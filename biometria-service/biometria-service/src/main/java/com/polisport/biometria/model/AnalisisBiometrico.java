@@ -1,19 +1,18 @@
 package com.polisport.biometria.model;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Entity
+@Table(name = "analisis_biometrico")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-
-public class Model {
+public class AnalisisBiometrico {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
