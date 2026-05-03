@@ -3,10 +3,7 @@ package com.polisport.biometria.controller;
 import com.polisport.biometria.model.AnalisisBiometrico;
 import com.polisport.biometria.service.AnalisisBiometricoService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,5 +22,23 @@ public class AnalisisBiometricoController {
         return ResponseEntity.ok(analisisBiometricoService.listar());
 
     }
-
+    @GetMapping("/{id}")
+    public ResponseEntity<AnalisisBiometrico> buscarPorId(@PathVariable Long id) {
+        return analisisBiometricoService.buscarPorId(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+    @PostMapping
+    public ResponseEntity<AnalisisBiometrico> crear(@RequestBody AnalisisBiometrico analisisBiometrico) {
+        return ResponseEntity.ok(analisisBiometricoService.crear(analisisBiometrico));
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<AnalisisBiometrico> actualizar(@PathVariable Long id, AnalisisBiometrico analisisBiometrico){
+        return ResponseEntity.ok(analisisBiometricoService.actualizar(analisisBiometrico));
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> eliminar(@PathVariable Long id){
+        analisisBiometricoService.eliminar(id);
+        return ResponseEntity.noContent().build();
+    }
 }
