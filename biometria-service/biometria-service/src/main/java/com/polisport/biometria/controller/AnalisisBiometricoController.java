@@ -33,7 +33,7 @@ public class AnalisisBiometricoController {
         return ResponseEntity.ok(analisisBiometricoService.crear(analisisBiometrico));
     }
     @PutMapping("/{id}")
-    public ResponseEntity<AnalisisBiometrico> actualizar(@PathVariable Long id, AnalisisBiometrico analisisBiometrico){
+    public ResponseEntity<AnalisisBiometrico> actualizar(@PathVariable Long id, @RequestBody AnalisisBiometrico analisisBiometrico){
         return ResponseEntity.ok(analisisBiometricoService.actualizar(analisisBiometrico));
     }
     @DeleteMapping("/{id}")
