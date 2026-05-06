@@ -3,6 +3,7 @@ package com.polisport.atletas.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "atletas")
@@ -35,7 +36,21 @@ public class Atleta {
     @Column(nullable = false)
     private String segundoApellido;
 
-    @Email(message = "El gmail esta vacio o es inválido")
-    private String gmail;
+    @Email(message = "El email es inválido")
+    @NotBlank(message = "El email es obligatorio")
+    private String email;
+
+    @NotNull(message = "la fecha de nacimiento es obligatoria")
+    @Past(message = "Fecha de nacimiento invalida")
+    private LocalDate fechaNacimiento;
+
+    @NotBlank(message = "El deporte principal es obligatorio")
+    private String deportePrincipal;
+
+    @NotBlank(message = "La categoría es obligatoria")
+    private String categoria;
+
+    @Size(max = 1000, message = "El historial deportivo excede los 1000 caracteres")
+    private String historialDeportivo;
 
 }
