@@ -16,9 +16,15 @@ public class Atleta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "RUT es un campo obligatorio")
-    @Column(unique = true, nullable = false, length = 12)
-    private String rut;
+    @NotNull(message = "El RUN es obligatorio")
+    @Positive(message = "El RUN debe ser válido")
+    @Column(unique = true, nullable = false)
+    private Integer runAtleta;
+
+    @NotBlank(message = "El dígito verificador es obligatorio")
+    @Size(min = 1, max = 1, message = "El DV debe ser de 1 carácter")
+    @Column(nullable = false)
+    private String dvrunAtleta;
 
     @NotBlank(message = "El campo es obligatorio")
     @Column(nullable = false)
