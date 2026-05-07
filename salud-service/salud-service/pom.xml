@@ -13,7 +13,7 @@
 	<name>salud-service</name>
 	<description>Microservicio de Gestion Medica PoliSport</description>
 	<properties>
-		<java.version>25</java.version>
+		<java.version>21</java.version>
 		<spring-cloud.version>2025.1.1</spring-cloud.version>
 	</properties>
 	<dependencies>
