@@ -28,7 +28,7 @@ public class AtletaService {
     }
 
     public Atleta guardarAtleta(Atleta atleta){
-        log.info("Registrando o actualizando atleta con RUT: {}", atleta.getRut());
+        log.info("Registrando o actualizando atleta con RUT: {}", atleta.getRunAtleta());
         return atletaRepository.save(atleta);
     }
 

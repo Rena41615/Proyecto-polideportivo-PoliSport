@@ -21,7 +21,7 @@ public class EntrenamientoService {
         return entrenamientoRepository.findAll();
     }
 
-    public Optional<Entrenamiento> obtenerId(Long id){
+    public Optional<Entrenamiento> obtenerPorId(Long id){
         log.info("Buscando entrenamiento con ID: {}", id);
         return entrenamientoRepository.findById(id);
     }

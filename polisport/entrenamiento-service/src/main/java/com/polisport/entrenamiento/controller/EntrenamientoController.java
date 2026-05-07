@@ -23,7 +23,7 @@ public class EntrenamientoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<List<Entrenamiento>> buscarPorId(@PathVariable Long id){
+    public ResponseEntity<Entrenamiento> buscarPorId(@PathVariable Long id){
         return entrenamientoService.obtenerPorId(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
