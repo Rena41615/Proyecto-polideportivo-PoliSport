@@ -29,9 +29,9 @@ public class AtletaController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @GetMapping("/rut/{rut}")
-    public ResponseEntity<Atleta> obtenerPorRut(@PathVariable String rut){
-        return atletaService.obtenerPorRut(rut)
+    @GetMapping("/run/{run}")
+    public ResponseEntity<Atleta> obtenerPorRun(@PathVariable Integer run){
+        return atletaService.obtenerPorRun(run)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }

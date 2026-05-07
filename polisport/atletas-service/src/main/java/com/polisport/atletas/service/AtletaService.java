@@ -37,9 +37,8 @@ public class AtletaService {
         atletaRepository.deleteById(id);
     }
 
-    public Optional<Atleta> obtenerPorRut(String rut){
-        log.info("Buscando atleta mediante su RUT: {}", rut);
-        return atletaRepository.findByRut(rut);
+    public Optional<Atleta> obtenerPorRun(Integer run) {
+        return atletaRepository.findByRunAtleta(run);
     }
 
 }

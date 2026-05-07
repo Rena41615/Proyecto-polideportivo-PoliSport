@@ -8,6 +8,6 @@ import java.util.Optional;
 @Repository
 public interface AtletaRepository extends JpaRepository<Atleta, Long>{
 
-    Optional<Atleta> findByRut(String rut);
+    Optional<Atleta> findByRunAtleta(Integer run);
 
 }
