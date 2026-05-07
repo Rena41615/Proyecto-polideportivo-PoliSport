@@ -32,14 +32,17 @@ public class Competencia {
 
     @NotNull(message = "La categoría es un campo obligatorio")
     @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "varchar(50)")
     private Categoria categoria;
 
     @NotNull(message = "La modalidad es un campo obligatorio")
     @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "varchar(50)")
     private Modalidad modalidad;
 
     @NotNull(message = "El estado es un campo obligatorio")
     @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "varchar(50)")
     private EstadoCompetencia estadoCompetencia;
 
     @ElementCollection

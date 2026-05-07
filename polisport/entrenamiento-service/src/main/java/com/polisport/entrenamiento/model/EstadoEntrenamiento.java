@@ -1,6 +1,6 @@
 package com.polisport.entrenamiento.model;
 
-public enum Estado {
+public enum EstadoEntrenamiento {
     PLANIFICADO,
     EN_CURSO,
     COMPLETADO

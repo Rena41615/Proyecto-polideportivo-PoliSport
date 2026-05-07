@@ -40,9 +40,11 @@ public class Contrato {
 
     @NotNull(message = "El tipo de contrato es obligatorio")
     @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "varchar(50)")
     private TipoContrato tipoContrato;
 
     @NotNull(message = "El estado del contrato es obligatorio")
     @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "varchar(50)")
     private EstadoContrato estado;
 }

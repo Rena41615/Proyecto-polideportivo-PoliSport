@@ -37,13 +37,13 @@ public class Entrenamiento {
 
     @NotNull(message = "El tipo de entrenamiento no puede estar vacío")
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(columnDefinition = "varchar(50)")
     private TipoEntrenamiento tipoEntrenamiento;
 
     @NotNull(message = "El estado del entrenamiento es obligatorio")
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private Estado estado;
+    @Column(columnDefinition = "varchar(50)")
+    private EstadoEntrenamiento estado;
 
     @PositiveOrZero(message = "La duración debe ser 0 o un número positivo")
     @NotNull(message = "La duración en minutos es obligatoria")
