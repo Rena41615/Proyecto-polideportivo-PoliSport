@@ -1,0 +1,15 @@
+INSERT INTO suplementaciones (plan_id, tipo, nombre, dosis, unidad, horario, observaciones) VALUES
+    (1, 'PROTEINA', 'Proteína de Suero de Leche', 25.00, 'GRAMO', '07:45:00', 'Post-entreno'),
+    (1, 'BCAA', 'Aminoácidos Ramificados', 10.00, 'GRAMO', '16:00:00', 'Durante el entreno'),
+    (2, 'MULTIVITAMINICO', 'Complejo de Vitaminas B', 1.00, 'PORCION', '08:00:00', 'Con desayuno'),
+    (2, 'OMEGA3', 'Aceite de Pescado', 2.00, 'GRAMO', '13:00:00', 'Con almuerzo'),
+    (3, 'PROTEINA', 'Caseína Micelar', 30.00, 'GRAMO', '21:00:00', 'Antes de dormir'),
+    (3, 'CREATINA', 'Creatina Monohidrato', 5.00, 'GRAMO', '12:00:00', 'Con carbohidratos'),
+    (4, 'MULTIVITAMINICO', 'Vitamina C', 500.00, 'MILIGRAMO', '09:00:00', 'Inmunidad'),
+    (4, 'PROTEINA', 'Gelatina Hidrolizada', 15.00, 'GRAMO', '19:00:00', 'Para recuperación articular'),
+    (5, 'MAGNESIO', 'Magnesio Glicinato', 400.00, 'MILIGRAMO', '21:00:00', 'Para relajación'),
+    (5, 'GLUCOSAMINA', 'Glucosamina Condroitina', 1500.00, 'MILIGRAMO', '08:00:00', 'Salud articular'),
+    (1, 'BETA_ALANINA', 'Beta Alanina', 3.00, 'GRAMO', '15:00:00', 'Pre-entreno'),
+    (2, 'ZINC', 'Zinc Quelado', 30.00, 'MILIGRAMO', '20:00:00', 'Testosterona y recuperación'),
+    (3, 'VITAMINA_D', 'Vitamina D3', 2000.00, 'UNIDAD_INTERNACIONAL', '08:00:00', 'Absorción de calcio'),
+    (4, 'HIERRO', 'Hierro Heme', 25.00, 'MILIGRAMO', '12:00:00', 'Resistencia aeróbica');
