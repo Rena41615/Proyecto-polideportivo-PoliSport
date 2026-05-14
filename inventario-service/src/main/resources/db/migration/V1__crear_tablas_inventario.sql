@@ -1,8 +1,16 @@
 CREATE TABLE instalacion (
-                             id BIGINT AUTO_INCREMENT PRIMARY KEY,
-                             nombre VARCHAR(100) NOT NULL,
-                             ubicacion VARCHAR(100) NOT NULL
+                             id         BIGINT AUTO_INCREMENT PRIMARY KEY,
+                             nombre     VARCHAR(100) NOT NULL,
+                             tipo       VARCHAR(100) NOT NULL,
+                             capacidad  INT          NOT NULL,
+                             disponible TINYINT(1)   NOT NULL,
+                             estado     VARCHAR(50)  NOT NULL
 );
 
-INSERT INTO instalacion (nombre, ubicacion) VALUES ('Gimnasio Techado', 'Sector A');
-INSERT INTO instalacion (nombre, ubicacion) VALUES ('Cancha de Fútbol 1', 'Sector B');
+CREATE TABLE inventario (
+                            id             BIGINT AUTO_INCREMENT PRIMARY KEY,
+                            nombre         VARCHAR(100) NOT NULL,
+                            cantidad       INT          NOT NULL,
+                            estado         VARCHAR(50)  NOT NULL,
+                            instalacion_id BIGINT       NOT NULL
+);
