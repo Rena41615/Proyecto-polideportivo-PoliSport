@@ -1,0 +1,39 @@
+version: '3.8'
+services:
+  mysql-biometria:
+    image: mysql:8.0
+    container_name: polisport-biometria-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: db_polisport_biometria
+    ports:
+      - "3307:3306"
+    volumes:
+      - biometria_data:/var/lib/mysql
+
+  mysql-inventario:
+    image: mysql:8.0
+    container_name: polisport-inventario-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: db_polisport_inventario
+    ports:
+      - "3308:3306"
+    volumes:
+      - inventario_data:/var/lib/mysql
+
+  mysql-salud:
+    image: mysql:8.0
+    container_name: polisport-salud-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: db_polisport_salud
+    ports:
+      - "3309:3306"
+    volumes:
+      - salud_data:/var/lib/mysql
+
+volumes:
+  biometria_data:
+  inventario_data:
+  salud_data:
