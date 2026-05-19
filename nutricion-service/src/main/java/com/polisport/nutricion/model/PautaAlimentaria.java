@@ -1,10 +1,10 @@
 package com.polisport.nutricion.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
 import java.time.*;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Getter
@@ -38,6 +38,6 @@ public class PautaAlimentaria {
     @ManyToOne
     @JoinColumn(name = "plan_id", nullable = false)
     @NotNull(message = "El plan nutricional es obligatorio")
-    @com.fasterxml.jackson.annotation.JsonBackReference("pautas")
+    @JsonBackReference("pautas")
     private PlanNutricional plan;
 }
