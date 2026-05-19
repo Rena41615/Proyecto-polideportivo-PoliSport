@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.*;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Getter
@@ -46,5 +47,6 @@ public class Usuarios {
     private LocalDateTime fechaRegistro = LocalDateTime.now();
 
     @OneToMany(mappedBy = "usuario")
+    @JsonManagedReference("usuario-roles")
     private List<RolesUsuarios> roles = new ArrayList<>();
 }

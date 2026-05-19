@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import lombok.*;
 import jakarta.validation.constraints.*;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Getter
@@ -28,8 +29,10 @@ public class Rol {
     private String descripcion;
 
     @OneToMany(mappedBy = "rol")
+    @JsonManagedReference("rol-usuarios")
     private List<RolesUsuarios> usuarios = new ArrayList<>();
 
     @OneToMany(mappedBy = "rol")
+    @JsonManagedReference("rol-permisos")
     private List<PermisosRol> permisos = new ArrayList<>();
 }

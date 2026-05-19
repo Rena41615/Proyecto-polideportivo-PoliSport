@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import java.time.LocalDateTime;
 import lombok.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Getter
@@ -19,11 +20,13 @@ public class RolesUsuarios {
     @ManyToOne
     @JoinColumn(name = "usuario_id", nullable = false)
     @NotNull(message = "El usuario es obligatorio")
+    @JsonBackReference("usuario-roles")
     private Usuarios usuario;
 
     @ManyToOne
     @JoinColumn(name = "rol_id", nullable = false)
     @NotNull(message = "El rol es obligatorio")
+    @JsonBackReference("rol-usuarios")
     private Rol rol;
 
     @Column(name = "fecha_asignacion", nullable = false)

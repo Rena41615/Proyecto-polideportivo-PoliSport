@@ -1,5 +1,6 @@
 package com.polisport.staff.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -31,6 +32,7 @@ public class MiembrosRolStaff {
     @ManyToOne
     @JoinColumn(name = "staff_id", nullable = false)
     @NotNull(message = "El miembro del staff es obligatorio")
+    @JsonIgnoreProperties("roles") // <--- ¡AÑADE ESTO AQUÍ!
     private MiembrosStaff staff;
 
     @Enumerated(EnumType.STRING)

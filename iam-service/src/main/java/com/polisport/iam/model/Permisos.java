@@ -5,6 +5,7 @@ import jakarta.validation.constraints.*;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.*;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Getter
@@ -27,5 +28,6 @@ public class Permisos {
     private String descripcion;
 
     @OneToMany(mappedBy = "permiso")
+    @JsonManagedReference("permiso-roles")
     private List<PermisosRol> roles = new ArrayList<>();
 }
