@@ -1,0 +1,14 @@
+target/
+!.mvn/wrapper/maven-wrapper.jar
+### IntelliJ IDEA ###
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+### Log files ###
+*.log
+### Operating System Files ###
+Thumbs.db
+ehthumbs.db
+Desktop.ini
