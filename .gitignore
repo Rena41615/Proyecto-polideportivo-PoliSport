@@ -7,3 +7,7 @@ target/
 out/
 *.log
 .mvn/
+### Operating System Files ###
+Thumbs.db
+ehthumbs.db
+Desktop.ini
