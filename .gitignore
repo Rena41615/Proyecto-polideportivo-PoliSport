@@ -1,13 +1,12 @@
-target/
-!.mvn/wrapper/maven-wrapper.jar
-### IntelliJ IDEA ###
 .idea/
-*.iws
+target/
+**/target/
 *.iml
+*.iws
 *.ipr
 out/
-### Log files ###
 *.log
+.mvn/
 ### Operating System Files ###
 Thumbs.db
 ehthumbs.db

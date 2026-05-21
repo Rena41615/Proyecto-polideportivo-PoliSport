@@ -1,0 +1,147 @@
+services:
+  # ==========================================
+  # CAPA DE BASES DE DATOS INDEPENDIENTES (Sin contraseña como Laragon)
+  # ==========================================
+
+  db-atletas:
+    image: mysql:8.0
+    container_name: polisport-atletas-db
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"         # <- Permite entrar sin contraseña
+      MYSQL_DATABASE: polisport_atletas_db
+    ports:
+      - "3306:3306"
+    volumes:
+      - atletas_data:/var/lib/mysql
+    networks:
+      net-atletas:
+        aliases:
+          - db-mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 5s
+      retries: 5
+
+  db-competencias:
+    image: mysql:8.0
+    container_name: polisport-competencias-db
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"         # <- Permite entrar sin contraseña
+      MYSQL_DATABASE: polisport_competencias_db
+    ports:
+      - "3311:3306"
+    volumes:
+      - competencias_data:/var/lib/mysql
+    networks:
+      net-competencias:
+        aliases:
+          - db-mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 5s
+      retries: 5
+
+  db-contratos:
+    image: mysql:8.0
+    container_name: polisport-contratos-db
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"         # <- Permite entrar sin contraseña
+      MYSQL_DATABASE: polisport_contratos_db
+    ports:
+      - "3312:3306"
+    volumes:
+      - contratos_data:/var/lib/mysql
+    networks:
+      net-contratos:
+        aliases:
+          - db-mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 5s
+      retries: 5
+
+  db-entrenamientos:
+    image: mysql:8.0
+    container_name: polisport-entrenamientos-db
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"         # <- Permite entrar sin contraseña
+      MYSQL_DATABASE: polisport_entrenamientos_db
+    ports:
+      - "3313:3306"
+    volumes:
+      - entrenamientos_data:/var/lib/mysql
+    networks:
+      net-entrenamientos:
+        aliases:
+          - db-mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 5s
+      retries: 5
+
+  # ==========================================
+  # CAPA DE MICROSERVICIOS
+  # ==========================================
+
+  atletas-service:
+    build:
+      context: ./atletas-service
+    container_name: atletas-service
+    ports:
+      - "8081:8080"
+    depends_on:
+      db-atletas:
+        condition: service_healthy
+    networks:
+      - net-atletas
+
+  competencia-service:
+    build:
+      context: ./competencia-service
+    container_name: competencia-service
+    ports:
+      - "8083:8080"
+    depends_on:
+      db-competencias:
+        condition: service_healthy
+    networks:
+      - net-competencias
+
+  contratos-service:
+    build:
+      context: ./contratos-service
+    container_name: contratos-service
+    ports:
+      - "8084:8080"
+    depends_on:
+      db-contratos:
+        condition: service_healthy
+    networks:
+      - net-contratos
+
+  entrenamiento-service:
+    build:
+      context: ./entrenamiento-service
+    container_name: entrenamiento-service
+    ports:
+      - "8085:8080"
+    depends_on:
+      db-entrenamientos:
+        condition: service_healthy
+    networks:
+      - net-entrenamientos
+
+# ==========================================
+# DEFINICIÓN DE REDES Y VOLÚMENES AISLADOS
+# ==========================================
+networks:
+  net-atletas:
+  net-competencias:
+  net-contratos:
+  net-entrenamientos:
+
+volumes:
+  atletas_data:
+  competencias_data:
+  contratos_data:
+  entrenamientos_data:
