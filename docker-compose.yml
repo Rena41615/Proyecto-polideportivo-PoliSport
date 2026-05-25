@@ -1,5 +1,9 @@
 version: '3.8'
+
 services:
+
+  # ==================== BASES DE DATOS ====================
+
   mysql-biometria:
     image: mysql:8.0
     container_name: polisport-biometria-db
@@ -10,6 +14,10 @@ services:
       - "3307:3306"
     volumes:
       - biometria_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 10s
+      retries: 10
 
   mysql-inventario:
     image: mysql:8.0
@@ -21,6 +29,10 @@ services:
       - "3308:3306"
     volumes:
       - inventario_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 10s
+      retries: 10
 
   mysql-salud:
     image: mysql:8.0
@@ -32,6 +44,57 @@ services:
       - "3309:3306"
     volumes:
       - salud_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 10s
+      retries: 10
+
+  # ==================== MICROSERVICIOS ====================
+
+  biometria-service:
+    build:
+      context: ./biometria-service
+      dockerfile: Dockerfile
+    container_name: polisport-biometria
+    ports:
+      - "8082:8082"
+    environment:
+      DB_BIOMETRIA_URL: jdbc:mysql://mysql-biometria:3306/db_polisport_biometria?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
+      DB_BIOMETRIA_USER: root
+      DB_BIOMETRIA_PASS: root
+    depends_on:
+      mysql-biometria:
+        condition: service_healthy
+
+  inventario-service:
+    build:
+      context: ./inventario-service
+      dockerfile: Dockerfile
+    container_name: polisport-inventario
+    ports:
+      - "8087:8087"
+    environment:
+      DB_INVENTARIO_URL: jdbc:mysql://mysql-inventario:3306/db_polisport_inventario?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
+      DB_INVENTARIO_USER: root
+      DB_INVENTARIO_PASS: root
+    depends_on:
+      mysql-inventario:
+        condition: service_healthy
+
+  salud-service:
+    build:
+      context: ./salud-service
+      dockerfile: Dockerfile
+    container_name: polisport-salud
+    ports:
+      - "8089:8089"
+    environment:
+      DB_SALUD_URL: jdbc:mysql://mysql-salud:3306/db_polisport_salud?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
+      DB_SALUD_USER: root
+      DB_SALUD_PASS: root
+    depends_on:
+      mysql-salud:
+        condition: service_healthy
 
 volumes:
   biometria_data:
