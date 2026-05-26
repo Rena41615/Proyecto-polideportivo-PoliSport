@@ -16,17 +16,17 @@ public class Contrato {
     private Long id;
 
     @NotNull(message = "El RUN del empleado es obligatorio")
-    @Positive(message = "El RUN debe ser válido")
+    @Positive(message = "El RUN debe ser valido")
     @Column(nullable = false)
     private Integer runEmpleado;
 
-    @NotBlank(message = "El dígito verificador es obligatorio")
-    @Size(min = 1, max = 1, message = "El DV debe ser de 1 carácter")
+    @NotBlank(message = "El digito verificador es obligatorio")
+    @Size(min = 1, max = 1, message = "El DV debe ser de 1 caracter")
     @Column(nullable = false)
     private String dvrunEmpleado;
 
     @NotBlank(message = "El cargo o rol es obligatorio")
-    private String cargo; // Ej: Entrenador, Recepcionista, Preparador Físico
+    private String cargo; // Ej: Entrenador, Recepcionista, Preparador Fisico
 
     @NotNull(message = "La fecha de inicio es obligatoria")
     private LocalDate fechaInicio;

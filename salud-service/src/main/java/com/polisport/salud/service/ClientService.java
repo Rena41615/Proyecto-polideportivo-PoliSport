@@ -16,13 +16,13 @@ public class ClientService {
     }
 
     public Mono<String> obtenerDatos(String endpoint) {
-        log.info("Realizando petición GET a: {}", endpoint);
+        log.info("Realizando peticion GET a: {}", endpoint);
         return webClient.get()
                 .uri(endpoint)
                 .retrieve()
                 .bodyToMono(String.class)
                 .doOnNext(respuesta -> log.info("Respuesta recibida: {}", respuesta))
-                .doOnError(error -> log.error("Error en la petición: {}", error.getMessage()));
+                .doOnError(error -> log.error("Error en la peticion: {}", error.getMessage()));
     }
 
     public Mono<String> enviarDatos(String endpoint, Object datos) {

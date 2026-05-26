@@ -15,23 +15,23 @@ public class Instalacion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "El nombre de la instalación es obligatorio")
+    @NotBlank(message = "El nombre de la instalacion es obligatorio")
     @Column(name = "nombre", nullable = false)
     private String nombre;
 
-    @NotBlank(message = "El tipo de instalación es obligatorio")
+    @NotBlank(message = "El tipo de instalacion es obligatorio")
     @Column(name = "tipo", nullable = false)
     private String tipo;
 
-    @Positive(message = "La capacidad debe ser un número positivo")
+    @Positive(message = "La capacidad debe ser un numero positivo")
     @Column(name = "capacidad")
     private int capacidad;
 
-    @NotNull(message = "Debe especificar si la instalación está disponible")
+    @NotNull(message = "Debe especificar si la instalacion esta disponible")
     @Column(name = "disponible", nullable = false)
     private boolean disponible;
 
-    @NotBlank(message = "El estado de la instalación es obligatorio")
+    @NotBlank(message = "El estado de la instalacion es obligatorio")
     @Column(name = "estado", nullable = false)
     private String estado;
 }

@@ -1,2 +1,2 @@
 INSERT INTO atletas (run_atleta, dvrun_atleta, primer_nombre, primer_apellido, segundo_apellido, email, fecha_nacimiento)
-VALUES (12345678, '9', 'Tomás', 'González', 'Sepúlveda', 'tomas@polisport.cl', '1985-11-22');
+VALUES (12345678, '9', 'Tomas', 'Gonzalez', 'Sepulveda', 'tomas@polisport.cl', '1985-11-22');

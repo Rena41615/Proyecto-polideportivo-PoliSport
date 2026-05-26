@@ -1,22 +1,37 @@
 services:
   # ==========================================
-  # CAPA DE BASES DE DATOS INDEPENDIENTES (Sin contraseña como Laragon)
+  # CAPA DE BASES DE DATOS INDEPENDIENTES (Sin contrasena)
   # ==========================================
 
   db-atletas:
     image: mysql:8.0
     container_name: polisport-atletas-db
     environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"         # <- Permite entrar sin contraseña
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
       MYSQL_DATABASE: polisport_atletas_db
     ports:
       - "3306:3306"
     volumes:
       - atletas_data:/var/lib/mysql
     networks:
-      net-atletas:
-        aliases:
-          - db-mysql
+      - net-atletas
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 5s
+      retries: 5
+
+  db-biometria:
+    image: mysql:8.0
+    container_name: polisport-biometria-db
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: db_polisport_biometria
+    ports:
+      - "3310:3306"
+    volumes:
+      - biometria_data:/var/lib/mysql
+    networks:
+      - net-biometria
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       timeout: 5s
@@ -26,16 +41,14 @@ services:
     image: mysql:8.0
     container_name: polisport-competencias-db
     environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"         # <- Permite entrar sin contraseña
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
       MYSQL_DATABASE: polisport_competencias_db
     ports:
       - "3311:3306"
     volumes:
       - competencias_data:/var/lib/mysql
     networks:
-      net-competencias:
-        aliases:
-          - db-mysql
+      - net-competencias
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       timeout: 5s
@@ -45,16 +58,14 @@ services:
     image: mysql:8.0
     container_name: polisport-contratos-db
     environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"         # <- Permite entrar sin contraseña
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
       MYSQL_DATABASE: polisport_contratos_db
     ports:
       - "3312:3306"
     volumes:
       - contratos_data:/var/lib/mysql
     networks:
-      net-contratos:
-        aliases:
-          - db-mysql
+      - net-contratos
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       timeout: 5s
@@ -64,20 +75,104 @@ services:
     image: mysql:8.0
     container_name: polisport-entrenamientos-db
     environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"         # <- Permite entrar sin contraseña
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
       MYSQL_DATABASE: polisport_entrenamientos_db
     ports:
       - "3313:3306"
     volumes:
       - entrenamientos_data:/var/lib/mysql
     networks:
-      net-entrenamientos:
-        aliases:
-          - db-mysql
+      - net-entrenamientos
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       timeout: 5s
       retries: 5
+
+  db-inventario:
+    image: mysql:8.0
+    container_name: polisport-inventario-db
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: polisport_inventario_db
+    ports:
+      - "3314:3306"
+    volumes:
+      - inventario_data:/var/lib/mysql
+    networks:
+      - net-inventario
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 5s
+      retries: 5
+
+  db-salud:
+    image: mysql:8.0
+    container_name: polisport-salud-db
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: polisport_salud_db
+    ports:
+      - "3315:3306"
+    volumes:
+      - salud_data:/var/lib/mysql
+    networks:
+      - net-salud
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 5s
+      retries: 5
+
+  db-iam:
+    image: mysql:8.0
+    container_name: polisport-iam-db
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: polisport_iam_db
+    ports:
+      - "3316:3306"
+    volumes:
+      - iam_data:/var/lib/mysql
+    networks:
+      - net-iam
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 5s
+      retries: 5
+
+  db-nutricion:
+    image: mysql:8.0
+    container_name: polisport-nutricion-db
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: polisport_nutricion_db
+    ports:
+      - "3317:3306"
+    volumes:
+      - nutricion_data:/var/lib/mysql
+    networks:
+      - net-nutricion
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 5s
+      retries: 5
+
+  db-staff:
+    image: mysql:8.0
+    container_name: polisport-staff-db
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: polisport_staff_db
+    ports:
+      - "3318:3306"
+    volumes:
+      - staff_data:/var/lib/mysql
+    networks:
+      - net-staff
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 5s
+      retries: 5
+
 
   # ==========================================
   # CAPA DE MICROSERVICIOS
@@ -94,6 +189,18 @@ services:
         condition: service_healthy
     networks:
       - net-atletas
+
+  biometria-service:
+    build:
+      context: ./biometria-service
+    container_name: biometria-service
+    ports:
+      - "8082:8080"
+    depends_on:
+      db-biometria:
+        condition: service_healthy
+    networks:
+      - net-biometria
 
   competencia-service:
     build:
@@ -123,25 +230,3 @@ services:
     build:
       context: ./entrenamiento-service
     container_name: entrenamiento-service
-    ports:
-      - "8085:8080"
-    depends_on:
-      db-entrenamientos:
-        condition: service_healthy
-    networks:
-      - net-entrenamientos
-
-# ==========================================
-# DEFINICIÓN DE REDES Y VOLÚMENES AISLADOS
-# ==========================================
-networks:
-  net-atletas:
-  net-competencias:
-  net-contratos:
-  net-entrenamientos:
-
-volumes:
-  atletas_data:
-  competencias_data:
-  contratos_data:
-  entrenamientos_data:

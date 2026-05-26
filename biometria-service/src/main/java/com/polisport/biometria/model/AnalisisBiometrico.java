@@ -20,7 +20,7 @@ public class AnalisisBiometrico {
     @Column(name = "atleta_id", nullable = false)
     private Long atletaId;
 
-    @NotBlank(message = "La fecha no puede estar vacía")
+    @NotBlank(message = "La fecha no puede estar vacia")
     @Column(name = "fecha", nullable = false)
     private String fecha;
 
@@ -48,7 +48,7 @@ public class AnalisisBiometrico {
     @Column(name = "vo2_max")
     private double vo2Max;
 
-    @Positive(message = "La frecuencia cardíaca en reposo debe ser positiva")
+    @Positive(message = "La frecuencia cardiaca en reposo debe ser positiva")
     @Column(name = "frecuencia_cardiaca_reposo")
     private int frecuenciaCardiacaReposo;
 

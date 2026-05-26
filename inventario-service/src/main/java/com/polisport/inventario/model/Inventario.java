@@ -16,7 +16,7 @@ public class Inventario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "El nombre del artículo es obligatorio")
+    @NotBlank(message = "El nombre del articulo es obligatorio")
     @Column(name = "nombre", nullable = false)
     private String nombre;
 
@@ -24,12 +24,12 @@ public class Inventario {
     @Column(name = "cantidad")
     private int cantidad;
 
-    @NotBlank(message = "El estado del artículo es obligatorio")
+    @NotBlank(message = "El estado del articulo es obligatorio")
     @Column(name = "estado", nullable = false)
     private String estado;
 
-    @NotNull(message = "El ID de la instalación asociada es obligatorio")
-    @Positive(message = "El ID de la instalación debe ser un número positivo")
+    @NotNull(message = "El ID de la instalacion asociada es obligatorio")
+    @Positive(message = "El ID de la instalacion debe ser un numero positivo")
     @Column(name = "instalacion_id", nullable = false)
     private Long instalacionId;
 }

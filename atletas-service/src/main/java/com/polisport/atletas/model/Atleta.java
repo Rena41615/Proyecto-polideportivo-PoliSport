@@ -17,12 +17,12 @@ public class Atleta {
     private Long id;
 
     @NotNull(message = "El RUN es obligatorio")
-    @Positive(message = "El RUN debe ser válido")
+    @Positive(message = "El RUN debe ser valido")
     @Column(unique = true, nullable = false)
     private Integer runAtleta;
 
-    @NotBlank(message = "El dígito verificador es obligatorio")
-    @Size(min = 1, max = 1, message = "El DV debe ser de 1 carácter")
+    @NotBlank(message = "El digito verificador es obligatorio")
+    @Size(min = 1, max = 1, message = "El DV debe ser de 1 caracter")
     @Column(nullable = false)
     private String dvrunAtleta;
 
@@ -42,7 +42,7 @@ public class Atleta {
     @Column(nullable = false)
     private String segundoApellido;
 
-    @Email(message = "El email es inválido")
+    @Email(message = "El email es invalido")
     @NotBlank(message = "El email es obligatorio")
     private String email;
 
@@ -53,7 +53,7 @@ public class Atleta {
     @NotBlank(message = "El deporte principal es obligatorio")
     private String deportePrincipal;
 
-    @NotBlank(message = "La categoría es obligatoria")
+    @NotBlank(message = "La categoria es obligatoria")
     private String categoria;
 
     @Size(max = 1000, message = "El historial deportivo excede los 1000 caracteres")

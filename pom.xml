@@ -15,12 +15,12 @@
 		<module>biometria-service</module>
 		<module>competencia-service</module>
 		<module>contratos-service</module>
-		<module>staff-service</module>
 		<module>entrenamiento-service</module>
 		<module>iam-service</module>
 		<module>inventario-service</module>
 		<module>nutricion-service</module>
 		<module>salud-service</module>
+		<module>staff-service</module>
 	</modules>
 	<properties>
 		<java.version>17</java.version>

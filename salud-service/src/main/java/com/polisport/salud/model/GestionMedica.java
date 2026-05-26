@@ -23,15 +23,15 @@ public class GestionMedica {
     @Column(name = "atleta_id", nullable = false)
     private Long atletaId;
 
-    @NotBlank(message = "El tipo de lesión no puede estar vacío")
+    @NotBlank(message = "El tipo de lesion no puede estar vacio")
     @Column(name = "tipo_lesion", nullable = false)
     private String tipoLesion;
 
-    @NotBlank(message = "La descripción de la lesión no puede estar vacía")
+    @NotBlank(message = "La descripcion de la lesion no puede estar vacia")
     @Column(name = "descripcion", nullable = false)
     private String descripcion;
 
-    @NotBlank(message = "La fecha de la lesión es obligatoria")
+    @NotBlank(message = "La fecha de la lesion es obligatoria")
     @Column(name = "fecha_lesion", nullable = false)
     private String fechaLesion;
 
@@ -39,16 +39,16 @@ public class GestionMedica {
     @Column(name = "fecha_retorno")
     private String fechaRetorno;
 
-    @NotBlank(message = "El estado de retorno no puede estar vacío")
+    @NotBlank(message = "El estado de retorno no puede estar vacio")
     @Column(name = "estado_retorno", nullable = false)
     private String estadoRetorno;
 
-    @NotNull(message = "El ID del médico responsable no puede ser nulo")
-    @Positive(message = "El ID del médico debe ser mayor a 0")
+    @NotNull(message = "El ID del medico responsable no puede ser nulo")
+    @Positive(message = "El ID del medico debe ser mayor a 0")
     @Column(name = "medico_id", nullable = false)
     private Long medicoId;
 
-    @NotBlank(message = "El tratamiento no puede estar vacío")
+    @NotBlank(message = "El tratamiento no puede estar vacio")
     @Column(name = "tratamiento", nullable = false)
     private String tratamiento;
 }

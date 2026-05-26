@@ -27,7 +27,7 @@ public class EntrenamientoService {
     }
 
     public Entrenamiento guardar(Entrenamiento entrenamiento){
-        log.info("Registrando sesión de entrenamiento para el entrenador RUN: {}", entrenamiento.getRunEntrenador());
+        log.info("Registrando sesion de entrenamiento para el entrenador RUN: {}", entrenamiento.getRunEntrenador());
         return entrenamientoRepository.save(entrenamiento);
     }
 

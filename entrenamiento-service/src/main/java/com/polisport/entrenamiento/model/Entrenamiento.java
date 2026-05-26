@@ -17,12 +17,12 @@ public class Entrenamiento {
     private Long id;
 
     @NotNull(message = "El RUN es obligatorio")
-    @Positive(message = "El RUN debe ser válido")
+    @Positive(message = "El RUN debe ser valido")
     @Column(nullable = false)
     private Integer runEntrenador;
 
-    @NotBlank(message = "El dígito verificador es obligatorio")
-    @Size(min = 1, max = 1, message = "El DV debe ser de 1 carácter")
+    @NotBlank(message = "El digito verificador es obligatorio")
+    @Size(min = 1, max = 1, message = "El DV debe ser de 1 caracter")
     @Column(nullable = false)
     private String dvrunEntrenador;
 
@@ -35,7 +35,7 @@ public class Entrenamiento {
     @NotNull(message = "La fecha de la sesion es obligatoria")
     private LocalDate fechaSesion;
 
-    @NotNull(message = "El tipo de entrenamiento no puede estar vacío")
+    @NotNull(message = "El tipo de entrenamiento no puede estar vacio")
     @Enumerated(EnumType.STRING)
     @Column(columnDefinition = "varchar(50)")
     private TipoEntrenamiento tipoEntrenamiento;
@@ -45,7 +45,7 @@ public class Entrenamiento {
     @Column(columnDefinition = "varchar(50)")
     private EstadoEntrenamiento estado;
 
-    @PositiveOrZero(message = "La duración debe ser 0 o un número positivo")
-    @NotNull(message = "La duración en minutos es obligatoria")
+    @PositiveOrZero(message = "La duracion debe ser 0 o un numero positivo")
+    @NotNull(message = "La duracion en minutos es obligatoria")
     private Integer duracionMinutos;
 }

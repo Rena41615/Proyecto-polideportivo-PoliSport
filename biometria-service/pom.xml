@@ -18,7 +18,7 @@
 	</properties>
 
 	<dependencies>
-		<!-- MOTOR DE MIGRACIONES FLYWAY (Configuración Limpia) -->
+		<!-- MOTOR DE MIGRACIONES FLYWAY (Configuracion Limpia) -->
 		<dependency>
 			<groupId>org.flywaydb</groupId>
 			<artifactId>flyway-core</artifactId>

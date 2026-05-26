@@ -14,8 +14,8 @@ public class ClientService {
     }
 
     /**
-     * Ejemplo: Consulta a salud-service para verificar restricciones médicas
-     * del atleta antes de permitir la asignación de una rutina pesada.
+     * Ejemplo: Consulta a salud-service para verificar restricciones medicas
+     * del atleta antes de permitir la asignacion de una rutina pesada.
      */
     public Mono<String> verificarRestriccionesMedicas(String atletaId) {
         return webClient.get()
@@ -23,7 +23,7 @@ public class ClientService {
                 .uri("http://localhost:8089/api/salud/atleta/{id}/restricciones", atletaId)
                 .retrieve()
                 .bodyToMono(String.class)
-                // Si el servicio está caído o no responde, asumimos por seguridad que no hay datos
-                .onErrorReturn("No se pudo verificar el estado médico. Proceder con precaución.");
+                // Si el servicio esta caido o no responde, asumimos por seguridad que no hay datos
+                .onErrorReturn("No se pudo verificar el estado medico. Proceder con precaucion.");
     }
 }

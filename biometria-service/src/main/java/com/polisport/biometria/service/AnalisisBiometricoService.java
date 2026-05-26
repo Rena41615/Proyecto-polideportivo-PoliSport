@@ -17,27 +17,27 @@ public class AnalisisBiometricoService {
     private AnalisisBiometricoRepository analisisBiometricoRepository;
 
     public List<AnalisisBiometrico> listar() {
-        log.info("Obteniendo la lista de todos los análisis biométricos");
+        log.info("Obteniendo la lista de todos los analisis biometricos");
         return analisisBiometricoRepository.findAll();
     }
 
     public Optional<AnalisisBiometrico> buscarPorId(Long id) {
-        log.info("Buscando análisis biométrico con ID: {}", id);
+        log.info("Buscando analisis biometrico con ID: {}", id);
         return analisisBiometricoRepository.findById(id);
     }
 
     public AnalisisBiometrico crear(AnalisisBiometrico analisis) {
-        log.info("Creando nuevo análisis biométrico para el atleta ID: {}", analisis.getAtletaId());
+        log.info("Creando nuevo analisis biometrico para el atleta ID: {}", analisis.getAtletaId());
         return analisisBiometricoRepository.save(analisis);
     }
 
     public void eliminar(Long id) {
-        log.warn("Eliminando análisis biométrico con ID: {}", id);
+        log.warn("Eliminando analisis biometrico con ID: {}", id);
         analisisBiometricoRepository.deleteById(id);
     }
 
     public AnalisisBiometrico actualizar(AnalisisBiometrico analisis) {
-        log.info("Actualizando análisis biométrico con ID: {}", analisis.getId());
+        log.info("Actualizando analisis biometrico con ID: {}", analisis.getId());
         return analisisBiometricoRepository.save(analisis);
     }
 }

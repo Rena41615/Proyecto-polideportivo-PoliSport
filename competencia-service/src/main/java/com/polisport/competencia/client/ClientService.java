@@ -22,7 +22,7 @@ public class ClientService {
                 .uri("http://localhost:8081/api/atletas/{id}", atletaId)
                 .retrieve()
                 .bodyToMono(String.class)
-                // Si el atleta no existe o el servicio de atletas está caído
+                // Si el atleta no existe o el servicio de atletas esta caido
                 .onErrorReturn("Error: Atleta no encontrado o servicio no disponible.");
     }
 }

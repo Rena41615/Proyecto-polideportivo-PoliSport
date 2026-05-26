@@ -30,7 +30,7 @@ public class Competencia {
     @NotNull(message = "La fecha de fin es un campo obligatorio")
     private LocalDate fechaFin;
 
-    @NotNull(message = "La categoría es un campo obligatorio")
+    @NotNull(message = "La categoria es un campo obligatorio")
     @Enumerated(EnumType.STRING)
     @Column(columnDefinition = "varchar(50)")
     private Categoria categoria;

@@ -9,6 +9,6 @@ import java.util.List;
 @Repository
 public interface ContratosRepository extends JpaRepository<Contrato, Long> {
 
-    // Busca todo el historial de contratos de un empleado específico
+    // Busca todo el historial de contratos de un empleado especifico
     List<Contrato> findByRunEmpleado(Integer runEmpleado);
 }

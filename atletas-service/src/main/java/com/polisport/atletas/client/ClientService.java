@@ -9,7 +9,7 @@ public class ClientService {
 
     private final WebClient webClient;
 
-    // Spring inyecta automáticamente el WebClient que creaste en tu ClientConfig
+    // Spring inyecta automaticamente el WebClient que creaste en tu ClientConfig
     public ClientService(WebClient webClient) {
         this.webClient = webClient;
     }
@@ -19,11 +19,11 @@ public class ClientService {
      */
     public Mono<String> obtenerDatosSalud(String atletaId) {
         return webClient.get()
-                // Asumiendo que salud-service corre en el puerto 8089 (cámbialo si es otro)
+                // Asumiendo que salud-service corre en el puerto 8089 (cambialo si es otro)
                 .uri("http://localhost:8089/api/salud/atleta/{id}", atletaId)
                 .retrieve()
                 .bodyToMono(String.class)
-                // Resiliencia: Si salud-service está caído, no se cae toda tu app, solo devuelve este mensaje
+                // Resiliencia: Si salud-service esta caido, no se cae toda tu app, solo devuelve este mensaje
                 .onErrorReturn("Servicio de salud no disponible en este momento.");
     }
 

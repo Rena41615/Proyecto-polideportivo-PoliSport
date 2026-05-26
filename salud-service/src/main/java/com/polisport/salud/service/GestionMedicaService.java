@@ -17,27 +17,27 @@ public class GestionMedicaService {
     private GestionMedicaRepository gestionMedicaRepository;
 
     public List<GestionMedica> listar() {
-        log.info("Obteniendo la lista de todos los registros médicos");
+        log.info("Obteniendo la lista de todos los registros medicos");
         return gestionMedicaRepository.findAll();
     }
 
     public Optional<GestionMedica> buscarPorId(Long id) {
-        log.info("Buscando registro médico con ID: {}", id);
+        log.info("Buscando registro medico con ID: {}", id);
         return gestionMedicaRepository.findById(id);
     }
 
     public GestionMedica crear(GestionMedica gestion) {
-        log.info("Creando nuevo registro médico");
+        log.info("Creando nuevo registro medico");
         return gestionMedicaRepository.save(gestion);
     }
 
     public void eliminar(Long id) {
-        log.warn("Eliminando registro médico con ID: {}", id);
+        log.warn("Eliminando registro medico con ID: {}", id);
         gestionMedicaRepository.deleteById(id);
     }
 
     public GestionMedica actualizar(GestionMedica gestion) {
-        log.info("Actualizando registro médico con ID: {}", gestion.getId());
+        log.info("Actualizando registro medico con ID: {}", gestion.getId());
         return gestionMedicaRepository.save(gestion);
     }
 }
