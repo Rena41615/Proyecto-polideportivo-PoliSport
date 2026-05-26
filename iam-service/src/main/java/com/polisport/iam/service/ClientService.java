@@ -1,4 +1,4 @@
-package com.polisport.biometria.service;
+package com.polisport.iam.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -12,7 +12,7 @@ public class ClientService {
     private final WebClient webClient;
 
     public ClientService(WebClient.Builder webClientBuilder) {
-        this.webClient = webClientBuilder.baseUrl("http://localhost:8080").build();
+        this.webClient = webClientBuilder.baseUrl("http://iam-service:8080").build();
     }
 
     public Mono<String> obtenerDatos(String endpoint) {

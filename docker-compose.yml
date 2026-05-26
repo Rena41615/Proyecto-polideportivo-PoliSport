@@ -10,7 +10,7 @@ services:
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
       MYSQL_DATABASE: polisport_atletas_db
     ports:
-      - "3306:3306"
+      - "3309:3306"
     volumes:
       - atletas_data:/var/lib/mysql
     networks:
@@ -180,8 +180,13 @@ services:
 
   atletas-service:
     build:
-      context: ./atletas-service
+      context: .
+      dockerfile: atletas-service/Dockerfile
     container_name: atletas-service
+    restart: on-failure
+    mem_limit: 512m
+    environment:
+      - JAVA_OPTS=-Xms128m -Xmx256m
     ports:
       - "8081:8080"
     depends_on:
@@ -189,11 +194,17 @@ services:
         condition: service_healthy
     networks:
       - net-atletas
+      - polisport-network
 
   biometria-service:
     build:
-      context: ./biometria-service
+      context: .
+      dockerfile: biometria-service/Dockerfile
     container_name: biometria-service
+    restart: on-failure
+    mem_limit: 512m
+    environment:
+      - JAVA_OPTS=-Xms128m -Xmx256m
     ports:
       - "8082:8080"
     depends_on:
@@ -201,11 +212,17 @@ services:
         condition: service_healthy
     networks:
       - net-biometria
+      - polisport-network
 
   competencia-service:
     build:
-      context: ./competencia-service
+      context: .
+      dockerfile: competencia-service/Dockerfile
     container_name: competencia-service
+    restart: on-failure
+    mem_limit: 512m
+    environment:
+      - JAVA_OPTS=-Xms128m -Xmx256m
     ports:
       - "8083:8080"
     depends_on:
@@ -213,11 +230,17 @@ services:
         condition: service_healthy
     networks:
       - net-competencias
+      - polisport-network
 
   contratos-service:
     build:
-      context: ./contratos-service
+      context: .
+      dockerfile: contratos-service/Dockerfile
     container_name: contratos-service
+    restart: on-failure
+    mem_limit: 512m
+    environment:
+      - JAVA_OPTS=-Xms128m -Xmx256m
     ports:
       - "8084:8080"
     depends_on:
@@ -225,8 +248,141 @@ services:
         condition: service_healthy
     networks:
       - net-contratos
+      - polisport-network
 
   entrenamiento-service:
     build:
-      context: ./entrenamiento-service
+      context: .
+      dockerfile: entrenamiento-service/Dockerfile
     container_name: entrenamiento-service
+    restart: on-failure
+    mem_limit: 512m
+    environment:
+      - JAVA_OPTS=-Xms128m -Xmx256m
+    ports:
+      - "8085:8080"
+    depends_on:
+      db-entrenamientos:
+        condition: service_healthy
+    networks:
+      - net-entrenamientos
+      - polisport-network
+
+  inventario-service:
+    build:
+      context: .
+      dockerfile: inventario-service/Dockerfile
+    container_name: inventario-service
+    restart: on-failure
+    mem_limit: 512m
+    environment:
+      - JAVA_OPTS=-Xms128m -Xmx256m
+    ports:
+      - "8086:8080"
+    depends_on:
+      db-inventario:
+        condition: service_healthy
+    networks:
+      - net-inventario
+      - polisport-network
+
+  salud-service:
+    build:
+      context: .
+      dockerfile: salud-service/Dockerfile
+    container_name: salud-service
+    restart: on-failure
+    mem_limit: 512m
+    environment:
+      - JAVA_OPTS=-Xms128m -Xmx256m
+    ports:
+      - "8087:8080"
+    depends_on:
+      db-salud:
+        condition: service_healthy
+    networks:
+      - net-salud
+      - polisport-network
+
+  iam-service:
+    build:
+      context: .
+      dockerfile: iam-service/Dockerfile
+    container_name: iam-service
+    restart: on-failure
+    mem_limit: 512m
+    environment:
+      - JAVA_OPTS=-Xms128m -Xmx256m
+    ports:
+      - "8088:8080"
+    depends_on:
+      db-iam:
+        condition: service_healthy
+    networks:
+      - net-iam
+      - polisport-network
+
+  nutricion-service:
+    build:
+      context: .
+      dockerfile: nutricion-service/Dockerfile
+    container_name: nutricion-service
+    restart: on-failure
+    mem_limit: 512m
+    environment:
+      - JAVA_OPTS=-Xms128m -Xmx256m
+    ports:
+      - "8089:8080"
+    depends_on:
+      db-nutricion:
+        condition: service_healthy
+    networks:
+      - net-nutricion
+      - polisport-network
+
+  staff-service:
+    build:
+      context: .
+      dockerfile: staff-service/Dockerfile
+    container_name: staff-service
+    restart: on-failure
+    mem_limit: 512m
+    environment:
+      - JAVA_OPTS=-Xms128m -Xmx256m
+    ports:
+      - "8090:8080"
+    depends_on:
+      db-staff:
+        condition: service_healthy
+    networks:
+      - net-staff
+      - polisport-network
+
+# ==========================================
+# DEFINICIÓN DE REDES Y VOLÚMENES AISLADOS
+# ==========================================
+networks:
+  polisport-network:
+    driver: bridge
+  net-atletas:
+  net-biometria:
+  net-competencias:
+  net-contratos:
+  net-entrenamientos:
+  net-inventario:
+  net-salud:
+  net-iam:
+  net-nutricion:
+  net-staff:
+
+volumes:
+  atletas_data:
+  biometria_data:
+  competencias_data:
+  contratos_data:
+  entrenamientos_data:
+  inventario_data:
+  salud_data:
+  iam_data:
+  nutricion_data:
+  staff_data:

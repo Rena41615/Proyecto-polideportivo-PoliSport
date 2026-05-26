@@ -12,7 +12,7 @@ public class ClientService {
     private final WebClient webClient;
 
     public ClientService(WebClient.Builder webClientBuilder) {
-        this.webClient = webClientBuilder.baseUrl("http://localhost:8080").build();
+        this.webClient = webClientBuilder.baseUrl("http://salud-service:8080").build();
     }
 
     public Mono<String> obtenerDatos(String endpoint) {

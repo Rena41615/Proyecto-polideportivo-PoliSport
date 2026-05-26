@@ -1,4 +1,3 @@
-USE db_polisport_nutricion;
 INSERT INTO `planes_nutricionales` (atleta_id, deporte, objetivo, fecha_inicio, fecha_fin, calorias_diarias_gr, proteina_gr, carbohidratos_gr, lipidos_gr, estado, notas) VALUES
 (3, 'Basquetbol', 'RENDIMIENTO', '2026-05-07', '2026-09-07', 2400, 145, 290, 78, 'ACTIVO', 'Preparacion para campeonato'),
 (4, 'Tenis', 'PERDIDA_GRASA', '2026-05-07', '2026-07-07', 1800, 120, 180, 50, 'BORRADOR', 'Plan de reduccion controlada'),

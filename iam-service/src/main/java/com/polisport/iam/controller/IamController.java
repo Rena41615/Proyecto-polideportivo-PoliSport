@@ -1,5 +1,8 @@
 package com.polisport.iam.controller;
 
+import com.polisport.common.dto.iam.*;
+import com.polisport.common.mapper.iam.UsuariosMapper;
+import com.polisport.common.mapper.iam.RolMapper;
 import com.polisport.iam.model.Rol;
 import com.polisport.iam.model.RolesUsuarios;
 import com.polisport.iam.model.Usuarios;
@@ -14,19 +17,25 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/iam")
+@CrossOrigin(origins = "*")
 public class IamController {
 
 	private final UsuariosService usuariosService;
 	private final RolService rolService;
 	private final RolesUsuariosService rolesUsuariosService;
+	private final UsuariosMapper usuariosMapper;
+	private final RolMapper rolMapper;
 
-	// Constructor limpio: solo inyectamos lo que este controlador maneja
 	public IamController(UsuariosService usuariosService,
 	                     RolService rolService,
-	                     RolesUsuariosService rolesUsuariosService) {
+	                     RolesUsuariosService rolesUsuariosService,
+	                     UsuariosMapper usuariosMapper,
+	                     RolMapper rolMapper) {
 		this.usuariosService = usuariosService;
 		this.rolService = rolService;
 		this.rolesUsuariosService = rolesUsuariosService;
+		this.usuariosMapper = usuariosMapper;
+		this.rolMapper = rolMapper;
 	}
 
 	// --- SECCION DE USUARIOS ---
@@ -35,7 +44,10 @@ public class IamController {
 	public ResponseEntity<?> mostrarUsuarios() {
 		try {
 			List<Usuarios> usuarios = usuariosService.obtenerTodos();
-			return ResponseEntity.ok(usuarios);
+			List<UsuariosDTO> dtos = usuarios.stream()
+					.map(usuariosMapper::entityToDTO)
+					.toList();
+			return ResponseEntity.ok(dtos);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
 					.body("Error al obtener los usuarios: " + e.getMessage());
@@ -47,7 +59,7 @@ public class IamController {
 		try {
 			Usuarios usuarioEncontrado = usuariosService.obtenerPorId(id).orElse(null);
 			if (usuarioEncontrado != null) {
-				return ResponseEntity.ok(usuarioEncontrado);
+				return ResponseEntity.ok(usuariosMapper.entityToDTO(usuarioEncontrado));
 			}
 			return ResponseEntity.status(HttpStatus.NOT_FOUND)
 					.body("Usuario no encontrado con ID: " + id);
@@ -58,9 +70,11 @@ public class IamController {
 	}
 
 	@PostMapping("/usuarios")
-	public ResponseEntity<?> guardarUsuario(@Valid @RequestBody Usuarios nuevoUsuario) {
+	public ResponseEntity<?> guardarUsuario(@Valid @RequestBody UsuariosCrearDTO crearDTO) {
 		try {
-			return ResponseEntity.status(HttpStatus.CREATED).body(usuariosService.guardarUsuarios(nuevoUsuario));
+			Usuarios nuevoUsuario = usuariosMapper.crearDTOToEntity(crearDTO);
+			Usuarios guardado = usuariosService.guardarUsuarios(nuevoUsuario);
+			return ResponseEntity.status(HttpStatus.CREATED).body(usuariosMapper.entityToDTO(guardado));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 					.body("Datos invalidos: " + e.getMessage());
@@ -68,12 +82,14 @@ public class IamController {
 	}
 
 	@PutMapping("/usuarios/{id}")
-	public ResponseEntity<?> actualizarUsuario(@PathVariable Long id, @Valid @RequestBody Usuarios usuarioActualizado) {
+	public ResponseEntity<?> actualizarUsuario(@PathVariable Long id, @Valid @RequestBody UsuariosCrearDTO crearDTO) {
 		try {
 			Usuarios usuarioExistente = usuariosService.obtenerPorId(id).orElse(null);
 			if (usuarioExistente != null) {
+				Usuarios usuarioActualizado = usuariosMapper.crearDTOToEntity(crearDTO);
 				usuarioActualizado.setId(id);
-				return ResponseEntity.ok(usuariosService.guardarUsuarios(usuarioActualizado));
+				Usuarios guardado = usuariosService.guardarUsuarios(usuarioActualizado);
+				return ResponseEntity.ok(usuariosMapper.entityToDTO(guardado));
 			}
 			return ResponseEntity.status(HttpStatus.NOT_FOUND)
 					.body("Usuario no encontrado con ID: " + id);
@@ -105,7 +121,10 @@ public class IamController {
 	public ResponseEntity<?> mostrarRoles() {
 		try {
 			List<Rol> roles = rolService.obtenerTodos();
-			return ResponseEntity.ok(roles);
+			List<RolDTO> dtos = roles.stream()
+					.map(rolMapper::entityToDTO)
+					.toList();
+			return ResponseEntity.ok(dtos);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
 					.body("Error al obtener los roles: " + e.getMessage());
@@ -117,7 +136,7 @@ public class IamController {
 		try {
 			Rol rolEncontrado = rolService.obtenerPorId(id).orElse(null);
 			if (rolEncontrado != null) {
-				return ResponseEntity.ok(rolEncontrado);
+				return ResponseEntity.ok(rolMapper.entityToDTO(rolEncontrado));
 			}
 			return ResponseEntity.status(HttpStatus.NOT_FOUND)
 					.body("Rol no encontrado con ID: " + id);
@@ -128,9 +147,11 @@ public class IamController {
 	}
 
 	@PostMapping("/roles")
-	public ResponseEntity<?> guardarRol(@Valid @RequestBody Rol nuevoRol) {
+	public ResponseEntity<?> guardarRol(@Valid @RequestBody RolCrearDTO crearDTO) {
 		try {
-			return ResponseEntity.status(HttpStatus.CREATED).body(rolService.guardarRol(nuevoRol));
+			Rol nuevoRol = rolMapper.crearDTOToEntity(crearDTO);
+			Rol guardado = rolService.guardarRol(nuevoRol);
+			return ResponseEntity.status(HttpStatus.CREATED).body(rolMapper.entityToDTO(guardado));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 					.body("Datos invalidos: " + e.getMessage());
@@ -138,12 +159,14 @@ public class IamController {
 	}
 
 	@PutMapping("/roles/{id}")
-	public ResponseEntity<?> actualizarRol(@PathVariable Long id, @Valid @RequestBody Rol rolActualizado) {
+	public ResponseEntity<?> actualizarRol(@PathVariable Long id, @Valid @RequestBody RolCrearDTO crearDTO) {
 		try {
 			Rol rolExistente = rolService.obtenerPorId(id).orElse(null);
 			if (rolExistente != null) {
+				Rol rolActualizado = rolMapper.crearDTOToEntity(crearDTO);
 				rolActualizado.setId(id);
-				return ResponseEntity.ok(rolService.guardarRol(rolActualizado));
+				Rol guardado = rolService.guardarRol(rolActualizado);
+				return ResponseEntity.ok(rolMapper.entityToDTO(guardado));
 			}
 			return ResponseEntity.status(HttpStatus.NOT_FOUND)
 					.body("Rol no encontrado con ID: " + id);

@@ -1,5 +1,8 @@
 package com.polisport.nutricion.controller;
 
+import com.polisport.common.dto.nutricion.PlanNutricionalDTO;
+import com.polisport.common.dto.nutricion.PlanNutricionalCrearDTO;
+import com.polisport.common.mapper.nutricion.PlanNutricionalMapper;
 import com.polisport.nutricion.model.PlanNutricional;
 import com.polisport.nutricion.service.PlanNutricionalService;
 import jakarta.validation.Valid;
@@ -10,19 +13,25 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/nutricion")
+@CrossOrigin(origins = "*")
 public class NutricionController {
 
 	private final PlanNutricionalService planNutricionalService;
+	private final PlanNutricionalMapper planNutricionalMapper;
 
-	public NutricionController(PlanNutricionalService planNutricionalService) {
+	public NutricionController(PlanNutricionalService planNutricionalService, PlanNutricionalMapper planNutricionalMapper) {
 		this.planNutricionalService = planNutricionalService;
+		this.planNutricionalMapper = planNutricionalMapper;
 	}
 
 	@GetMapping
 	public ResponseEntity<?> mostrarPlanes() {
 		try {
 			List<PlanNutricional> planes = planNutricionalService.obtenerTodos();
-			return ResponseEntity.ok(planes);
+			List<PlanNutricionalDTO> dtos = planes.stream()
+					.map(planNutricionalMapper::entityToDTO)
+					.toList();
+			return ResponseEntity.ok(dtos);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
 					.body("Error al obtener los planes nutricionales: " + e.getMessage());
@@ -35,7 +44,7 @@ public class NutricionController {
 			PlanNutricional planEncontrado = planNutricionalService.obtenerPorId(id).orElse(null);
 
 			if (planEncontrado != null) {
-				return ResponseEntity.ok(planEncontrado);
+				return ResponseEntity.ok(planNutricionalMapper.entityToDTO(planEncontrado));
 			} else {
 				return ResponseEntity.status(HttpStatus.NOT_FOUND)
 						.body("Plan nutricional no encontrado con ID: " + id);
@@ -47,10 +56,11 @@ public class NutricionController {
 	}
 
 	@PostMapping
-	public ResponseEntity<?> guardarPlan(@Valid @RequestBody PlanNutricional nuevoPlan) {
+	public ResponseEntity<?> guardarPlan(@Valid @RequestBody PlanNutricionalCrearDTO crearDTO) {
 		try {
+			PlanNutricional nuevoPlan = planNutricionalMapper.crearDTOToEntity(crearDTO);
 			PlanNutricional planGuardado = planNutricionalService.guardarPlanNutricional(nuevoPlan);
-			return ResponseEntity.status(HttpStatus.CREATED).body(planGuardado);
+			return ResponseEntity.status(HttpStatus.CREATED).body(planNutricionalMapper.entityToDTO(planGuardado));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 					.body("Datos invalidos: " + e.getMessage());
@@ -58,14 +68,15 @@ public class NutricionController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<?> actualizarPlan(@PathVariable Long id, @Valid @RequestBody PlanNutricional planActualizado) {
+	public ResponseEntity<?> actualizarPlan(@PathVariable Long id, @Valid @RequestBody PlanNutricionalCrearDTO crearDTO) {
 		try {
 			PlanNutricional planExistente = planNutricionalService.obtenerPorId(id).orElse(null);
 
 			if (planExistente != null) {
+				PlanNutricional planActualizado = planNutricionalMapper.crearDTOToEntity(crearDTO);
 				planActualizado.setId(id);
 				PlanNutricional planActualizadoGuardado = planNutricionalService.guardarPlanNutricional(planActualizado);
-				return ResponseEntity.ok(planActualizadoGuardado);
+				return ResponseEntity.ok(planNutricionalMapper.entityToDTO(planActualizadoGuardado));
 			} else {
 				return ResponseEntity.status(HttpStatus.NOT_FOUND)
 						.body("Plan nutricional no encontrado con ID: " + id);

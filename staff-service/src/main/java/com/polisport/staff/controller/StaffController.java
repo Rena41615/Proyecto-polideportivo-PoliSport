@@ -1,5 +1,8 @@
 package com.polisport.staff.controller;
 
+import com.polisport.common.dto.staff.*;
+import com.polisport.common.mapper.staff.MiembrosStaffMapper;
+import com.polisport.common.mapper.staff.RolStaffMapper;
 import com.polisport.staff.model.MiembrosPermisosStaff;
 import com.polisport.staff.model.MiembrosRolStaff;
 import com.polisport.staff.model.MiembrosStaff;
@@ -14,25 +17,35 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/staff")
+@CrossOrigin(origins = "*")
 public class StaffController {
 
 	private final MiembrosStaffService miembrosStaffService;
 	private final MiembrosRolStaffService miembrosRolStaffService;
 	private final MiembrosPermisosStaffService miembrosPermisosStaffService;
+	private final MiembrosStaffMapper miembrosStaffMapper;
+	private final RolStaffMapper rolStaffMapper;
 
 	public StaffController(MiembrosStaffService miembrosStaffService,
 						  MiembrosRolStaffService miembrosRolStaffService,
-						  MiembrosPermisosStaffService miembrosPermisosStaffService) {
+						  MiembrosPermisosStaffService miembrosPermisosStaffService,
+						  MiembrosStaffMapper miembrosStaffMapper,
+						  RolStaffMapper rolStaffMapper) {
 		this.miembrosStaffService = miembrosStaffService;
 		this.miembrosRolStaffService = miembrosRolStaffService;
 		this.miembrosPermisosStaffService = miembrosPermisosStaffService;
+		this.miembrosStaffMapper = miembrosStaffMapper;
+		this.rolStaffMapper = rolStaffMapper;
 	}
 
 	@GetMapping("/miembros")
 	public ResponseEntity<?> mostrarMiembros() {
 		try {
 			List<MiembrosStaff> miembros = miembrosStaffService.obtenerTodos();
-			return ResponseEntity.ok(miembros);
+			List<MiembrosStaffDTO> dtos = miembros.stream()
+					.map(miembrosStaffMapper::entityToDTO)
+					.toList();
+			return ResponseEntity.ok(dtos);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
 					.body("Error al obtener los miembros del staff: " + e.getMessage());
@@ -44,7 +57,7 @@ public class StaffController {
 		try {
 			MiembrosStaff miembroEncontrado = miembrosStaffService.obtenerPorId(id).orElse(null);
 			if (miembroEncontrado != null) {
-				return ResponseEntity.ok(miembroEncontrado);
+				return ResponseEntity.ok(miembrosStaffMapper.entityToDTO(miembroEncontrado));
 			}
 			return ResponseEntity.status(HttpStatus.NOT_FOUND)
 					.body("Miembro del staff no encontrado con ID: " + id);
@@ -55,9 +68,11 @@ public class StaffController {
 	}
 
 	@PostMapping("/miembros")
-	public ResponseEntity<?> guardarMiembro(@Valid @RequestBody MiembrosStaff nuevoMiembro) {
+	public ResponseEntity<?> guardarMiembro(@Valid @RequestBody MiembrosStaffCrearDTO crearDTO) {
 		try {
-			return ResponseEntity.status(HttpStatus.CREATED).body(miembrosStaffService.guardarMiembrosStaff(nuevoMiembro));
+			MiembrosStaff nuevoMiembro = miembrosStaffMapper.crearDTOToEntity(crearDTO);
+			MiembrosStaff guardado = miembrosStaffService.guardarMiembrosStaff(nuevoMiembro);
+			return ResponseEntity.status(HttpStatus.CREATED).body(miembrosStaffMapper.entityToDTO(guardado));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 					.body("Datos invalidos: " + e.getMessage());
@@ -65,12 +80,14 @@ public class StaffController {
 	}
 
 	@PutMapping("/miembros/{id}")
-	public ResponseEntity<?> actualizarMiembro(@PathVariable Long id, @Valid @RequestBody MiembrosStaff miembroActualizado) {
+	public ResponseEntity<?> actualizarMiembro(@PathVariable Long id, @Valid @RequestBody MiembrosStaffCrearDTO crearDTO) {
 		try {
 			MiembrosStaff miembroExistente = miembrosStaffService.obtenerPorId(id).orElse(null);
 			if (miembroExistente != null) {
+				MiembrosStaff miembroActualizado = miembrosStaffMapper.crearDTOToEntity(crearDTO);
 				miembroActualizado.setId(id);
-				return ResponseEntity.ok(miembrosStaffService.guardarMiembrosStaff(miembroActualizado));
+				MiembrosStaff guardado = miembrosStaffService.guardarMiembrosStaff(miembroActualizado);
+				return ResponseEntity.ok(miembrosStaffMapper.entityToDTO(guardado));
 			}
 			return ResponseEntity.status(HttpStatus.NOT_FOUND)
 					.body("Miembro del staff no encontrado con ID: " + id);
@@ -100,7 +117,10 @@ public class StaffController {
 	public ResponseEntity<?> mostrarRolesStaff() {
 		try {
 			List<MiembrosRolStaff> roles = miembrosRolStaffService.obtenerTodos();
-			return ResponseEntity.ok(roles);
+			List<RolStaffDTO> dtos = roles.stream()
+					.map(rol -> new RolStaffDTO(rol.getId(), rol.getNombre(), rol.getDescripcion()))
+					.toList();
+			return ResponseEntity.ok(dtos);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
 					.body("Error al obtener los roles del staff: " + e.getMessage());
@@ -112,7 +132,8 @@ public class StaffController {
 		try {
 			MiembrosRolStaff rolEncontrado = miembrosRolStaffService.obtenerPorId(id).orElse(null);
 			if (rolEncontrado != null) {
-				return ResponseEntity.ok(rolEncontrado);
+				RolStaffDTO dto = new RolStaffDTO(rolEncontrado.getId(), rolEncontrado.getNombre(), rolEncontrado.getDescripcion());
+				return ResponseEntity.ok(dto);
 			}
 			return ResponseEntity.status(HttpStatus.NOT_FOUND)
 					.body("Rol del staff no encontrado con ID: " + id);
@@ -123,9 +144,12 @@ public class StaffController {
 	}
 
 	@PostMapping("/roles")
-	public ResponseEntity<?> guardarRolStaff(@Valid @RequestBody MiembrosRolStaff nuevoRol) {
+	public ResponseEntity<?> guardarRolStaff(@Valid @RequestBody RolStaffCrearDTO crearDTO) {
 		try {
-			return ResponseEntity.status(HttpStatus.CREATED).body(miembrosRolStaffService.guardarMiembrosRolStaff(nuevoRol));
+			MiembrosRolStaff nuevoRol = rolStaffMapper.crearDTOToEntity(crearDTO);
+			MiembrosRolStaff guardado = miembrosRolStaffService.guardarMiembrosRolStaff(nuevoRol);
+			RolStaffDTO dto = new RolStaffDTO(guardado.getId(), guardado.getNombre(), guardado.getDescripcion());
+			return ResponseEntity.status(HttpStatus.CREATED).body(dto);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 					.body("Datos invalidos: " + e.getMessage());
@@ -133,12 +157,15 @@ public class StaffController {
 	}
 
 	@PutMapping("/roles/{id}")
-	public ResponseEntity<?> actualizarRolStaff(@PathVariable Long id, @Valid @RequestBody MiembrosRolStaff rolActualizado) {
+	public ResponseEntity<?> actualizarRolStaff(@PathVariable Long id, @Valid @RequestBody RolStaffCrearDTO crearDTO) {
 		try {
 			MiembrosRolStaff rolExistente = miembrosRolStaffService.obtenerPorId(id).orElse(null);
 			if (rolExistente != null) {
+				MiembrosRolStaff rolActualizado = rolStaffMapper.crearDTOToEntity(crearDTO);
 				rolActualizado.setId(id);
-				return ResponseEntity.ok(miembrosRolStaffService.guardarMiembrosRolStaff(rolActualizado));
+				MiembrosRolStaff guardado = miembrosRolStaffService.guardarMiembrosRolStaff(rolActualizado);
+				RolStaffDTO dto = new RolStaffDTO(guardado.getId(), guardado.getNombre(), guardado.getDescripcion());
+				return ResponseEntity.ok(dto);
 			}
 			return ResponseEntity.status(HttpStatus.NOT_FOUND)
 					.body("Rol del staff no encontrado con ID: " + id);

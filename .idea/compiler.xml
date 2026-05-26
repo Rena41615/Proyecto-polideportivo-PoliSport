@@ -11,6 +11,7 @@
         <module name="iam-service" />
         <module name="biometria-service" />
         <module name="atletas-service" />
+        <module name="common-dtos" />
         <module name="staff-service" />
         <module name="competencia-service" />
         <module name="inventario-service" />
@@ -24,6 +25,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="atletas-service" options="-parameters" />
       <module name="biometria-service" options="-parameters" />
+      <module name="common-dtos" options="-parameters" />
       <module name="competencia-service" options="-parameters" />
       <module name="contratos-service" options="-parameters" />
       <module name="entrenamiento-service" options="-parameters" />
