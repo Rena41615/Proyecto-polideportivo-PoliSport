@@ -1,0 +1,2 @@
+INSERT INTO contratos (run_empleado, dvrun_empleado, cargo, fecha_inicio, salario_mensual, tipo_contrato, estado)
+VALUES (87654321, 'K', 'Preparador Físico', '2026-01-01', 1200000, 'INDEFINIDO', 'ACTIVO');

@@ -1,102 +1,147 @@
-version: '3.8'
-
 services:
+  # ==========================================
+  # CAPA DE BASES DE DATOS INDEPENDIENTES (Sin contraseña como Laragon)
+  # ==========================================
 
-  # ==================== BASES DE DATOS ====================
-
-  mysql-biometria:
+  db-atletas:
     image: mysql:8.0
-    container_name: polisport-biometria-db
+    container_name: polisport-atletas-db
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: db_polisport_biometria
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"         # <- Permite entrar sin contraseña
+      MYSQL_DATABASE: polisport_atletas_db
     ports:
-      - "3307:3306"
+      - "3306:3306"
     volumes:
-      - biometria_data:/var/lib/mysql
+      - atletas_data:/var/lib/mysql
+    networks:
+      net-atletas:
+        aliases:
+          - db-mysql
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      timeout: 10s
-      retries: 10
+      timeout: 5s
+      retries: 5
 
-  mysql-inventario:
+  db-competencias:
     image: mysql:8.0
-    container_name: polisport-inventario-db
+    container_name: polisport-competencias-db
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: db_polisport_inventario
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"         # <- Permite entrar sin contraseña
+      MYSQL_DATABASE: polisport_competencias_db
     ports:
-      - "3308:3306"
+      - "3311:3306"
     volumes:
-      - inventario_data:/var/lib/mysql
+      - competencias_data:/var/lib/mysql
+    networks:
+      net-competencias:
+        aliases:
+          - db-mysql
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      timeout: 10s
-      retries: 10
+      timeout: 5s
+      retries: 5
 
-  mysql-salud:
+  db-contratos:
     image: mysql:8.0
-    container_name: polisport-salud-db
+    container_name: polisport-contratos-db
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: db_polisport_salud
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"         # <- Permite entrar sin contraseña
+      MYSQL_DATABASE: polisport_contratos_db
     ports:
-      - "3309:3306"
+      - "3312:3306"
     volumes:
-      - salud_data:/var/lib/mysql
+      - contratos_data:/var/lib/mysql
+    networks:
+      net-contratos:
+        aliases:
+          - db-mysql
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      timeout: 10s
-      retries: 10
+      timeout: 5s
+      retries: 5
 
-  # ==================== MICROSERVICIOS ====================
-
-  biometria-service:
-    build:
-      context: ./biometria-service
-      dockerfile: Dockerfile
-    container_name: polisport-biometria
-    ports:
-      - "8082:8082"
+  db-entrenamientos:
+    image: mysql:8.0
+    container_name: polisport-entrenamientos-db
     environment:
-      DB_BIOMETRIA_URL: jdbc:mysql://mysql-biometria:3306/db_polisport_biometria?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
-      DB_BIOMETRIA_USER: root
-      DB_BIOMETRIA_PASS: root
-    depends_on:
-      mysql-biometria:
-        condition: service_healthy
-
-  inventario-service:
-    build:
-      context: ./inventario-service
-      dockerfile: Dockerfile
-    container_name: polisport-inventario
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"         # <- Permite entrar sin contraseña
+      MYSQL_DATABASE: polisport_entrenamientos_db
     ports:
-      - "8087:8087"
-    environment:
-      DB_INVENTARIO_URL: jdbc:mysql://mysql-inventario:3306/db_polisport_inventario?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
-      DB_INVENTARIO_USER: root
-      DB_INVENTARIO_PASS: root
-    depends_on:
-      mysql-inventario:
-        condition: service_healthy
+      - "3313:3306"
+    volumes:
+      - entrenamientos_data:/var/lib/mysql
+    networks:
+      net-entrenamientos:
+        aliases:
+          - db-mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 5s
+      retries: 5
 
-  salud-service:
+  # ==========================================
+  # CAPA DE MICROSERVICIOS
+  # ==========================================
+
+  atletas-service:
     build:
-      context: ./salud-service
-      dockerfile: Dockerfile
-    container_name: polisport-salud
+      context: ./atletas-service
+    container_name: atletas-service
     ports:
-      - "8089:8089"
-    environment:
-      DB_SALUD_URL: jdbc:mysql://mysql-salud:3306/db_polisport_salud?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
-      DB_SALUD_USER: root
-      DB_SALUD_PASS: root
+      - "8081:8080"
     depends_on:
-      mysql-salud:
+      db-atletas:
         condition: service_healthy
+    networks:
+      - net-atletas
+
+  competencia-service:
+    build:
+      context: ./competencia-service
+    container_name: competencia-service
+    ports:
+      - "8083:8080"
+    depends_on:
+      db-competencias:
+        condition: service_healthy
+    networks:
+      - net-competencias
+
+  contratos-service:
+    build:
+      context: ./contratos-service
+    container_name: contratos-service
+    ports:
+      - "8084:8080"
+    depends_on:
+      db-contratos:
+        condition: service_healthy
+    networks:
+      - net-contratos
+
+  entrenamiento-service:
+    build:
+      context: ./entrenamiento-service
+    container_name: entrenamiento-service
+    ports:
+      - "8085:8080"
+    depends_on:
+      db-entrenamientos:
+        condition: service_healthy
+    networks:
+      - net-entrenamientos
+
+# ==========================================
+# DEFINICIÓN DE REDES Y VOLÚMENES AISLADOS
+# ==========================================
+networks:
+  net-atletas:
+  net-competencias:
+  net-contratos:
+  net-entrenamientos:
 
 volumes:
-  biometria_data:
-  inventario_data:
-  salud_data:
+  atletas_data:
+  competencias_data:
+  contratos_data:
+  entrenamientos_data:
