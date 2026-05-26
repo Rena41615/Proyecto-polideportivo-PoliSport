@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/atletas-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/biometria-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/competencia-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/contratos-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/entrenamiento-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/iam-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/inventario-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/nutricion-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/polisport/atletas-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/polisport/biometria-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/polisport/competencia-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/polisport/contratos-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/polisport/entrenamiento-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/polisport/iam-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/polisport/inventario-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/polisport/nutricion-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/polisport/salud-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/polisport/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/polisport/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/polisport/staff-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/salud-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/staff-service/src/main/java" charset="UTF-8" />
+  </component>
+</project>
