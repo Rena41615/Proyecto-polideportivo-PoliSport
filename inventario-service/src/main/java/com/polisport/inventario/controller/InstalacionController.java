@@ -1,8 +1,8 @@
 package com.polisport.inventario.controller;
 
-import com.polisport.common.dto.inventario.InstalacionDTO;
-import com.polisport.common.dto.inventario.InstalacionCrearDTO;
-import com.polisport.common.mapper.inventario.InstalacionMapper;
+import com.polisport.inventario.dto.InstalacionDTO;
+import com.polisport.inventario.dto.InstalacionCrearDTO;
+import com.polisport.inventario.mapper.InstalacionMapper;
 import com.polisport.inventario.model.Instalacion;
 import com.polisport.inventario.service.InstalacionService;
 import jakarta.validation.Valid;

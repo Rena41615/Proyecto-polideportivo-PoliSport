@@ -1,8 +1,8 @@
 package com.polisport.entrenamiento.controller;
 
-import com.polisport.common.dto.entrenamiento.EntrenamientoDTO;
-import com.polisport.common.dto.entrenamiento.EntrenamientoCrearDTO;
-import com.polisport.common.mapper.entrenamiento.EntrenamientoMapper;
+import com.polisport.entrenamiento.dto.EntrenamientoDTO;
+import com.polisport.entrenamiento.dto.EntrenamientoCrearDTO;
+import com.polisport.entrenamiento.mapper.EntrenamientoMapper;
 import com.polisport.entrenamiento.model.Entrenamiento;
 import com.polisport.entrenamiento.service.EntrenamientoService;
 import jakarta.validation.Valid;

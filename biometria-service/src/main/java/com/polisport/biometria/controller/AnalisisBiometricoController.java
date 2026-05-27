@@ -1,8 +1,8 @@
 package com.polisport.biometria.controller;
 
-import com.polisport.common.dto.biometria.AnalisisBiometricoCrearDTO;
-import com.polisport.common.dto.biometria.AnalisisBiometricoDTO;
-import com.polisport.common.mapper.biometria.AnalisisBiometricoMapper;
+import com.polisport.biometria.dto.AnalisisBiometricoCrearDTO;
+import com.polisport.biometria.dto.AnalisisBiometricoDTO;
+import com.polisport.biometria.mapper.AnalisisBiometricoMapper;
 import com.polisport.biometria.model.AnalisisBiometrico;
 import com.polisport.biometria.service.AnalisisBiometricoService;
 import org.springframework.validation.annotation.Validated;

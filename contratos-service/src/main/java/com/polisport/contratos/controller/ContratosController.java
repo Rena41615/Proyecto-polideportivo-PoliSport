@@ -1,8 +1,8 @@
 package com.polisport.contratos.controller;
 
-import com.polisport.common.dto.contratos.ContratoDTO;
-import com.polisport.common.dto.contratos.ContratoCrearDTO;
-import com.polisport.common.mapper.contratos.ContratoMapper;
+import com.polisport.contratos.dto.ContratoDTO;
+import com.polisport.contratos.dto.ContratoCrearDTO;
+import com.polisport.contratos.mapper.ContratoMapper;
 import com.polisport.contratos.model.Contrato;
 import com.polisport.contratos.service.ContratosService;
 import jakarta.validation.Valid;

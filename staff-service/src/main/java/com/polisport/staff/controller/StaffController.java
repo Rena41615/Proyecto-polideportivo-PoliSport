@@ -1,8 +1,8 @@
 package com.polisport.staff.controller;
 
-import com.polisport.common.dto.staff.*;
-import com.polisport.common.mapper.staff.MiembrosStaffMapper;
-import com.polisport.common.mapper.staff.RolStaffMapper;
+import com.polisport.staff.dto.*;
+import com.polisport.staff.mapper.MiembrosStaffMapper;
+import com.polisport.staff.mapper.RolStaffMapper;
 import com.polisport.staff.model.MiembrosPermisosStaff;
 import com.polisport.staff.model.MiembrosRolStaff;
 import com.polisport.staff.model.MiembrosStaff;

@@ -1,8 +1,8 @@
 package com.polisport.inventario.controller;
 
-import com.polisport.common.dto.inventario.InventarioDTO;
-import com.polisport.common.dto.inventario.InventarioCrearDTO;
-import com.polisport.common.mapper.inventario.InventarioMapper;
+import com.polisport.inventario.dto.InventarioDTO;
+import com.polisport.inventario.dto.InventarioCrearDTO;
+import com.polisport.inventario.mapper.InventarioMapper;
 import com.polisport.inventario.model.Inventario;
 import com.polisport.inventario.service.InventarioService;
 import jakarta.validation.Valid;

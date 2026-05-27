@@ -1,8 +1,8 @@
 package com.polisport.nutricion.controller;
 
-import com.polisport.common.dto.nutricion.PlanNutricionalDTO;
-import com.polisport.common.dto.nutricion.PlanNutricionalCrearDTO;
-import com.polisport.common.mapper.nutricion.PlanNutricionalMapper;
+import com.polisport.nutricion.dto.PlanNutricionalDTO;
+import com.polisport.nutricion.dto.PlanNutricionalCrearDTO;
+import com.polisport.nutricion.mapper.PlanNutricionalMapper;
 import com.polisport.nutricion.model.PlanNutricional;
 import com.polisport.nutricion.service.PlanNutricionalService;
 import jakarta.validation.Valid;

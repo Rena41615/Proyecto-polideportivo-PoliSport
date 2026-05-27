@@ -1,8 +1,8 @@
 package com.polisport.salud.controller;
 
-import com.polisport.common.dto.salud.GestionMedicaDTO;
-import com.polisport.common.dto.salud.GestionMedicaCrearDTO;
-import com.polisport.common.mapper.salud.GestionMedicaMapper;
+import com.polisport.salud.dto.GestionMedicaDTO;
+import com.polisport.salud.dto.GestionMedicaCrearDTO;
+import com.polisport.salud.mapper.GestionMedicaMapper;
 import com.polisport.salud.model.GestionMedica;
 import com.polisport.salud.service.GestionMedicaService;
 import jakarta.validation.Valid;

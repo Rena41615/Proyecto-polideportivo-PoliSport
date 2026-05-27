@@ -54,9 +54,7 @@
 			<artifactId>flyway-mysql</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.polisport</groupId>
-			<artifactId>common-dtos</artifactId>
-			<version>1.0.0</version>
+			
 		</dependency>
 	</dependencies>
 	<build>

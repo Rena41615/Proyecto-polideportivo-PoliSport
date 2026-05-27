@@ -1,8 +1,8 @@
 package com.polisport.competencia.controller;
 
-import com.polisport.common.dto.competencia.CompetenciaDTO;
-import com.polisport.common.dto.competencia.CompetenciaCrearDTO;
-import com.polisport.common.mapper.competencia.CompetenciaMapper;
+import com.polisport.competencia.dto.CompetenciaDTO;
+import com.polisport.competencia.dto.CompetenciaCrearDTO;
+import com.polisport.competencia.mapper.CompetenciaMapper;
 import com.polisport.competencia.model.Competencia;
 import com.polisport.competencia.service.CompetenciaService;
 import jakarta.validation.Valid;

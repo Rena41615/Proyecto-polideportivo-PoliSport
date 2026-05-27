@@ -1,8 +1,8 @@
 package com.polisport.atletas.controller;
 
-import com.polisport.common.dto.atletas.AtletaCrearDTO;
-import com.polisport.common.dto.atletas.AtletaDTO;
-import com.polisport.common.mapper.atletas.AtletaMapper;
+import com.polisport.atletas.dto.AtletaCrearDTO;
+import com.polisport.atletas.dto.AtletaDTO;
+import com.polisport.atletas.mapper.AtletaMapper;
 import com.polisport.atletas.model.Atleta;
 import com.polisport.atletas.service.AtletaService;
 import jakarta.validation.Valid;

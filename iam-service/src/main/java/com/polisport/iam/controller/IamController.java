@@ -1,8 +1,8 @@
 package com.polisport.iam.controller;
 
-import com.polisport.common.dto.iam.*;
-import com.polisport.common.mapper.iam.UsuariosMapper;
-import com.polisport.common.mapper.iam.RolMapper;
+import com.polisport.iam.dto.*;
+import com.polisport.iam.mapper.UsuariosMapper;
+import com.polisport.iam.mapper.RolMapper;
 import com.polisport.iam.model.Rol;
 import com.polisport.iam.model.RolesUsuarios;
 import com.polisport.iam.model.Usuarios;
