@@ -7,11 +7,18 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+      </profile>
+      <profile name="Annotation profile for polisport" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.30/lombok-1.18.30.jar" />
+        </processorPath>
         <module name="contratos-service" />
         <module name="iam-service" />
         <module name="biometria-service" />
         <module name="atletas-service" />
-        <module name="common-dtos" />
         <module name="staff-service" />
         <module name="competencia-service" />
         <module name="inventario-service" />
@@ -20,6 +27,9 @@
         <module name="nutricion-service" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="common-dtos" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
@@ -32,6 +42,7 @@
       <module name="iam-service" options="-parameters" />
       <module name="inventario-service" options="-parameters" />
       <module name="nutricion-service" options="-parameters" />
+      <module name="polisport" options="-parameters" />
       <module name="salud-service" options="-parameters" />
       <module name="staff-service" options="-parameters" />
     </option>

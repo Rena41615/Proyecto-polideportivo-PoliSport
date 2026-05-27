@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.netty.http.client.HttpClient;
-import reactor.netty.tcp.SslProvider;
 
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
@@ -34,7 +33,6 @@ public class ClientConfig {
         
         // Configurar HttpClient con timeouts
         HttpClient httpClient = HttpClient.create()
-                .secure(sslSpec -> sslSpec.sslContext(SslProvider.builder().build()))
                 .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 5000) // 5 segundos
                 .responseTimeout(Duration.ofSeconds(10)) // 10 segundos para read
                 .doOnConnected(conn -> {

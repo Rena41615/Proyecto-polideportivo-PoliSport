@@ -4,6 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.*;
+
 @Entity
 @Table(name = "instalacion")
 @AllArgsConstructor
@@ -18,6 +19,12 @@ public class Instalacion {
     @NotBlank(message = "El nombre de la instalacion es obligatorio")
     @Column(name = "nombre", nullable = false)
     private String nombre;
+
+    @Column(name = "descripcion")
+    private String descripcion;
+
+    @Column(name = "ubicacion")
+    private String ubicacion;
 
     @NotBlank(message = "El tipo de instalacion es obligatorio")
     @Column(name = "tipo", nullable = false)

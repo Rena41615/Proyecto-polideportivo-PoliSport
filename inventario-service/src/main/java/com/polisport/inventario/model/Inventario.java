@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
 import lombok.*;
+
 @Entity
 @Table(name = "inventario")
 @AllArgsConstructor
@@ -19,6 +20,12 @@ public class Inventario {
     @NotBlank(message = "El nombre del articulo es obligatorio")
     @Column(name = "nombre", nullable = false)
     private String nombre;
+
+    @Column(name = "descripcion")
+    private String descripcion;
+
+    @Column(name = "ubicacion")
+    private String ubicacion;
 
     @PositiveOrZero(message = "La cantidad no puede ser negativa")
     @Column(name = "cantidad")

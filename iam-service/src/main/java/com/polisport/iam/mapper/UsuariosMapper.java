@@ -12,7 +12,7 @@ public class UsuariosMapper {
         
         Usuarios entity = new Usuarios();
         entity.setEmail(dto.getEmail());
-        entity.setContrasena(dto.getContrasena());
+        entity.setPasswordHash(dto.getContrasena());
         entity.setNombre(dto.getNombre());
         
         return entity;
@@ -25,7 +25,7 @@ public class UsuariosMapper {
         dto.setId(entity.getId());
         dto.setEmail(entity.getEmail());
         dto.setNombre(entity.getNombre());
-        dto.setContrasena(entity.getContrasena());
+        dto.setContrasena(entity.getPasswordHash());
         
         return dto;
     }

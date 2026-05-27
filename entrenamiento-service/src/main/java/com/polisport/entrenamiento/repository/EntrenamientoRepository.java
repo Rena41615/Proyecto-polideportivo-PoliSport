@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface EntrenamientoRepository extends JpaRepository<Entrenamiento, Long>{
 
-    @Query("SELECT e FROM Entrenamiento e JOIN e.participantesRun p WHERE p = :runAtleta")
+    @Query("SELECT e FROM Entrenamiento e JOIN e.atletasParticipantes p WHERE p = :runAtleta")
     List<Entrenamiento> buscarPorAtleta(@Param("runAtleta") Integer runAtleta);
 
     List<Entrenamiento> findByRunEntrenador(Integer runEntrenador);

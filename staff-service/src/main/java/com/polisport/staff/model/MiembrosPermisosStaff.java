@@ -12,18 +12,11 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.time.LocalDate;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "miembros_permisos_staff")
 public class MiembrosPermisosStaff {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -44,4 +37,55 @@ public class MiembrosPermisosStaff {
 
     @Column(name = "otorgado_desde")
     private LocalDate otorgadoDesde = LocalDate.now();
+
+    public MiembrosPermisosStaff() {
+    }
+
+    public MiembrosPermisosStaff(Long id, MiembrosStaff staff, String permiso, String descripcion, LocalDate otorgadoDesde) {
+        this.id = id;
+        this.staff = staff;
+        this.permiso = permiso;
+        this.descripcion = descripcion;
+        this.otorgadoDesde = otorgadoDesde;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public MiembrosStaff getStaff() {
+        return staff;
+    }
+
+    public void setStaff(MiembrosStaff staff) {
+        this.staff = staff;
+    }
+
+    public String getPermiso() {
+        return permiso;
+    }
+
+    public void setPermiso(String permiso) {
+        this.permiso = permiso;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public LocalDate getOtorgadoDesde() {
+        return otorgadoDesde;
+    }
+
+    public void setOtorgadoDesde(LocalDate otorgadoDesde) {
+        this.otorgadoDesde = otorgadoDesde;
+    }
 }

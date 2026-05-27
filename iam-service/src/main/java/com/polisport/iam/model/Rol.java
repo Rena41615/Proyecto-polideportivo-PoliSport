@@ -3,18 +3,12 @@ package com.polisport.iam.model;
 import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-import lombok.*;
 import jakarta.validation.constraints.*;
 
-
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "roles")
-
 public class Rol {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -33,4 +27,55 @@ public class Rol {
 
     @OneToMany(mappedBy = "rol")
     private List<PermisosRol> permisos = new ArrayList<>();
+
+    public Rol() {
+    }
+
+    public Rol(Long id, String nombre, String descripcion, List<RolesUsuarios> usuarios, List<PermisosRol> permisos) {
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.usuarios = usuarios;
+        this.permisos = permisos;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public List<RolesUsuarios> getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(List<RolesUsuarios> usuarios) {
+        this.usuarios = usuarios;
+    }
+
+    public List<PermisosRol> getPermisos() {
+        return permisos;
+    }
+
+    public void setPermisos(List<PermisosRol> permisos) {
+        this.permisos = permisos;
+    }
 }

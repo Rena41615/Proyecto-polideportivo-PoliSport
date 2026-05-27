@@ -1,13 +1,11 @@
 package com.polisport.nutricion.dto;
-
-import com.polisport.common.model.ObjetivoNutricional;
-import com.polisport.common.model.PlanEstado;
+import com.polisport.nutricion.model.ObjetivoNutricional;
+import com.polisport.nutricion.model.PlanEstado;
 import lombok.*;
 import java.time.LocalDate;
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @ToString
 public class PlanNutricionalDTO {
-
     private Long id;
     private Long atletaId;
     private ObjetivoNutricional objetivo;

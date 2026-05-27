@@ -11,7 +11,7 @@ public class RolMapper {
         if (dto == null) return null;
         
         Rol entity = new Rol();
-        entity.setNombreRol(dto.getNombreRol());
+        entity.setNombre(dto.getNombreRol());
         entity.setDescripcion(dto.getDescripcion());
         
         return entity;
@@ -22,7 +22,7 @@ public class RolMapper {
         
         RolDTO dto = new RolDTO();
         dto.setId(entity.getId());
-        dto.setNombreRol(entity.getNombreRol());
+        dto.setNombreRol(entity.getNombre());
         dto.setDescripcion(entity.getDescripcion());
         
         return dto;

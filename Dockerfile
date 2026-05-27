@@ -41,4 +41,5 @@ RUN chmod +x start.sh
 
 EXPOSE 8081 8082 8083 8084 8085 8086 8087 8088 8089 8090
 
-ENTRYPOINT ["./start.sh"]
+# Si quieres ejecutar tu script de inicio (el que ya limpiamos):
+ENTRYPOINT ["/app/start.sh"]

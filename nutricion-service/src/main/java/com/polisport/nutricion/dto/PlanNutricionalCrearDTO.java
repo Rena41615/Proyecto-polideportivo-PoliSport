@@ -1,14 +1,12 @@
 package com.polisport.nutricion.dto;
-
-import com.polisport.common.model.ObjetivoNutricional;
-import com.polisport.common.model.PlanEstado;
+import com.polisport.nutricion.model.ObjetivoNutricional;
+import com.polisport.nutricion.model.PlanEstado;
 import jakarta.validation.constraints.*;
 import lombok.*;
 import java.time.LocalDate;
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @ToString
 public class PlanNutricionalCrearDTO {
-
     @NotNull(message = "El ID del atleta es obligatorio")
     @Positive(message = "El ID del atleta debe ser positivo")
     private Long atletaId;

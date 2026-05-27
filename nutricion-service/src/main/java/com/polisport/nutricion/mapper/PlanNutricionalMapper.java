@@ -9,22 +9,22 @@ public class PlanNutricionalMapper {
 
     public PlanNutricional crearDTOToEntity(PlanNutricionalCrearDTO dto) {
         if (dto == null) return null;
-        
+
         PlanNutricional entity = new PlanNutricional();
         entity.setAtletaId(dto.getAtletaId());
         entity.setObjetivo(dto.getObjetivo());
         entity.setEstado(dto.getEstado());
         entity.setFechaInicio(dto.getFechaInicio());
         entity.setFechaFin(dto.getFechaFin());
-        entity.setCaloriasDiarias(dto.getCaloriasDiarias());
-        entity.setObservaciones(dto.getObservaciones());
-        
+        entity.setCaloriasDiariasGr(dto.getCaloriasDiarias());
+        entity.setNotas(dto.getObservaciones());
+
         return entity;
     }
 
     public PlanNutricionalDTO entityToDTO(PlanNutricional entity) {
         if (entity == null) return null;
-        
+
         PlanNutricionalDTO dto = new PlanNutricionalDTO();
         dto.setId(entity.getId());
         dto.setAtletaId(entity.getAtletaId());
@@ -32,9 +32,9 @@ public class PlanNutricionalMapper {
         dto.setEstado(entity.getEstado());
         dto.setFechaInicio(entity.getFechaInicio());
         dto.setFechaFin(entity.getFechaFin());
-        dto.setCaloriasDiarias(entity.getCaloriasDiarias());
-        dto.setObservaciones(entity.getObservaciones());
-        
+        dto.setCaloriasDiarias(entity.getCaloriasDiariasGr());
+        dto.setObservaciones(entity.getNotas());
+
         return dto;
     }
 }
