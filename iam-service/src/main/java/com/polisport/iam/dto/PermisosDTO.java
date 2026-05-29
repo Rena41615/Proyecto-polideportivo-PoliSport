@@ -3,11 +3,9 @@ package com.polisport.iam.dto;
 import lombok.*;
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @ToString
-public class UsuariosDTO {
+public class PermisosDTO {
 
     private Long id;
-    private String email;
     private String nombre;
-    private String apellido;
-    private String contrasena;
+    private String descripcion;
 }

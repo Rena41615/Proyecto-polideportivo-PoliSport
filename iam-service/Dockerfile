@@ -12,6 +12,6 @@ WORKDIR /app
 
 COPY --from=build /workspace/iam-service/target/*.jar app.jar
 
-EXPOSE 8086
+EXPOSE 8087
 ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar /app/app.jar"]
 

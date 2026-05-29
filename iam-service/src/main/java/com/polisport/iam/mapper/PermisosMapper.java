@@ -1,28 +1,28 @@
 package com.polisport.iam.mapper;
 
-import com.polisport.iam.model.Rol;
+import com.polisport.iam.model.Permisos;
 import com.polisport.iam.dto.*;
 import org.springframework.stereotype.Component;
 
 @Component
-public class RolMapper {
+public class PermisosMapper {
 
-    public Rol crearDTOToEntity(RolCrearDTO dto) {
+    public Permisos crearDTOToEntity(PermisosCrearDTO dto) {
         if (dto == null) return null;
 
-        Rol entity = new Rol();
-        entity.setNombre(dto.getNombreRol());
+        Permisos entity = new Permisos();
+        entity.setNombre(dto.getNombre());
         entity.setDescripcion(dto.getDescripcion());
 
         return entity;
     }
 
-    public RolDTO entityToDTO(Rol entity) {
+    public PermisosDTO entityToDTO(Permisos entity) {
         if (entity == null) return null;
 
-        RolDTO dto = new RolDTO();
+        PermisosDTO dto = new PermisosDTO();
         dto.setId(entity.getId());
-        dto.setNombreRol(entity.getNombre());
+        dto.setNombre(entity.getNombre());
         dto.setDescripcion(entity.getDescripcion());
 
         return dto;

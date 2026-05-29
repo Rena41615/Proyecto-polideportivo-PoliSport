@@ -3,9 +3,15 @@ package com.polisport.iam.controller;
 import com.polisport.iam.dto.*;
 import com.polisport.iam.mapper.UsuariosMapper;
 import com.polisport.iam.mapper.RolMapper;
+import com.polisport.iam.mapper.PermisosMapper;
+import com.polisport.iam.mapper.PermisosRolMapper;
+import com.polisport.iam.model.Permisos;
+import com.polisport.iam.model.PermisosRol;
 import com.polisport.iam.model.Rol;
 import com.polisport.iam.model.RolesUsuarios;
 import com.polisport.iam.model.Usuarios;
+import com.polisport.iam.service.PermisosRolService;
+import com.polisport.iam.service.PermisosService;
 import com.polisport.iam.service.RolService;
 import com.polisport.iam.service.RolesUsuariosService;
 import com.polisport.iam.service.UsuariosService;
@@ -23,22 +29,32 @@ public class IamController {
 	private final UsuariosService usuariosService;
 	private final RolService rolService;
 	private final RolesUsuariosService rolesUsuariosService;
+	private final PermisosService permisosService;
+	private final PermisosRolService permisosRolService;
 	private final UsuariosMapper usuariosMapper;
 	private final RolMapper rolMapper;
+	private final PermisosMapper permisosMapper;
+	private final PermisosRolMapper permisosRolMapper;
 
 	public IamController(UsuariosService usuariosService,
-	                     RolService rolService,
-	                     RolesUsuariosService rolesUsuariosService,
-	                     UsuariosMapper usuariosMapper,
-	                     RolMapper rolMapper) {
+						 RolService rolService,
+						 RolesUsuariosService rolesUsuariosService,
+						 PermisosService permisosService,
+						 PermisosRolService permisosRolService,
+						 UsuariosMapper usuariosMapper,
+						 RolMapper rolMapper,
+						 PermisosMapper permisosMapper,
+						 PermisosRolMapper permisosRolMapper) {
 		this.usuariosService = usuariosService;
 		this.rolService = rolService;
 		this.rolesUsuariosService = rolesUsuariosService;
+		this.permisosService = permisosService;
+		this.permisosRolService = permisosRolService;
 		this.usuariosMapper = usuariosMapper;
 		this.rolMapper = rolMapper;
+		this.permisosMapper = permisosMapper;
+		this.permisosRolMapper = permisosRolMapper;
 	}
-
-	// --- SECCION DE USUARIOS ---
 
 	@GetMapping("/usuarios")
 	public ResponseEntity<?> mostrarUsuarios() {
@@ -192,8 +208,6 @@ public class IamController {
 		}
 	}
 
-	// --- SECCION DE RELACIONES ROLES-USUARIOS ---
-
 	@GetMapping("/roles-usuarios")
 	public ResponseEntity<?> mostrarRolesUsuarios() {
 		try {
@@ -259,6 +273,187 @@ public class IamController {
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
 					.body("Error al eliminar la relacion usuario-rol: " + e.getMessage());
+		}
+	}
+
+	@GetMapping("/permisos")
+	public ResponseEntity<?> mostrarPermisos() {
+		try {
+			List<Permisos> permisos = permisosService.obtenerTodos();
+			List<PermisosDTO> dtos = permisos.stream()
+					.map(permisosMapper::entityToDTO)
+					.toList();
+			return ResponseEntity.ok(dtos);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("Error al obtener los permisos: " + e.getMessage());
+		}
+	}
+
+	@GetMapping("/permisos/{id}")
+	public ResponseEntity<?> buscarPermisoPorId(@PathVariable Long id) {
+		try {
+			Permisos permisoEncontrado = permisosService.obtenerPorId(id).orElse(null);
+			if (permisoEncontrado != null) {
+				return ResponseEntity.ok(permisosMapper.entityToDTO(permisoEncontrado));
+			}
+			return ResponseEntity.status(HttpStatus.NOT_FOUND)
+					.body("Permiso no encontrado con ID: " + id);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("Error al buscar el permiso: " + e.getMessage());
+		}
+	}
+
+	@PostMapping("/permisos")
+	public ResponseEntity<?> guardarPermiso(@Valid @RequestBody PermisosCrearDTO crearDTO) {
+		try {
+			Permisos nuevoPermiso = permisosMapper.crearDTOToEntity(crearDTO);
+			Permisos guardado = permisosService.guardarPermisos(nuevoPermiso);
+			return ResponseEntity.status(HttpStatus.CREATED).body(permisosMapper.entityToDTO(guardado));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+					.body("Datos invalidos: " + e.getMessage());
+		}
+	}
+
+	@PutMapping("/permisos/{id}")
+	public ResponseEntity<?> actualizarPermiso(@PathVariable Long id, @Valid @RequestBody PermisosCrearDTO crearDTO) {
+		try {
+			Permisos permisoExistente = permisosService.obtenerPorId(id).orElse(null);
+			if (permisoExistente != null) {
+				Permisos permisoActualizado = permisosMapper.crearDTOToEntity(crearDTO);
+				permisoActualizado.setId(id);
+				Permisos guardado = permisosService.guardarPermisos(permisoActualizado);
+				return ResponseEntity.ok(permisosMapper.entityToDTO(guardado));
+			}
+			return ResponseEntity.status(HttpStatus.NOT_FOUND)
+					.body("Permiso no encontrado con ID: " + id);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("Error al actualizar el permiso: " + e.getMessage());
+		}
+	}
+
+	@DeleteMapping("/permisos/{id}")
+	public ResponseEntity<?> eliminarPermiso(@PathVariable Long id) {
+		try {
+			Permisos permisoExistente = permisosService.obtenerPorId(id).orElse(null);
+			if (permisoExistente != null) {
+				permisosService.eliminarPermisos(id);
+				return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+			}
+			return ResponseEntity.status(HttpStatus.NOT_FOUND)
+					.body("Permiso no encontrado con ID: " + id);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("Error al eliminar el permiso: " + e.getMessage());
+		}
+	}
+
+	// --- SECCION DE PERMISOS POR ROL ---
+
+	@GetMapping("/permisos-rol")
+	public ResponseEntity<?> mostrarPermisosRol() {
+		try {
+			List<PermisosRol> relaciones = permisosRolService.obtenerTodos();
+			List<PermisosRolDTO> dtos = relaciones.stream()
+					.map(permisosRolMapper::entityToDTO)
+					.toList();
+			return ResponseEntity.ok(dtos);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("Error al obtener los permisos por rol: " + e.getMessage());
+		}
+	}
+
+	@GetMapping("/permisos-rol/{id}")
+	public ResponseEntity<?> buscarPermisoRolPorId(@PathVariable Long id) {
+		try {
+			PermisosRol relacionEncontrada = permisosRolService.obtenerPorId(id).orElse(null);
+			if (relacionEncontrada != null) {
+				return ResponseEntity.ok(permisosRolMapper.entityToDTO(relacionEncontrada));
+			}
+			return ResponseEntity.status(HttpStatus.NOT_FOUND)
+					.body("Permiso por rol no encontrado con ID: " + id);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("Error al buscar el permiso por rol: " + e.getMessage());
+		}
+	}
+
+	@PostMapping("/permisos-rol")
+	public ResponseEntity<?> guardarPermisoRol(@Valid @RequestBody PermisosRolCrearDTO crearDTO) {
+		try {
+			Rol rol = rolService.obtenerPorId(crearDTO.getRolId()).orElse(null);
+			if (rol == null) {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND)
+						.body("Rol no encontrado con ID: " + crearDTO.getRolId());
+			}
+
+			Permisos permiso = permisosService.obtenerPorId(crearDTO.getPermisoId()).orElse(null);
+			if (permiso == null) {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND)
+						.body("Permiso no encontrado con ID: " + crearDTO.getPermisoId());
+			}
+
+			PermisosRol nuevaRelacion = new PermisosRol();
+			nuevaRelacion.setRol(rol);
+			nuevaRelacion.setPermiso(permiso);
+
+			PermisosRol guardado = permisosRolService.guardarPermisosRol(nuevaRelacion);
+			return ResponseEntity.status(HttpStatus.CREATED).body(permisosRolMapper.entityToDTO(guardado));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+					.body("Datos invalidos: " + e.getMessage());
+		}
+	}
+
+	@PutMapping("/permisos-rol/{id}")
+	public ResponseEntity<?> actualizarPermisoRol(@PathVariable Long id, @Valid @RequestBody PermisosRolCrearDTO crearDTO) {
+		try {
+			PermisosRol relacionExistente = permisosRolService.obtenerPorId(id).orElse(null);
+			if (relacionExistente == null) {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND)
+						.body("Permiso por rol no encontrado con ID: " + id);
+			}
+
+			Rol rol = rolService.obtenerPorId(crearDTO.getRolId()).orElse(null);
+			if (rol == null) {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND)
+						.body("Rol no encontrado con ID: " + crearDTO.getRolId());
+			}
+
+			Permisos permiso = permisosService.obtenerPorId(crearDTO.getPermisoId()).orElse(null);
+			if (permiso == null) {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND)
+						.body("Permiso no encontrado con ID: " + crearDTO.getPermisoId());
+			}
+
+			relacionExistente.setRol(rol);
+			relacionExistente.setPermiso(permiso);
+
+			PermisosRol guardado = permisosRolService.guardarPermisosRol(relacionExistente);
+			return ResponseEntity.ok(permisosRolMapper.entityToDTO(guardado));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("Error al actualizar el permiso por rol: " + e.getMessage());
+		}
+	}
+
+	@DeleteMapping("/permisos-rol/{id}")
+	public ResponseEntity<?> eliminarPermisoRol(@PathVariable Long id) {
+		try {
+			PermisosRol relacionExistente = permisosRolService.obtenerPorId(id).orElse(null);
+			if (relacionExistente != null) {
+				permisosRolService.eliminarPermisosRol(id);
+				return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+			}
+			return ResponseEntity.status(HttpStatus.NOT_FOUND)
+					.body("Permiso por rol no encontrado con ID: " + id);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("Error al eliminar el permiso por rol: " + e.getMessage());
 		}
 	}
 }
