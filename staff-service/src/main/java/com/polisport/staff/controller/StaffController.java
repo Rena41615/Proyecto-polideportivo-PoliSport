@@ -9,6 +9,8 @@ import com.polisport.staff.model.RolStaff;
 import com.polisport.staff.repository.RolStaffRepository;
 import com.polisport.staff.service.MiembrosPermisosStaffService;
 import com.polisport.staff.service.MiembrosStaffService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import java.util.List;
 import org.springframework.http.HttpStatus;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/staff")
 @CrossOrigin(origins = "*")
+@Tag(name = "Staff - Gestión de Personal", description = "Gestión de miembros del staff, roles de personal y sus permisos")
 public class StaffController {
 
 	private final MiembrosStaffService miembrosStaffService;
@@ -39,6 +42,10 @@ public class StaffController {
 	}
 
 	@GetMapping("/miembros")
+	@Operation(
+		summary = "Listar todos los miembros del staff",
+		description = "Obtiene la lista completa de todos los miembros del personal registrados"
+	)
 	public ResponseEntity<?> mostrarMiembros() {
 		try {
 			List<MiembrosStaff> miembros = miembrosStaffService.obtenerTodos();
@@ -53,6 +60,10 @@ public class StaffController {
 	}
 
 	@GetMapping("/miembros/{id}")
+	@Operation(
+		summary = "Obtener miembro del staff por ID",
+		description = "Busca y retorna un miembro del personal específico por su identificador único"
+	)
 	public ResponseEntity<?> buscarMiembroPorId(@PathVariable Long id) {
 		try {
 			MiembrosStaff miembroEncontrado = miembrosStaffService.obtenerPorId(id).orElse(null);
@@ -68,6 +79,10 @@ public class StaffController {
 	}
 
 	@PostMapping("/miembros")
+	@Operation(
+		summary = "Crear nuevo miembro del staff",
+		description = "Crea un nuevo miembro del personal en el sistema con los datos proporcionados"
+	)
 	public ResponseEntity<?> guardarMiembro(@Valid @RequestBody MiembrosStaffCrearDTO crearDTO) {
 		try {
 			MiembrosStaff nuevoMiembro = miembrosStaffMapper.crearDTOToEntity(crearDTO);
@@ -80,6 +95,10 @@ public class StaffController {
 	}
 
 	@PutMapping("/miembros/{id}")
+	@Operation(
+		summary = "Actualizar miembro del staff",
+		description = "Actualiza los datos de un miembro del personal existente identificado por su ID"
+	)
 	public ResponseEntity<?> actualizarMiembro(@PathVariable Long id, @Valid @RequestBody MiembrosStaffCrearDTO crearDTO) {
 		try {
 			MiembrosStaff miembroExistente = miembrosStaffService.obtenerPorId(id).orElse(null);
@@ -98,6 +117,10 @@ public class StaffController {
 	}
 
 	@DeleteMapping("/miembros/{id}")
+	@Operation(
+		summary = "Eliminar miembro del staff",
+		description = "Elimina un miembro del personal del sistema identificado por su ID"
+	)
 	public ResponseEntity<?> eliminarMiembro(@PathVariable Long id) {
 		try {
 			MiembrosStaff miembroExistente = miembrosStaffService.obtenerPorId(id).orElse(null);
@@ -114,6 +137,10 @@ public class StaffController {
 	}
 
 	@GetMapping("/roles")
+	@Operation(
+		summary = "Listar todos los roles del staff",
+		description = "Obtiene la lista completa de todos los roles disponibles para el personal"
+	)
 	public ResponseEntity<?> mostrarRolesStaff() {
 		try {
 			List<RolStaff> roles = rolStaffRepository.findAll();
@@ -128,6 +155,10 @@ public class StaffController {
 	}
 
 	@GetMapping("/roles/{id}")
+	@Operation(
+		summary = "Obtener rol del staff por ID",
+		description = "Busca y retorna un rol del personal específico por su identificador único"
+	)
 	public ResponseEntity<?> buscarRolStaffPorId(@PathVariable Long id) {
 		try {
 			RolStaff rolEncontrado = rolStaffRepository.findById(id).orElse(null);
@@ -143,6 +174,10 @@ public class StaffController {
 	}
 
 	@PostMapping("/roles")
+	@Operation(
+		summary = "Crear nuevo rol del staff",
+		description = "Crea un nuevo rol para el personal en el sistema con los datos proporcionados"
+	)
 	public ResponseEntity<?> guardarRolStaff(@Valid @RequestBody RolStaffCrearDTO crearDTO) {
 		try {
 			RolStaff nuevoRol = rolStaffMapper.crearDTOToEntity(crearDTO);
@@ -155,6 +190,10 @@ public class StaffController {
 	}
 
 	@PutMapping("/roles/{id}")
+	@Operation(
+		summary = "Actualizar rol del staff",
+		description = "Actualiza los datos de un rol del personal existente identificado por su ID"
+	)
 	public ResponseEntity<?> actualizarRolStaff(@PathVariable Long id, @Valid @RequestBody RolStaffCrearDTO crearDTO) {
 		try {
 			RolStaff rolExistente = rolStaffRepository.findById(id).orElse(null);
@@ -173,6 +212,10 @@ public class StaffController {
 	}
 
 	@DeleteMapping("/roles/{id}")
+	@Operation(
+		summary = "Eliminar rol del staff",
+		description = "Elimina un rol del personal del sistema identificado por su ID"
+	)
 	public ResponseEntity<?> eliminarRolStaff(@PathVariable Long id) {
 		try {
 			RolStaff rolExistente = rolStaffRepository.findById(id).orElse(null);
@@ -189,6 +232,10 @@ public class StaffController {
 	}
 
 	@GetMapping("/permisos")
+	@Operation(
+		summary = "Listar todos los permisos del staff",
+		description = "Obtiene la lista completa de todos los permisos disponibles para el personal"
+	)
 	public ResponseEntity<?> mostrarPermisosStaff() {
 		try {
 			List<MiembrosPermisosStaff> permisos = miembrosPermisosStaffService.obtenerTodos();
@@ -200,6 +247,10 @@ public class StaffController {
 	}
 
 	@GetMapping("/permisos/{id}")
+	@Operation(
+		summary = "Obtener permiso del staff por ID",
+		description = "Busca y retorna un permiso del personal específico por su identificador único"
+	)
 	public ResponseEntity<?> buscarPermisoStaffPorId(@PathVariable Long id) {
 		try {
 			MiembrosPermisosStaff permisoEncontrado = miembrosPermisosStaffService.obtenerPorId(id).orElse(null);
@@ -215,6 +266,10 @@ public class StaffController {
 	}
 
 	@PostMapping("/permisos")
+	@Operation(
+		summary = "Crear nuevo permiso del staff",
+		description = "Crea un nuevo permiso para el personal en el sistema con los datos proporcionados"
+	)
 	public ResponseEntity<?> guardarPermisoStaff(@Valid @RequestBody MiembrosPermisosStaff nuevoPermiso) {
 		try {
 			return ResponseEntity.status(HttpStatus.CREATED).body(miembrosPermisosStaffService.guardarMiembrosPermisosStaff(nuevoPermiso));
@@ -225,6 +280,10 @@ public class StaffController {
 	}
 
 	@PutMapping("/permisos/{id}")
+	@Operation(
+		summary = "Actualizar permiso del staff",
+		description = "Actualiza los datos de un permiso del personal existente identificado por su ID"
+	)
 	public ResponseEntity<?> actualizarPermisoStaff(@PathVariable Long id, @Valid @RequestBody MiembrosPermisosStaff permisoActualizado) {
 		try {
 			MiembrosPermisosStaff permisoExistente = miembrosPermisosStaffService.obtenerPorId(id).orElse(null);
@@ -241,6 +300,10 @@ public class StaffController {
 	}
 
 	@DeleteMapping("/permisos/{id}")
+	@Operation(
+		summary = "Eliminar permiso del staff",
+		description = "Elimina un permiso del personal del sistema identificado por su ID"
+	)
 	public ResponseEntity<?> eliminarPermisoStaff(@PathVariable Long id) {
 		try {
 			MiembrosPermisosStaff permisoExistente = miembrosPermisosStaffService.obtenerPorId(id).orElse(null);

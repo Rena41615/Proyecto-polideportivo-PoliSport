@@ -5,42 +5,52 @@ import jakarta.validation.constraints.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 @Entity
 @Table(name = "usuarios")
+@Schema(name = "Usuarios", description = "Usuario del sistema PoliSport")
 public class Usuarios {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Schema(name = "id", description = "Identificador único del usuario", example = "1")
     private Long id;
 
     @Column(name = "email", nullable = false, length = 120, unique = true)
     @NotBlank(message = "El email es obligatorio")
     @Email(message = "El email debe ser valido")
+    @Schema(name = "email", description = "Correo electrónico del usuario", example = "usuario@polisport.cl")
     private String email;
 
     @Column(name = "password_hash", nullable = false, length = 255)
     @NotBlank(message = "La contrasena es obligatoria")
+    @Schema(name = "passwordHash", description = "Hash de la contraseña encriptada", example = "$2a$10$N9qo8uLO...")
     private String passwordHash;
 
     @Column(name = "nombre", nullable = false, length = 80)
     @NotBlank(message = "El nombre es obligatorio")
     @Size(max = 80, message = "El nombre no puede exceder 80 caracteres")
+    @Schema(name = "nombre", description = "Nombre del usuario", example = "Juan")
     private String nombre;
 
     @Column(name = "apellido", nullable = false, length = 80)
     @NotBlank(message = "El apellido es obligatorio")
     @Size(max = 80, message = "El apellido no puede exceder 80 caracteres")
+    @Schema(name = "apellido", description = "Apellido del usuario", example = "Pérez")
     private String apellido;
 
     @Column(name = "activo", nullable = false)
     @NotNull(message = "El estado es obligatorio")
+    @Schema(name = "activo", description = "Estado activo del usuario", example = "true")
     private Boolean activo = true;
 
     @Column(name = "fecha_registro", nullable = false)
+    @Schema(name = "fechaRegistro", description = "Fecha y hora de registro del usuario", example = "2024-01-15T10:30:00")
     private LocalDateTime fechaRegistro = LocalDateTime.now();
 
     @OneToMany(mappedBy = "usuario")
+    @Schema(name = "roles", description = "Lista de roles asignados al usuario", example = "[]")
     private List<RolesUsuarios> roles = new ArrayList<>();
 
     public Usuarios() {

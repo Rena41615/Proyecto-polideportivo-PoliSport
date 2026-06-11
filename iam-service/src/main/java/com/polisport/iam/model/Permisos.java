@@ -4,25 +4,31 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import java.util.ArrayList;
 import java.util.List;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 @Entity
 @Table(name = "permisos")
+@Schema(name = "Permisos", description = "Permiso del sistema")
 public class Permisos {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Schema(name = "id", description = "Identificador único del permiso", example = "1")
     private Long id;
 
     @Column(name = "nombre", nullable = false, length = 120, unique = true)
     @NotBlank(message = "El nombre del permiso es obligatorio")
     @Size(max = 120, message = "El nombre no puede exceder 120 caracteres")
+    @Schema(name = "nombre", description = "Nombre único del permiso", example = "CREAR_USUARIO")
     private String nombre;
 
     @Column(name = "descripcion", length = 300)
     @Size(max = 300, message = "La descripcion no puede exceder 300 caracteres")
+    @Schema(name = "descripcion", description = "Descripción del permiso", example = "Permite crear nuevos usuarios en el sistema")
     private String descripcion;
 
     @OneToMany(mappedBy = "permiso")
+    @Schema(name = "roles", description = "Lista de roles con este permiso", example = "[]")
     private List<PermisosRol> roles = new ArrayList<>();
 
     public Permisos() {

@@ -5,6 +5,8 @@ import com.polisport.salud.dto.GestionMedicaCrearDTO;
 import com.polisport.salud.mapper.GestionMedicaMapper;
 import com.polisport.salud.model.GestionMedica;
 import com.polisport.salud.service.GestionMedicaService;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/salud")
 @CrossOrigin(origins = "*")
+@Tag(name = "Gestión Médica", description = "Operaciones CRUD para registros médicos")
 public class GestionMedicaController {
 
     private final GestionMedicaService gestionMedicaService;
@@ -27,6 +30,7 @@ public class GestionMedicaController {
         this.gestionMedicaMapper = gestionMedicaMapper;
     }
 
+    @Operation(summary = "Listar todas las gestiones médicas", description = "Obtiene el listado completo de todos los registros médicos almacenados")
     @GetMapping
     public ResponseEntity<List<GestionMedicaDTO>> listar() {
         log.info("Peticion REST recibida para listar gestiones medicas");
@@ -37,6 +41,7 @@ public class GestionMedicaController {
         return ResponseEntity.ok(dtos);
     }
 
+    @Operation(summary = "Buscar gestion médica por ID", description = "Obtiene los detalles de una gestion médica específica usando su identificador único")
     @GetMapping("/{id}")
     public ResponseEntity<GestionMedicaDTO> buscarPorId(@PathVariable Long id) {
         log.info("Peticion REST recibida para buscar gestion medica con ID: {}", id);
@@ -48,6 +53,7 @@ public class GestionMedicaController {
                 });
     }
 
+    @Operation(summary = "Crear nuevo registro médico", description = "Crea e inserta un nuevo registro médico en el sistema con los datos proporcionados")
     @PostMapping
     public ResponseEntity<GestionMedicaDTO> crear(@Valid @RequestBody GestionMedicaCrearDTO crearDTO) {
         log.info("Peticion REST recibida para crear un registro medico");
@@ -56,6 +62,7 @@ public class GestionMedicaController {
         return new ResponseEntity<>(gestionMedicaMapper.entityToDTO(creada), HttpStatus.CREATED);
     }
 
+    @Operation(summary = "Actualizar registro médico", description = "Actualiza los datos de un registro médico existente usando su identificador único")
     @PutMapping("/{id}")
     public ResponseEntity<GestionMedicaDTO> actualizar(@PathVariable Long id, @Valid @RequestBody GestionMedicaCrearDTO crearDTO) {
         log.info("Peticion REST recibida para actualizar registro medico con ID: {}", id);
@@ -65,6 +72,7 @@ public class GestionMedicaController {
         return ResponseEntity.ok(gestionMedicaMapper.entityToDTO(actualizada));
     }
 
+    @Operation(summary = "Eliminar registro médico", description = "Elimina un registro médico del sistema usando su identificador único")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Long id) {
         log.info("Peticion REST recibida para eliminar registro medico con ID: {}", id);

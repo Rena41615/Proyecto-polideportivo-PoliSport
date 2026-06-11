@@ -5,6 +5,8 @@ import com.polisport.nutricion.dto.PlanNutricionalCrearDTO;
 import com.polisport.nutricion.mapper.PlanNutricionalMapper;
 import com.polisport.nutricion.model.PlanNutricional;
 import com.polisport.nutricion.service.PlanNutricionalService;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import java.util.List;
 import org.springframework.http.HttpStatus;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/nutricion")
 @CrossOrigin(origins = "*")
+@Tag(name = "Plan Nutricional", description = "Operaciones CRUD para planes nutricionales")
 public class NutricionController {
 
 	private final PlanNutricionalService planNutricionalService;
@@ -24,6 +27,7 @@ public class NutricionController {
 		this.planNutricionalMapper = planNutricionalMapper;
 	}
 
+	@Operation(summary = "Listar todos los planes nutricionales", description = "Obtiene el listado completo de todos los planes nutricionales registrados en el sistema")
 	@GetMapping
 	public ResponseEntity<?> mostrarPlanes() {
 		try {
@@ -38,6 +42,7 @@ public class NutricionController {
 		}
 	}
 
+	@Operation(summary = "Buscar plan nutricional por ID", description = "Obtiene los detalles de un plan nutricional específico usando su identificador único")
 	@GetMapping("/{id}")
 	public ResponseEntity<?> buscarPorId(@PathVariable Long id) {
 		try {
@@ -55,6 +60,7 @@ public class NutricionController {
 		}
 	}
 
+	@Operation(summary = "Crear nuevo plan nutricional", description = "Crea e inserta un nuevo plan nutricional en el sistema con los datos proporcionados")
 	@PostMapping
 	public ResponseEntity<?> guardarPlan(@Valid @RequestBody PlanNutricionalCrearDTO crearDTO) {
 		try {
@@ -67,6 +73,7 @@ public class NutricionController {
 		}
 	}
 
+	@Operation(summary = "Actualizar plan nutricional", description = "Actualiza los datos de un plan nutricional existente usando su identificador único")
 	@PutMapping("/{id}")
 	public ResponseEntity<?> actualizarPlan(@PathVariable Long id, @Valid @RequestBody PlanNutricionalCrearDTO crearDTO) {
 		try {
@@ -87,6 +94,7 @@ public class NutricionController {
 		}
 	}
 
+	@Operation(summary = "Eliminar plan nutricional", description = "Elimina un plan nutricional del sistema usando su identificador único")
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> eliminarPlan(@PathVariable Long id) {
 		try {

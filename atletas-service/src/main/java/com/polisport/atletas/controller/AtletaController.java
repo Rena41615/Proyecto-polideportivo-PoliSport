@@ -5,6 +5,8 @@ import com.polisport.atletas.dto.AtletaDTO;
 import com.polisport.atletas.mapper.AtletaMapper;
 import com.polisport.atletas.model.Atleta;
 import com.polisport.atletas.service.AtletaService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -21,6 +23,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/atletas")
 @CrossOrigin(origins = "*")
+@Tag(name = "Atleta", description = "Operaciones CRUD para atletas")
 public class AtletaController {
 
     private final AtletaService atletaService;
@@ -36,6 +39,7 @@ public class AtletaController {
      * GET /api/atletas
      */
     @GetMapping
+    @Operation(summary = "Listar todos los atletas", description = "Obtiene la lista completa de todos los atletas registrados en el sistema")
     public ResponseEntity<List<AtletaDTO>> listarTodos() {
         log.info("Consultando lista completa de atletas");
         List<Atleta> atletas = atletaService.obtenerTodos();
@@ -50,6 +54,7 @@ public class AtletaController {
      * GET /api/atletas/{id}
      */
     @GetMapping("/{id}")
+    @Operation(summary = "Buscar atleta por ID", description = "Obtiene los detalles de un atleta específico usando su identificador único")
     public ResponseEntity<AtletaDTO> obtenerPorId(@PathVariable Long id) {
         log.info("Buscando atleta con ID: {}", id);
         return atletaService.obtenerPorId(id)
@@ -66,6 +71,7 @@ public class AtletaController {
      * GET /api/atletas/run/{run}
      */
     @GetMapping("/run/{run}")
+    @Operation(summary = "Buscar atleta por RUN", description = "Obtiene los detalles de un atleta usando su número de RUN (Rol Único Nacional)")
     public ResponseEntity<AtletaDTO> obtenerPorRun(@PathVariable Integer run) {
         log.info("Buscando atleta con RUN: {}", run);
         return atletaService.obtenerPorRun(run)
@@ -82,6 +88,7 @@ public class AtletaController {
      * POST /api/atletas
      */
     @PostMapping
+    @Operation(summary = "Crear nuevo atleta", description = "Crea un nuevo registro de atleta con la información proporcionada")
     public ResponseEntity<AtletaDTO> crear(@Valid @RequestBody AtletaCrearDTO dto) {
         log.info("Creando nuevo atleta con RUN: {}", dto.getRunAtleta());
         Atleta atleta = atletaMapper.crearDTOToEntity(dto);
@@ -96,6 +103,7 @@ public class AtletaController {
      * PUT /api/atletas/{id}
      */
     @PutMapping("/{id}")
+    @Operation(summary = "Actualizar atleta existente", description = "Actualiza los datos de un atleta específico identificado por su ID")
     public ResponseEntity<AtletaDTO> actualizar(@PathVariable Long id, @Valid @RequestBody AtletaCrearDTO dto) {
         log.info("Actualizando atleta con ID: {}", id);
         Atleta atleta = atletaMapper.crearDTOToEntity(dto);
@@ -111,6 +119,7 @@ public class AtletaController {
      * DELETE /api/atletas/{id}
      */
     @DeleteMapping("/{id}")
+    @Operation(summary = "Eliminar atleta", description = "Elimina un atleta específico del sistema identificado por su ID")
     public ResponseEntity<Void> eliminar(@PathVariable Long id) {
         log.info("Eliminando atleta con ID: {}", id);
         atletaService.eliminarAtleta(id);

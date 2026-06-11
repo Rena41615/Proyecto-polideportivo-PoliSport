@@ -4,28 +4,34 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import java.time.LocalDateTime;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 @Entity
 @Table(name = "roles_usuarios")
+@Schema(name = "RolesUsuarios", description = "Relación entre usuario y rol")
 public class RolesUsuarios {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Schema(name = "id", description = "Identificador único de la relación", example = "1")
     private Long id;
 
     @ManyToOne
     @JoinColumn(name = "usuario_id", nullable = false)
     @NotNull(message = "El usuario es obligatorio")
     @JsonIgnoreProperties("roles")
+    @Schema(name = "usuario", description = "Usuario asignado al rol", example = "{\"id\": 1}")
     private Usuarios usuario;
 
     @ManyToOne
     @JoinColumn(name = "rol_id", nullable = false)
     @NotNull(message = "El rol es obligatorio")
     @JsonIgnoreProperties("usuarios")
+    @Schema(name = "rol", description = "Rol asignado al usuario", example = "{\"id\": 1}")
     private Rol rol;
 
     @Column(name = "fecha_asignacion", nullable = false)
+    @Schema(name = "fechaAsignacion", description = "Fecha y hora de asignación del rol", example = "2024-01-20T15:45:00")
     private LocalDateTime fechaAsignacion = LocalDateTime.now();
 
     public RolesUsuarios() {
