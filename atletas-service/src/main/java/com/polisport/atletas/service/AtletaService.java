@@ -7,14 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
-@Slf4j //jerarquia de mensajes
-
+@Slf4j // jerarquia de mensajes
 public class AtletaService {
 
-    @Autowired //permite comunicacion con el repository
+    @Autowired // permite comunicacion con el repository
     private AtletaRepository atletaRepository;
 
     public List<Atleta> obtenerTodos() {
@@ -41,4 +41,34 @@ public class AtletaService {
         return atletaRepository.findByRunAtleta(run);
     }
 
+    public Atleta actualizarParcial(Long id, Map<String, Object> updates) {
+        log.info("Iniciando actualización parcial (PATCH) para el atleta con ID: {}", id);
+
+        // 1. Buscamos el atleta en la base de datos. Si no existe, lanzamos un error.
+        Atleta atleta = atletaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Atleta no encontrado con ID: " + id));
+
+        // 2. Iteramos sobre el mapa de actualizaciones que nos envió el Controller
+        updates.forEach((campo, valor) -> {
+            switch (campo) {
+                case "primerNombre" -> atleta.setPrimerNombre((String) valor);
+                case "segundoNombre" -> atleta.setSegundoNombre((String) valor);
+                case "tercerNombre" -> atleta.setTercerNombre((String) valor);
+                case "primerApellido" -> atleta.setPrimerApellido((String) valor);
+                case "segundoApellido" -> atleta.setSegundoApellido((String) valor);
+                case "email" -> atleta.setEmail((String) valor);
+                case "deportePrincipal" -> atleta.setDeportePrincipal((String) valor);
+                case "categoria" -> atleta.setCategoria((String) valor);
+                case "historialDeportivo" -> atleta.setHistorialDeportivo((String) valor);
+
+                // Nota: Fechas (LocalDate) requieren un tratamiento especial de casteo,
+                // por lo que se omiten en este PATCH básico por seguridad.
+                // Nota 2: NO incluimos "runAtleta" ni "id" para proteger la integridad.
+            }
+        });
+
+        // 3. Guardamos los cambios
+        log.info("Atleta con ID {} actualizado parcialmente de forma exitosa", id);
+        return atletaRepository.save(atleta);
+    }
 }

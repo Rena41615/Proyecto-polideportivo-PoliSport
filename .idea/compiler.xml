@@ -2,12 +2,6 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
-      <profile default="true" name="Default" enabled="true" />
-      <profile name="Maven default annotation processors profile" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-      </profile>
       <profile name="Annotation profile for polisport" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
@@ -28,15 +22,11 @@
         <module name="nutricion-service" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="common-dtos" target="17" />
-    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="atletas-service" options="-parameters" />
       <module name="biometria-service" options="-parameters" />
-      <module name="common-dtos" options="-parameters" />
       <module name="competencia-service" options="-parameters" />
       <module name="contratos-service" options="-parameters" />
       <module name="entrenamiento-service" options="-parameters" />

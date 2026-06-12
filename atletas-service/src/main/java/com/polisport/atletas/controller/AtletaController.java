@@ -115,6 +115,18 @@ public class AtletaController {
     }
 
     /**
+     * Actualización parcial.
+     * PATCH /api/atletas/{id}
+     */
+    @PatchMapping("/{id}")
+    @Operation(summary = "Actualizar parcialmente", description = "Actualiza solo campos específicos de un atleta")
+    public ResponseEntity<AtletaDTO> actualizarParcial(@PathVariable Long id, @RequestBody java.util.Map<String, Object> updates) {
+        log.info("Actualización parcial recibida para ID: {}", id);
+        Atleta atletaActualizado = atletaService.actualizarParcial(id, updates);
+        return ResponseEntity.ok(atletaMapper.entityToDTO(atletaActualizado));
+    }
+
+    /**
      * Eliminar atleta.
      * DELETE /api/atletas/{id}
      */
