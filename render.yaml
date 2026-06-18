@@ -35,7 +35,7 @@ services:
         value: 8082
 
   - type: web
-    name: polisport-competencias
+    name: polisport-competencia
     env: java
     region: oregon
     buildCommand: ./mvnw -B -DskipTests clean package
@@ -59,7 +59,7 @@ services:
         value: 8084
 
   - type: web
-    name: polisport-entrenamientos
+    name: polisport-entrenamiento
     env: java
     region: oregon
     buildCommand: ./mvnw -B -DskipTests clean package

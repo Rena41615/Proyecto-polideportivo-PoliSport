@@ -79,15 +79,15 @@ Cada microservicio tiene su propia base de datos MySQL 8.0 independiente con mig
 | # | Servicio | Puerto | Swagger UI | API Docs |
 |---|----------|--------|------------|----------|
 | 1 | **Atletas** | `8081` | http://localhost:8081/swagger-ui.html | http://localhost:8081/api-docs |
-| 3 | **Biometria** | `8082` | http://localhost:8082/swagger-ui.html | http://localhost:8082/api-docs |
-| 4 | **Competencias** | `8083` | http://localhost:8083/swagger-ui.html | http://localhost:8083/api-docs |
-| 5 | **Contratos** | `8084` | http://localhost:8084/swagger-ui.html | http://localhost:8084/api-docs |
-| 6 | **Entrenamientos** | `8085` | http://localhost:8085/swagger-ui.html | http://localhost:8085/api-docs |
-| 7 | **Inventario** | `8086` | http://localhost:8086/swagger-ui.html | http://localhost:8086/api-docs |
-| 8 | **Salud** | `8087` | http://localhost:8087/swagger-ui.html | http://localhost:8087/api-docs |
-| 9 | **IAM** | `8088` | http://localhost:8088/swagger-ui.html | http://localhost:8088/api-docs |
-| 10 | **Nutricion** | `8089` | http://localhost:8089/swagger-ui.html | http://localhost:8089/api-docs |
-| 11 | **Staff** | `8090` | http://localhost:8090/swagger-ui.html | http://localhost:8090/api-docs |
+| 2 | **Biometria** | `8082` | http://localhost:8082/swagger-ui.html | http://localhost:8082/api-docs |
+| 3 | **Competencias** | `8083` | http://localhost:8083/swagger-ui.html | http://localhost:8083/api-docs |
+| 4 | **Contratos** | `8084` | http://localhost:8084/swagger-ui.html | http://localhost:8084/api-docs |
+| 5 | **Entrenamientos** | `8085` | http://localhost:8085/swagger-ui.html | http://localhost:8085/api-docs |
+| 6 | **Inventario** | `8086` | http://localhost:8086/swagger-ui.html | http://localhost:8086/api-docs |
+| 7 | **Salud** | `8087` | http://localhost:8087/swagger-ui.html | http://localhost:8087/api-docs |
+| 8 | **IAM** | `8088` | http://localhost:8088/swagger-ui.html | http://localhost:8088/api-docs |
+| 9 | **Nutricion** | `8089` | http://localhost:8089/swagger-ui.html | http://localhost:8089/api-docs |
+| 10 | **Staff** | `8090` | http://localhost:8090/swagger-ui.html | http://localhost:8090/api-docs |
 
 > Tambien puedes acceder a todos los servicios a traves del Gateway en `http://localhost:8080/<ruta-del-servicio>`
 

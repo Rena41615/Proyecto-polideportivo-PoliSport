@@ -4,43 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ef73f9bd-22fb-4ee1-8d1f-c774e90cad43" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/atletas-service/src/main/java/com/polisport/atletas/client/ClientService.java" beforeDir="false" afterPath="$PROJECT_DIR$/atletas-service/src/main/java/com/polisport/atletas/client/ClientService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/atletas-service/src/main/java/com/polisport/atletas/service/AtletaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/atletas-service/src/main/java/com/polisport/atletas/service/AtletaService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/atletas-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/atletas-service/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/atletas-service/src/test/java/com/polisport/atletas/AtletasServiceApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/atletas-service/src/test/java/com/polisport/atletas/AtletasServiceApplicationTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/biometria-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/biometria-service/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/competencia-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/competencia-service/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contratos-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/contratos-service/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entrenamiento-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/entrenamiento-service/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iam-service/src/main/java/com/polisport/iam/controller/IamController.java" beforeDir="false" afterPath="$PROJECT_DIR$/iam-service/src/main/java/com/polisport/iam/controller/IamController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iam-service/src/main/java/com/polisport/iam/service/ClientService.java" beforeDir="false" afterPath="$PROJECT_DIR$/iam-service/src/main/java/com/polisport/iam/service/ClientService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iam-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/iam-service/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inventario-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/inventario-service/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nutricion-service/src/main/java/com/polisport/nutricion/controller/NutricionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/nutricion-service/src/main/java/com/polisport/nutricion/controller/NutricionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nutricion-service/src/main/java/com/polisport/nutricion/repository/PlanNutricionalRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/nutricion-service/src/main/java/com/polisport/nutricion/repository/PlanNutricionalRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nutricion-service/src/main/java/com/polisport/nutricion/service/ClientService.java" beforeDir="false" afterPath="$PROJECT_DIR$/nutricion-service/src/main/java/com/polisport/nutricion/service/ClientService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nutricion-service/src/main/java/com/polisport/nutricion/service/PlanNutricionalService.java" beforeDir="false" afterPath="$PROJECT_DIR$/nutricion-service/src/main/java/com/polisport/nutricion/service/PlanNutricionalService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nutricion-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/nutricion-service/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nutricion-service/src/test/java/com/polisport/nutricion/NutricionServiceApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/nutricion-service/src/test/java/com/polisport/nutricion/NutricionServiceApplicationTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/salud-service/src/main/java/com/polisport/salud/controller/GestionMedicaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/salud-service/src/main/java/com/polisport/salud/controller/GestionMedicaController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/salud-service/src/main/java/com/polisport/salud/repository/GestionMedicaRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/salud-service/src/main/java/com/polisport/salud/repository/GestionMedicaRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/salud-service/src/main/java/com/polisport/salud/service/ClientService.java" beforeDir="false" afterPath="$PROJECT_DIR$/salud-service/src/main/java/com/polisport/salud/service/ClientService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/salud-service/src/main/java/com/polisport/salud/service/GestionMedicaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/salud-service/src/main/java/com/polisport/salud/service/GestionMedicaService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/salud-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/salud-service/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/salud-service/src/test/java/com/polisport/salud/SaludServiceApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/salud-service/src/test/java/com/polisport/salud/SaludServiceApplicationTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/staff-service/src/main/java/com/polisport/staff/service/ClientService.java" beforeDir="false" afterPath="$PROJECT_DIR$/staff-service/src/main/java/com/polisport/staff/service/ClientService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/staff-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/staff-service/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/start.sh" beforeDir="false" afterPath="$PROJECT_DIR$/start.sh" afterDir="false" />
-    </list>
+    <list default="true" id="ef73f9bd-22fb-4ee1-8d1f-c774e90cad43" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
