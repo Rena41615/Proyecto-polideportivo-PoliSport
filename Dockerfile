@@ -4,7 +4,8 @@ WORKDIR /workspace
 # Dependencias base
 COPY pom.xml .
 
-# Código fuente de los 10 servicios
+# Código fuente de los 11 servicios
+COPY gateway-service/ gateway-service/
 COPY atletas-service/ atletas-service/
 COPY biometria-service/ biometria-service/
 COPY competencia-service/ competencia-service/
@@ -24,6 +25,7 @@ FROM eclipse-temurin:17-jre-alpine
 WORKDIR /app
 
 # Copiar los JARs de cada servicio
+COPY --from=build /workspace/gateway-service/target/*.jar gateway-service.jar
 COPY --from=build /workspace/atletas-service/target/*.jar atletas-service.jar
 COPY --from=build /workspace/biometria-service/target/*.jar biometria-service.jar
 COPY --from=build /workspace/competencia-service/target/*.jar competencia-service.jar
@@ -39,7 +41,7 @@ COPY --from=build /workspace/staff-service/target/*.jar staff-service.jar
 COPY start.sh .
 RUN chmod +x start.sh
 
-EXPOSE 8081 8082 8083 8084 8085 8086 8087 8088 8089 8090
+EXPOSE 8080 8081 8082 8083 8084 8085 8086 8087 8088 8089 8090
 
 # Si quieres ejecutar tu script de inicio (el que ya limpiamos):
 ENTRYPOINT ["/app/start.sh"]

@@ -11,8 +11,8 @@ public class ClientService {
 
     private final WebClient webClient;
 
-    public ClientService(WebClient.Builder webClientBuilder) {
-        this.webClient = webClientBuilder.baseUrl("http://inventario-service:8080").build();
+    public ClientService(WebClient webClient) {
+        this.webClient = webClient;
     }
 
     public Mono<String> obtenerDatos(String endpoint) {

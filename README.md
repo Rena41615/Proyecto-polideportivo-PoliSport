@@ -3,209 +3,372 @@
   <img src="https://img.shields.io/badge/Spring_Boot-3.2.0-6DB33F?style=for-the-badge&logo=spring&logoColor=white" alt="Spring Boot 3.2"/>
   <img src="https://img.shields.io/badge/MySQL-8.0-4479A1?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL 8.0"/>
   <img src="https://img.shields.io/badge/Docker-compose-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker Compose"/>
-  <img src="https://img.shields.io/badge/GraalVM-Native-FF8C00?style=for-the-badge&logo=graalvm&logoColor=white" alt="GraalVM"/>
+  <img src="https://img.shields.io/badge/API_Gateway-SpringCloud-6DB33F?style=for-the-badge&logo=spring&logoColor=white" alt="Spring Cloud Gateway"/>
+  <img src="https://img.shields.io/badge/JaCoCo-0.8.12-FF0000?style=for-the-badge" alt="JaCoCo Coverage"/>
 </div>
 
-<h1 align="center">🏟️ Polisport</h1>
+<h1 align="center"> PoliSport</h1>
 
 <p align="center">
   <strong>Plataforma integral de gestion deportiva</strong><br>
   Arquitectura de microservicios para la administracion de atletas, entrenamientos, nutricion, salud, competencias y mas.
 </p>
 
-<p align="center">
-  <b>Tech stack:</b> Java 17 · Spring Boot 3.2 · MySQL 8.0 · Docker · Flyway · Resilience4j
-</p>
-
 ---
 
-## 📋 Tabla de Contenidos
+## Estrategia de Branching — GitHub Flow
 
-- [Arquitectura](#arquitectura)
-- [Microservicios](#microservicios)
-  - [Core](#-core)
-  - [Gestion](#-gestion)
-  - [Soporte](#-soporte)
-- [Requisitos](#-requisitos)
-- [Inicio Rapido](#-inicio-rapido)
-- [Estructura del Proyecto](#-estructura-del-proyecto)
-- [Tecnologias](#-tecnologias)
-
----
-
-## 🏗️ Arquitectura
-
-Polisport esta construido bajo una **arquitectura de microservicios**, donde cada dominio de negocio es independiente con su propia base de datos MySQL y API REST. La comunicacion entre servicios se realiza mediante **WebClient reactivo** con **circuit breakers** (Resilience4j) para tolerancia a fallos.
+Este proyecto sigue **GitHub Flow** como estrategia de branching:
 
 ```
-┌─────────────┐  ┌─────────────┐  ┌─────────────┐
-│  Atletas    │  │  Biometria  │  │  Salud      │
-│  :8081      │  │  :8082      │  │  :8089      │
-└──────┬──────┘  └──────┬──────┘  └──────┬──────┘
-       │                 │               │
-       └─────────────────┼───────────────┘
-                         │
-                ┌────────┴────────┐
-                │   WebClient     │
-                │  (Reactive)     │
-                └────────┬────────┘
-                         │
-       ┌─────────────────┼─────────────────┐
-       │                 │                 │
-┌──────┴──────┐  ┌──────┴──────┐  ┌──────┴──────┐
-│Competencias │  │Entrenamiento│  │  Staff      │
-│  :8083      │  │  :8085      │  │  :8088      │
-└─────────────┘  └─────────────┘  └─────────────┘
+main ──── merge ──── merge ──── merge ────
+          ↑           ↑           ↑
+          |           |           |
+feature/  feature/   feature/   hotfix/
+atletas   gateway    testing    login-bug
+```
+
+### Reglas:
+- **main**: siempre desplegable, codigo estable y probado
+- **feature/***: ramas para nuevas funcionalidades (ej: `feature/atletas-crud`)
+- **hotfix/***: ramas para correcciones urgentes en produccion
+- **No hay rama develop**: se integra directamente a main via Pull Request
+- Cada PR debe pasar los tests y tener al menos 1 approval
+
+---
+
+## Arquitectura
+
+```
+                          ┌─────────────────┐
+                          │   Gateway       │
+                          │   :8080         │
+                          └────────┬────────┘
+                                   │
+              ┌────────────────────┼────────────────────┐
+              │                    │                    │
+     ┌────────┴────────┐  ┌───────┴────────┐  ┌───────┴────────┐
+     │   Atletas       │  │  Biometria     │  │  Competencias  │
+     │   :8081         │  │  :8082         │  │  :8083         │
+     └────────┬────────┘  └───────┬────────┘  └───────┬────────┘
+              │                    │                    │
+     ┌────────┴────────┐  ┌───────┴────────┐  ┌───────┴────────┐
+     │   Contratos     │  │  Entrenamiento │  │  Inventario    │
+     │   :8084         │  │  :8085         │  │  :8086         │
+     └────────┬────────┘  └───────┬────────┘  └───────┬────────┘
+              │                    │                    │
+     ┌────────┴────────┐  ┌───────┴────────┐  ┌───────┴────────┐
+     │   Salud         │  │  IAM           │  │  Nutricion     │
+     │   :8087         │  │  :8088         │  │  :8089         │
+     └────────┬────────┘  └───────┬────────┘  └───────┬────────┘
+              │                    │                    │
+              └────────────────────┼────────────────────┘
+                                   │
+                          ┌────────┴────────┐
+                          │   Staff         │
+                          │   :8090         │
+                          └─────────────────┘
+```
+
+Cada microservicio tiene su propia base de datos MySQL 8.0 independiente con migraciones Flyway.
+
+---
+
+## Microservicios y Swagger
+
+| # | Servicio | Puerto | Swagger UI | API Docs |
+|---|----------|--------|------------|----------|
+| 1 | **Atletas** | `8081` | http://localhost:8081/swagger-ui.html | http://localhost:8081/api-docs |
+| 3 | **Biometria** | `8082` | http://localhost:8082/swagger-ui.html | http://localhost:8082/api-docs |
+| 4 | **Competencias** | `8083` | http://localhost:8083/swagger-ui.html | http://localhost:8083/api-docs |
+| 5 | **Contratos** | `8084` | http://localhost:8084/swagger-ui.html | http://localhost:8084/api-docs |
+| 6 | **Entrenamientos** | `8085` | http://localhost:8085/swagger-ui.html | http://localhost:8085/api-docs |
+| 7 | **Inventario** | `8086` | http://localhost:8086/swagger-ui.html | http://localhost:8086/api-docs |
+| 8 | **Salud** | `8087` | http://localhost:8087/swagger-ui.html | http://localhost:8087/api-docs |
+| 9 | **IAM** | `8088` | http://localhost:8088/swagger-ui.html | http://localhost:8088/api-docs |
+| 10 | **Nutricion** | `8089` | http://localhost:8089/swagger-ui.html | http://localhost:8089/api-docs |
+| 11 | **Staff** | `8090` | http://localhost:8090/swagger-ui.html | http://localhost:8090/api-docs |
+
+> Tambien puedes acceder a todos los servicios a traves del Gateway en `http://localhost:8080/<ruta-del-servicio>`
+
+---
+
+## Endpoints por servicio
+
+### Gateway (API Gateway)
+```
+GET  /api/atletas/**        → atletas-service:8081
+GET  /api/v1/biometria/**   → biometria-service:8082
+GET  /api/competencias/**   → competencia-service:8083
+GET  /api/contratos/**      → contratos-service:8084
+GET  /api/entrenamientos/** → entrenamiento-service:8085
+GET  /api/v1/inventario/**  → inventario-service:8086
+GET  /api/v1/instalaciones/** → inventario-service:8086
+GET  /api/v1/salud/**       → salud-service:8087
+GET  /api/v1/iam/**         → iam-service:8088
+GET  /api/v1/nutricion/**   → nutricion-service:8089
+GET  /api/v1/staff/**       → staff-service:8090
+```
+
+### Atletas (`/api/atletas`)
+```
+GET    /                  Listar todos
+GET    /{id}              Obtener por ID
+GET    /run/{run}         Obtener por RUN
+POST   /                  Crear
+PUT    /{id}              Actualizar
+PATCH  /{id}              Actualizacion parcial
+DELETE /{id}              Eliminar
+```
+
+### Biometria (`/api/v1/biometria`)
+```
+GET    /                  Listar
+GET    /{id}              Obtener por ID
+POST   /                  Crear
+PUT    /{id}              Actualizar
+DELETE /{id}              Eliminar
+```
+
+### Competencias (`/api/competencias`)
+```
+GET    /                  Listar
+GET    /{id}              Obtener por ID
+GET    /atleta/{run}      Listar por atleta
+POST   /                  Crear
+PUT    /{id}              Actualizar
+DELETE /{id}              Eliminar
+```
+
+### Contratos (`/api/contratos`)
+```
+GET    /                  Listar
+GET    /{id}              Obtener por ID
+GET    /empleado/{run}    Listar por empleado
+POST   /                  Crear
+PUT    /{id}              Actualizar
+DELETE /{id}              Eliminar
+```
+
+### Entrenamientos (`/api/entrenamientos`)
+```
+GET    /                  Listar
+GET    /{id}              Obtener por ID
+GET    /atleta/{run}      Listar por atleta
+POST   /                  Crear
+PUT    /{id}              Actualizar
+DELETE /{id}              Eliminar
+```
+
+### IAM (`/api/v1/iam`)
+```
+GET    /usuarios              Listar usuarios
+GET    /usuarios/{id}         Obtener usuario
+POST   /usuarios              Crear usuario
+PUT    /usuarios/{id}         Actualizar usuario
+DELETE /usuarios/{id}         Eliminar usuario
+GET    /roles                 Listar roles
+GET    /roles/{id}            Obtener rol
+POST   /roles                 Crear rol
+PUT    /roles/{id}            Actualizar rol
+DELETE /roles/{id}            Eliminar rol
+GET    /permisos              Listar permisos
+POST   /permisos              Crear permiso
+GET    /roles-usuarios        Listar asignaciones
+POST   /roles-usuarios        Asignar rol a usuario
+GET    /permisos-rol          Listar permisos por rol
+POST   /permisos-rol          Asignar permiso a rol
+```
+
+### Inventario (`/api/v1/inventario`)
+```
+GET    /                  Listar
+POST   /                  Crear
+PUT    /{id}              Actualizar
+DELETE /{id}              Eliminar
+```
+
+### Instalaciones (`/api/v1/instalaciones`)
+```
+GET    /                  Listar
+POST   /                  Crear
+PUT    /{id}              Actualizar
+DELETE /{id}              Eliminar
+```
+
+### Nutricion (`/api/v1/nutricion`)
+```
+GET    /                  Listar planes
+GET    /{id}              Obtener por ID
+GET    /atleta/{id}       Buscar por atleta
+POST   /                  Crear
+PUT    /{id}              Actualizar
+DELETE /{id}              Eliminar
+```
+
+### Salud (`/api/v1/salud`)
+```
+GET    /                  Listar registros
+GET    /{id}              Obtener por ID
+GET    /atleta/{id}       Buscar por atleta
+POST   /                  Crear
+PUT    /{id}              Actualizar
+DELETE /{id}              Eliminar
+```
+
+### Staff (`/api/v1/staff`)
+```
+GET    /                  Listar miembros
+GET    /roles             Listar roles
+POST   /                  Crear miembro
+POST   /roles             Crear rol
 ```
 
 ---
 
-## 🧩 Microservicios
-
-### 🎯 Core
-
-| Servicio | Puerto | Descripcion |
-|----------|--------|-------------|
-| **Atletas** | `8081` | Gestion de atletas: RUN, nombres, datos personales, historial deportivo |
-| **Biometria** | `8082` | Analisis biometricos: peso, altura, IMC, VO2 max, frecuencia cardiaca |
-| **Competencia** | `8083` | Competencias deportivas: categorias, modalidades, resultados |
-| **Entrenamiento** | `8085` | Sesiones de entrenamiento: tipo, duracion, participantes |
-| **Salud** | `8089` | Gestion medica: lesiones, tratamientos, historial clinico |
-
-### 📋 Gestion
-
-| Servicio | Puerto | Descripcion |
-|----------|--------|-------------|
-| **Contratos** | `8084` | Administracion de contratos laborales del personal |
-| **Inventario** | `8086` | Control de inventario e instalaciones deportivas |
-| **Staff** | `8088` | Gestion de miembros del staff, roles y permisos |
-
-### 🔐 Soporte
-
-| Servicio | Puerto | Descripcion |
-|----------|--------|-------------|
-| **IAM** | `8087` | Identidad y acceso: usuarios, roles, permisos |
-| **Nutricion** | `8088` | Planes nutricionales, pautas alimentarias, suplementacion |
-
----
-
-## 📋 Requisitos
+## Requisitos
 
 - **Java 17** o superior
 - **Maven 3.8+** (o usar `mvnw` incluido)
-- **Docker** y **Docker Compose**
-- Puerto 3306 y 8080-8089 disponibles
+- **Docker** y **Docker Compose** (para base de datos)
+- Puertos 8080-8090 disponibles
 
 ---
 
-## 🚀 Inicio Rapido
+## Inicio Rapido
 
-### 1. Clonar el repositorio
+### 1. Clonar e iniciar bases de datos
 
 ```bash
 git clone https://github.com/tu-usuario/polisport.git
 cd polisport
-```
-
-### 2. Levantar las bases de datos con Docker
-
-```bash
 docker compose up -d
 ```
 
-Esto levantara 9 instancias de MySQL 8.0, una por microservicio.
+Esto levantara 10 instancias de MySQL 8.0, una por microservicio.
 
-### 3. Compilar y ejecutar
+### 2. Compilar y ejecutar
 
 ```bash
 # Compilar todo el proyecto
-./mvnw clean install -DskipTests
+./mvnw clean install
 
-# Ejecutar un servicio especifico (ej: atletas)
+# Ejecutar todos los servicios via Docker
+docker compose up --build
+
+# O ejecutar servicios individualmente
+./mvnw spring-boot:run -pl gateway-service
 ./mvnw spring-boot:run -pl atletas-service
 ```
 
-O desde tu IDE favorito (IntelliJ IDEA recomendado), ejecutar cada servicio individualmente.
+### 3. Probar
 
----
+```bash
+# Via Gateway (recomendado)
+curl http://localhost:8080/api/atletas
 
-## 📁 Estructura del Proyecto
+# Via servicio directo
+curl http://localhost:8081/api/atletas
 
-```
-polisport/
-├── pom.xml                          # POM padre multi-modulo
-├── docker-compose.yml               # Orquestacion Docker
-│
-├── atletas-service/                 # 🎯 Gestion de atletas
-│   ├── controller/                  #   REST controllers
-│   ├── service/                     #   Logica de negocio
-│   ├── repository/                  #   Acceso a datos
-│   ├── model/                       #   Entidades JPA
-│   ├── client/                      #   Cliente HTTP reactivo
-│   └── config/                      #   Configuraciones
-│
-├── biometria-service/               # 📊 Analisis biometricos
-├── competencia-service/             # 🏆 Competencias
-├── contratos-service/               # 📄 Contratos
-├── entrenamiento-service/           # 🏋️ Entrenamiento
-├── iam-service/                     # 🔐 Identidad y acceso
-├── inventario-service/              # 📦 Inventario
-├── nutricion-service/               # 🥗 Nutricion
-├── salud-service/                   # 🏥 Salud
-└── staff-service/                   # 👥 Staff
-```
-
-Cada microservicio sigue la misma estructura interna:
-
-```
-└── src/main/java/com/polisport/<servicio>/
-    ├── <Servicio>Application.java    # Punto de entrada
-    ├── controller/                   # Capa REST
-    ├── service/                      # Logica de negocio
-    ├── repository/                   # Acceso a datos (JPA)
-    ├── model/                        # Entidades y enums
-    ├── client/                       # Comunicacion entre servicios
-    ├── config/                       # Configuracion (WebClient, etc.)
-    └── exception/                    # Manejo global de errores
+# Swagger UI
+open http://localhost:8080/swagger-ui.html
 ```
 
 ---
 
-## 🛠️ Tecnologias
+## Pruebas y Cobertura
+
+```bash
+# Ejecutar todos los tests
+./mvnw test
+
+# Reporte de cobertura JaCoCo
+open target/site/jacoco/index.html
+```
+
+Los tests incluyen:
+- Tests de contexto Spring Boot
+- Tests unitarios con Mockito para servicios clave
+- Cobertura de codigo via JaCoCo
+
+---
+
+## Despliegue
+
+### Local con Docker
+```bash
+docker compose up --build
+```
+
+### Render (Cloud)
+El archivo `render.yaml` contiene la configuracion para desplegar los 11 servicios en Render.
+```bash
+# Usar Blueprint de Render con render.yaml
+# Conectar repositorio a Render y seleccionar "Blueprint"
+```
+
+---
+
+## ClickUp
+
+Este proyecto utiliza ClickUp para la gestion de tareas.
+El archivo `.clickup/tasks.json` contiene la lista completa de tareas del proyecto.
+
+Panel: Crear un nuevo Space en ClickUp e importar las tareas desde `.clickup/tasks.json`
+
+---
+
+## Postman
+
+La coleccion de Postman se encuentra en:
+```
+postman/polisport-collection.json
+```
+
+Importar en Postman: `File → Import → Seleccionar archivo`
+
+Variable de entorno configurada:
+- `baseUrl`: `http://localhost:8080` (Gateway)
+
+---
+
+## Tecnologias
 
 | Tecnologia | Version | Proposito |
 |------------|---------|-----------|
 | Java | 17 | Lenguaje base |
 | Spring Boot | 3.2.0 | Framework principal |
+| Spring Cloud Gateway | 2023.0.0 | API Gateway |
 | Spring Data JPA | 3.2.0 | Persistencia y ORM |
 | Spring WebFlux | 3.2.0 | Cliente HTTP reactivo |
-| Spring Cloud | 2023.0.0 | Circuit breaker (Resilience4j) |
+| Spring Cloud Gateway | 2023.0.0 | Circuit breaker |
 | MySQL | 8.0 | Base de datos relacional |
 | Flyway | - | Migraciones de base de datos |
 | Lombok | - | Reduccion de boilerplate |
 | Jakarta Validation | - | Validacion de datos |
 | Docker | - | Contenedores |
+| JaCoCo | 0.8.12 | Cobertura de codigo |
 | GraalVM | - | Compilacion nativa |
 
 ---
 
-## 🌐 Endpoints
+## ClickUp Tasks Quick Reference
 
-Cada servicio expone su API REST en `http://localhost:<puerto>/api/<recurso>`.
-
-Ejemplo con el servicio de atletas:
-
-```
-GET    /api/atletas              # Listar todos los atletas
-GET    /api/atletas/{id}         # Obtener atleta por ID
-GET    /api/atletas/run/{run}    # Obtener atleta por RUN
-POST   /api/atletas              # Crear atleta
-PUT    /api/atletas/{id}         # Actualizar atleta
-DELETE /api/atletas/{id}         # Eliminar atleta
-```
-
----
-
-<div align="center">
-  <sub>Hecho con ❤️ para la gestion deportiva</sub>
-</div>
+| ID | Tarea | Estado |
+|----|-------|--------|
+| POLISPORT-1 | Infraestructura Docker | Done |
+| POLISPORT-2 | API Gateway | Done |
+| POLISPORT-3 | CRUD Atletas | Done |
+| POLISPORT-4 | CRUD Biometria | Done |
+| POLISPORT-5 | CRUD Competencias | Done |
+| POLISPORT-6 | CRUD Contratos | Done |
+| POLISPORT-7 | CRUD Entrenamientos | Done |
+| POLISPORT-8 | IAM | Done |
+| POLISPORT-9 | Inventario | Done |
+| POLISPORT-10 | Nutricion | Done |
+| POLISPORT-11 | Salud | Done |
+| POLISPORT-12 | Staff | Done |
+| POLISPORT-13 | Pruebas + JaCoCo | Done |
+| POLISPORT-14 | Despliegue Render | Done |
+| POLISPORT-15 | Postman Collection | Done |
+| POLISPORT-16 | Documentacion | Done |

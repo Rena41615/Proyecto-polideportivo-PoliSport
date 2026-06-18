@@ -188,6 +188,7 @@ services:
     environment:
       - JAVA_OPTS=-Xms512m -Xmx1g
     ports:
+      - "8080:8080"
       - "8081:8081"
       - "8082:8082"
       - "8083:8083"

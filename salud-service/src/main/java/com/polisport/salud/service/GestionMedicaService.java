@@ -40,4 +40,9 @@ public class GestionMedicaService {
         log.info("Actualizando registro medico con ID: {}", gestion.getId());
         return gestionMedicaRepository.save(gestion);
     }
+
+    public List<GestionMedica> buscarPorAtletaId(Long atletaId) {
+        log.info("Buscando registros medicos para el atleta ID: {}", atletaId);
+        return gestionMedicaRepository.findByAtletaId(atletaId);
+    }
 }

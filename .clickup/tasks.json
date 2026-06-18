@@ -1,0 +1,116 @@
+{
+  "tasks": [
+    {
+      "id": "POLISPORT-1",
+      "name": "Configurar infraestructura Docker",
+      "status": "done",
+      "description": "Configurar docker-compose.yml, Dockerfile y redes para los 11 microservicios",
+      "assignee": "DevOps"
+    },
+    {
+      "id": "POLISPORT-2",
+      "name": "Implementar API Gateway",
+      "status": "done",
+      "description": "Crear gateway-service con Spring Cloud Gateway para enrutar a los 10 microservicios",
+      "assignee": "Backend"
+    },
+    {
+      "id": "POLISPORT-3",
+      "name": "CRUD Atletas",
+      "status": "done",
+      "description": "Implementar CRUD completo para el microservicio de atletas",
+      "assignee": "Backend"
+    },
+    {
+      "id": "POLISPORT-4",
+      "name": "CRUD Biometria",
+      "status": "done",
+      "description": "Implementar CRUD para analisis biometricos",
+      "assignee": "Backend"
+    },
+    {
+      "id": "POLISPORT-5",
+      "name": "CRUD Competencias",
+      "status": "done",
+      "description": "Implementar CRUD para competencias deportivas",
+      "assignee": "Backend"
+    },
+    {
+      "id": "POLISPORT-6",
+      "name": "CRUD Contratos",
+      "status": "done",
+      "description": "Implementar CRUD para contratos de personal",
+      "assignee": "Backend"
+    },
+    {
+      "id": "POLISPORT-7",
+      "name": "CRUD Entrenamientos",
+      "status": "done",
+      "description": "Implementar CRUD para sesiones de entrenamiento",
+      "assignee": "Backend"
+    },
+    {
+      "id": "POLISPORT-8",
+      "name": "IAM - Usuarios, Roles y Permisos",
+      "status": "done",
+      "description": "Implementar gestion de identidad y acceso",
+      "assignee": "Backend"
+    },
+    {
+      "id": "POLISPORT-9",
+      "name": "CRUD Inventario e Instalaciones",
+      "status": "done",
+      "description": "Implementar CRUD para inventario e instalaciones",
+      "assignee": "Backend"
+    },
+    {
+      "id": "POLISPORT-10",
+      "name": "CRUD Nutricion",
+      "status": "done",
+      "description": "Implementar CRUD para planes nutricionales",
+      "assignee": "Backend"
+    },
+    {
+      "id": "POLISPORT-11",
+      "name": "CRUD Salud",
+      "status": "done",
+      "description": "Implementar gestion medica",
+      "assignee": "Backend"
+    },
+    {
+      "id": "POLISPORT-12",
+      "name": "CRUD Staff",
+      "status": "done",
+      "description": "Implementar gestion de miembros del staff",
+      "assignee": "Backend"
+    },
+    {
+      "id": "POLISPORT-13",
+      "name": "Pruebas unitarias con JaCoCo",
+      "status": "in_progress",
+      "description": "Escribir tests unitarios y configurar cobertura JaCoCo",
+      "assignee": "QA"
+    },
+    {
+      "id": "POLISPORT-14",
+      "name": "Configurar despliegue en Render",
+      "status": "in_progress",
+      "description": "Configurar render.yaml y perfiles para despliegue en Render",
+      "assignee": "DevOps"
+    },
+    {
+      "id": "POLISPORT-15",
+      "name": "Coleccion Postman",
+      "status": "done",
+      "description": "Crear coleccion Postman con todos los endpoints de la API",
+      "assignee": "Backend"
+    },
+    {
+      "id": "POLISPORT-16",
+      "name": "Documentacion README",
+      "status": "in_progress",
+      "description": "Actualizar README con Swagger URLs, GitHubFlow, y documentacion completa",
+      "assignee": "Backend"
+    }
+  ]
+}

@@ -45,6 +45,11 @@ public class PlanNutricionalService {
 		log.warn("Eliminando de la base de datos el plan nutricional con ID: {}", id);
 		planNutricionalRepository.deleteById(id);
 	}
+
+	public List<PlanNutricional> buscarPorAtletaId(Long atletaId) {
+		log.info("Buscando planes nutricionales para el atleta ID: {}", atletaId);
+		return planNutricionalRepository.findByAtletaId(atletaId);
+	}
 }
 
 

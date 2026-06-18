@@ -11,24 +11,24 @@ public class ClientService {
 
     private final WebClient webClient;
 
-    public ClientService(WebClient.Builder webClientBuilder) {
-        this.webClient = webClientBuilder.baseUrl("http://iam-service:8080").build();
+    public ClientService(WebClient webClient) {
+        this.webClient = webClient;
     }
 
-    public Mono<String> obtenerDatos(String endpoint) {
-        log.info("Realizando peticion GET a: {}", endpoint);
+    public Mono<String> obtenerDatos(String url) {
+        log.info("Realizando peticion GET a: {}", url);
         return webClient.get()
-                .uri(endpoint)
+                .uri(url)
                 .retrieve()
                 .bodyToMono(String.class)
                 .doOnNext(respuesta -> log.info("Respuesta recibida: {}", respuesta))
                 .doOnError(error -> log.error("Error en la peticion: {}", error.getMessage()));
     }
 
-    public Mono<String> enviarDatos(String endpoint, Object datos) {
-        log.info("Enviando datos a: {}", endpoint);
+    public Mono<String> enviarDatos(String url, Object datos) {
+        log.info("Enviando datos a: {}", url);
         return webClient.post()
-                .uri(endpoint)
+                .uri(url)
                 .bodyValue(datos)
                 .retrieve()
                 .bodyToMono(String.class)

@@ -60,6 +60,21 @@ public class NutricionController {
 		}
 	}
 
+	@Operation(summary = "Buscar planes nutricionales por ID de atleta", description = "Obtiene todos los planes nutricionales asociados a un atleta específico")
+	@GetMapping("/atleta/{atletaId}")
+	public ResponseEntity<?> buscarPorAtletaId(@PathVariable Long atletaId) {
+		try {
+			List<PlanNutricional> planes = planNutricionalService.buscarPorAtletaId(atletaId);
+			List<PlanNutricionalDTO> dtos = planes.stream()
+					.map(planNutricionalMapper::entityToDTO)
+					.toList();
+			return ResponseEntity.ok(dtos);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("Error al buscar planes nutricionales por atleta: " + e.getMessage());
+		}
+	}
+
 	@Operation(summary = "Crear nuevo plan nutricional", description = "Crea e inserta un nuevo plan nutricional en el sistema con los datos proporcionados")
 	@PostMapping
 	public ResponseEntity<?> guardarPlan(@Valid @RequestBody PlanNutricionalCrearDTO crearDTO) {

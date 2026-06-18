@@ -1,0 +1,107 @@
+{
+  "info": {
+    "name": "PoliSport API",
+    "description": "Coleccion de endpoints para la plataforma de gestion deportiva PoliSport. Arquitectura de microservicios con API Gateway en puerto 8080.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Gateway",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/actuator/health", "host": ["{{baseUrl}}"], "path": ["actuator", "health"] } }
+        }
+      ]
+    },
+    {
+      "name": "Atletas",
+      "item": [
+        { "name": "Listar todos", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/atletas", "host": ["{{baseUrl}}"], "path": ["api", "atletas"] } } },
+        { "name": "Obtener por ID", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/atletas/1", "host": ["{{baseUrl}}"], "path": ["api", "atletas", "1"] } } },
+        { "name": "Obtener por RUN", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/atletas/run/20456789", "host": ["{{baseUrl}}"], "path": ["api", "atletas", "run", "20456789"] } } },
+        { "name": "Crear", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"runAtleta\": 20456789, \"dvrunAtleta\": \"K\", \"primerNombre\": \"Juan\", \"primerApellido\": \"Perez\", \"segundoApellido\": \"Garcia\", \"email\": \"juan.perez@polisport.cl\", \"fechaNacimiento\": \"1998-05-15\", \"deportePrincipal\": \"Atletismo\", \"categoria\": \"Senior\"}" }, "url": { "raw": "{{baseUrl}}/api/atletas", "host": ["{{baseUrl}}"], "path": ["api", "atletas"] } } },
+        { "name": "Actualizar", "request": { "method": "PUT", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"runAtleta\": 20456789, \"dvrunAtleta\": \"K\", \"primerNombre\": \"Juan\", \"primerApellido\": \"Perez\", \"segundoApellido\": \"Garcia\", \"email\": \"juan.perez@polisport.cl\", \"fechaNacimiento\": \"1998-05-15\", \"deportePrincipal\": \"Natacion\", \"categoria\": \"Senior\"}" }, "url": { "raw": "{{baseUrl}}/api/atletas/1", "host": ["{{baseUrl}}"], "path": ["api", "atletas", "1"] } } },
+        { "name": "Eliminar", "request": { "method": "DELETE", "url": { "raw": "{{baseUrl}}/api/atletas/1", "host": ["{{baseUrl}}"], "path": ["api", "atletas", "1"] } } }
+      ]
+    },
+    {
+      "name": "Biometria",
+      "item": [
+        { "name": "Listar", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/v1/biometria", "host": ["{{baseUrl}}"], "path": ["api", "v1", "biometria"] } } },
+        { "name": "Obtener por ID", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/v1/biometria/1", "host": ["{{baseUrl}}"], "path": ["api", "v1", "biometria", "1"] } } },
+        { "name": "Crear", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"atletaId\": 1, \"peso\": 75.5, \"altura\": 1.80, \"imc\": 23.3, \"porcentajeGrasa\": 15.0, \"masaMuscular\": 35.0, \"vo2Max\": 48.0, \"frecuenciaCardiacaReposo\": 60, \"fecha\": \"2026-06-18\"}" }, "url": { "raw": "{{baseUrl}}/api/v1/biometria", "host": ["{{baseUrl}}"], "path": ["api", "v1", "biometria"] } } },
+        { "name": "Actualizar", "request": { "method": "PUT", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"atletaId\": 1, \"peso\": 76.0, \"altura\": 1.80, \"imc\": 23.5, \"porcentajeGrasa\": 14.5, \"masaMuscular\": 35.5, \"vo2Max\": 50.0, \"frecuenciaCardiacaReposo\": 58, \"fecha\": \"2026-06-18\"}" }, "url": { "raw": "{{baseUrl}}/api/v1/biometria/1", "host": ["{{baseUrl}}"], "path": ["api", "v1", "biometria", "1"] } } },
+        { "name": "Eliminar", "request": { "method": "DELETE", "url": { "raw": "{{baseUrl}}/api/v1/biometria/1", "host": ["{{baseUrl}}"], "path": ["api", "v1", "biometria", "1"] } } }
+      ]
+    },
+    {
+      "name": "Competencias",
+      "item": [
+        { "name": "Listar", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/competencias", "host": ["{{baseUrl}}"], "path": ["api", "competencias"] } } },
+        { "name": "Obtener por ID", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/competencias/1", "host": ["{{baseUrl}}"], "path": ["api", "competencias", "1"] } } },
+        { "name": "Listar por atleta", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/competencias/atleta/20456789", "host": ["{{baseUrl}}"], "path": ["api", "competencias", "atleta", "20456789"] } } }
+      ]
+    },
+    {
+      "name": "Contratos",
+      "item": [
+        { "name": "Listar", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/contratos", "host": ["{{baseUrl}}"], "path": ["api", "contratos"] } } },
+        { "name": "Obtener por ID", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/contratos/1", "host": ["{{baseUrl}}"], "path": ["api", "contratos", "1"] } } },
+        { "name": "Listar por empleado", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/contratos/empleado/15234789", "host": ["{{baseUrl}}"], "path": ["api", "contratos", "empleado", "15234789"] } } }
+      ]
+    },
+    {
+      "name": "Entrenamientos",
+      "item": [
+        { "name": "Listar", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/entrenamientos", "host": ["{{baseUrl}}"], "path": ["api", "entrenamientos"] } } },
+        { "name": "Obtener por ID", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/entrenamientos/1", "host": ["{{baseUrl}}"], "path": ["api", "entrenamientos", "1"] } } },
+        { "name": "Listar por atleta", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/entrenamientos/atleta/20456789", "host": ["{{baseUrl}}"], "path": ["api", "entrenamientos", "atleta", "20456789"] } } }
+      ]
+    },
+    {
+      "name": "IAM",
+      "item": [
+        { "name": "Listar usuarios", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/v1/iam/usuarios", "host": ["{{baseUrl}}"], "path": ["api", "v1", "iam", "usuarios"] } } },
+        { "name": "Crear usuario", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"email\": \"admin@polisport.cl\", \"nombre\": \"Admin\", \"apellido\": \"Sistema\", \"contrasena\": \"securepass123\"}" }, "url": { "raw": "{{baseUrl}}/api/v1/iam/usuarios", "host": ["{{baseUrl}}"], "path": ["api", "v1", "iam", "usuarios"] } } },
+        { "name": "Listar roles", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/v1/iam/roles", "host": ["{{baseUrl}}"], "path": ["api", "v1", "iam", "roles"] } } },
+        { "name": "Listar permisos", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/v1/iam/permisos", "host": ["{{baseUrl}}"], "path": ["api", "v1", "iam", "permisos"] } } },
+        { "name": "Listar roles-usuarios", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/v1/iam/roles-usuarios", "host": ["{{baseUrl}}"], "path": ["api", "v1", "iam", "roles-usuarios"] } } },
+        { "name": "Asignar rol a usuario", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\"usuarioId\": 1, \"rolId\": 1}" }, "url": { "raw": "{{baseUrl}}/api/v1/iam/roles-usuarios", "host": ["{{baseUrl}}"], "path": ["api", "v1", "iam", "roles-usuarios"] } } }
+      ]
+    },
+    {
+      "name": "Inventario",
+      "item": [
+        { "name": "Listar inventario", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/v1/inventario", "host": ["{{baseUrl}}"], "path": ["api", "v1", "inventario"] } } },
+        { "name": "Listar instalaciones", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/v1/instalaciones", "host": ["{{baseUrl}}"], "path": ["api", "v1", "instalaciones"] } } }
+      ]
+    },
+    {
+      "name": "Nutricion",
+      "item": [
+        { "name": "Listar planes", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/v1/nutricion", "host": ["{{baseUrl}}"], "path": ["api", "v1", "nutricion"] } } },
+        { "name": "Obtener por ID", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/v1/nutricion/1", "host": ["{{baseUrl}}"], "path": ["api", "v1", "nutricion", "1"] } } },
+        { "name": "Buscar por atleta", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/v1/nutricion/atleta/1", "host": ["{{baseUrl}}"], "path": ["api", "v1", "nutricion", "atleta", "1"] } } }
+      ]
+    },
+    {
+      "name": "Salud",
+      "item": [
+        { "name": "Listar registros", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/v1/salud", "host": ["{{baseUrl}}"], "path": ["api", "v1", "salud"] } } },
+        { "name": "Obtener por ID", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/v1/salud/1", "host": ["{{baseUrl}}"], "path": ["api", "v1", "salud", "1"] } } },
+        { "name": "Buscar por atleta", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/v1/salud/atleta/1", "host": ["{{baseUrl}}"], "path": ["api", "v1", "salud", "atleta", "1"] } } }
+      ]
+    },
+    {
+      "name": "Staff",
+      "item": [
+        { "name": "Listar miembros", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/v1/staff", "host": ["{{baseUrl}}"], "path": ["api", "v1", "staff"] } } },
+        { "name": "Listar roles", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/v1/staff/roles", "host": ["{{baseUrl}}"], "path": ["api", "v1", "staff", "roles"] } } }
+      ]
+    }
+  ],
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080" }
+  ]
+}

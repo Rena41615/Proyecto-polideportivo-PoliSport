@@ -30,7 +30,7 @@ public class ClientService {
         log.info("Realizando petición a salud-service para atleta: {}", atletaId);
         
         return webClient.get()
-                .uri("http://salud-service:8080/api/salud/atleta/{id}", atletaId)
+                .uri("http://salud-service:8087/api/v1/salud/atleta/{id}", atletaId)
                 .retrieve()
                 .bodyToMono(String.class)
                 .timeout(Duration.ofSeconds(10))
@@ -58,7 +58,7 @@ public class ClientService {
         log.info("Obteniendo ficha consolidada para atleta: {}", atletaId);
         
         return webClient.get()
-                .uri("http://salud-service:8080/api/salud/atleta/{id}", atletaId)
+                .uri("http://salud-service:8087/api/v1/salud/atleta/{id}", atletaId)
                 .retrieve()
                 .bodyToMono(String.class)
                 .timeout(Duration.ofSeconds(10))
@@ -68,7 +68,7 @@ public class ClientService {
                     log.info("Datos de salud obtenidos, consultando entrenamiento...");
                     
                     return webClient.get()
-                            .uri("http://entrenamiento-service:8080/api/entrenamiento/atleta/{id}", atletaId)
+                            .uri("http://entrenamiento-service:8085/api/entrenamientos/atleta/{id}", atletaId)
                             .retrieve()
                             .bodyToMono(String.class)
                             .timeout(Duration.ofSeconds(10))
@@ -91,7 +91,7 @@ public class ClientService {
         log.info("Realizando petición a nutricion-service para atleta: {}", atletaId);
         
         return webClient.get()
-                .uri("http://nutricion-service:8080/api/v1/nutricion/atleta/{id}", atletaId)
+                .uri("http://nutricion-service:8089/api/v1/nutricion/atleta/{id}", atletaId)
                 .retrieve()
                 .bodyToMono(String.class)
                 .timeout(Duration.ofSeconds(10))
@@ -107,7 +107,7 @@ public class ClientService {
         log.info("Realizando petición a competencia-service para atleta: {}", atletaId);
         
         return webClient.get()
-                .uri("http://competencia-service:8080/api/competencias/atleta/{id}", atletaId)
+                .uri("http://competencia-service:8083/api/competencias/atleta/{id}", atletaId)
                 .retrieve()
                 .bodyToMono(String.class)
                 .timeout(Duration.ofSeconds(10))

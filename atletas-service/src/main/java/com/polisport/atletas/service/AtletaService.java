@@ -1,5 +1,6 @@
 package com.polisport.atletas.service;
 
+import com.polisport.atletas.exception.ResourceNotFoundException;
 import com.polisport.atletas.model.Atleta;
 import com.polisport.atletas.repository.AtletaRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -46,7 +47,7 @@ public class AtletaService {
 
         // 1. Buscamos el atleta en la base de datos. Si no existe, lanzamos un error.
         Atleta atleta = atletaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Atleta no encontrado con ID: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Atleta no encontrado con ID: " + id));
 
         // 2. Iteramos sobre el mapa de actualizaciones que nos envió el Controller
         updates.forEach((campo, valor) -> {

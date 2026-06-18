@@ -1,5 +1,6 @@
 #!/bin/sh
 set -e
+java -jar /app/gateway-service.jar --server.port=8080 &
 java -jar /app/atletas-service.jar --server.port=8081 &
 java -jar /app/biometria-service.jar --server.port=8082 &
 java -jar /app/competencia-service.jar --server.port=8083 &

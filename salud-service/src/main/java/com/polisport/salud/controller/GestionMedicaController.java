@@ -53,6 +53,17 @@ public class GestionMedicaController {
                 });
     }
 
+    @Operation(summary = "Buscar registros médicos por ID de atleta", description = "Obtiene todos los registros médicos asociados a un atleta específico")
+    @GetMapping("/atleta/{atletaId}")
+    public ResponseEntity<List<GestionMedicaDTO>> buscarPorAtletaId(@PathVariable Long atletaId) {
+        log.info("Buscando registros medicos para el atleta ID: {}", atletaId);
+        List<GestionMedica> gestiones = gestionMedicaService.buscarPorAtletaId(atletaId);
+        List<GestionMedicaDTO> dtos = gestiones.stream()
+                .map(gestionMedicaMapper::entityToDTO)
+                .toList();
+        return ResponseEntity.ok(dtos);
+    }
+
     @Operation(summary = "Crear nuevo registro médico", description = "Crea e inserta un nuevo registro médico en el sistema con los datos proporcionados")
     @PostMapping
     public ResponseEntity<GestionMedicaDTO> crear(@Valid @RequestBody GestionMedicaCrearDTO crearDTO) {

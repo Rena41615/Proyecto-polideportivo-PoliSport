@@ -5,24 +5,41 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ef73f9bd-22fb-4ee1-8d1f-c774e90cad43" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/PoliSport.iml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/atletas-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/atletas-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/atletas-service/src/main/java/com/polisport/atletas/controller/AtletaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/atletas-service/src/main/java/com/polisport/atletas/controller/AtletaController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/atletas-service/src/main/java/com/polisport/atletas/client/ClientService.java" beforeDir="false" afterPath="$PROJECT_DIR$/atletas-service/src/main/java/com/polisport/atletas/client/ClientService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/atletas-service/src/main/java/com/polisport/atletas/service/AtletaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/atletas-service/src/main/java/com/polisport/atletas/service/AtletaService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/biometria-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/biometria-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/competencia-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/competencia-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contratos-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/contratos-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entrenamiento-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/entrenamiento-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iam-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/iam-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inventario-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/inventario-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nutricion-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nutricion-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/salud-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/salud-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/staff-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/staff-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/atletas-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/atletas-service/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/atletas-service/src/test/java/com/polisport/atletas/AtletasServiceApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/atletas-service/src/test/java/com/polisport/atletas/AtletasServiceApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/biometria-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/biometria-service/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/competencia-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/competencia-service/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contratos-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/contratos-service/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entrenamiento-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/entrenamiento-service/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iam-service/src/main/java/com/polisport/iam/controller/IamController.java" beforeDir="false" afterPath="$PROJECT_DIR$/iam-service/src/main/java/com/polisport/iam/controller/IamController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iam-service/src/main/java/com/polisport/iam/service/ClientService.java" beforeDir="false" afterPath="$PROJECT_DIR$/iam-service/src/main/java/com/polisport/iam/service/ClientService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iam-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/iam-service/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inventario-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/inventario-service/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nutricion-service/src/main/java/com/polisport/nutricion/controller/NutricionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/nutricion-service/src/main/java/com/polisport/nutricion/controller/NutricionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nutricion-service/src/main/java/com/polisport/nutricion/repository/PlanNutricionalRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/nutricion-service/src/main/java/com/polisport/nutricion/repository/PlanNutricionalRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nutricion-service/src/main/java/com/polisport/nutricion/service/ClientService.java" beforeDir="false" afterPath="$PROJECT_DIR$/nutricion-service/src/main/java/com/polisport/nutricion/service/ClientService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nutricion-service/src/main/java/com/polisport/nutricion/service/PlanNutricionalService.java" beforeDir="false" afterPath="$PROJECT_DIR$/nutricion-service/src/main/java/com/polisport/nutricion/service/PlanNutricionalService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nutricion-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/nutricion-service/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nutricion-service/src/test/java/com/polisport/nutricion/NutricionServiceApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/nutricion-service/src/test/java/com/polisport/nutricion/NutricionServiceApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/salud-service/src/main/java/com/polisport/salud/controller/GestionMedicaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/salud-service/src/main/java/com/polisport/salud/controller/GestionMedicaController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/salud-service/src/main/java/com/polisport/salud/repository/GestionMedicaRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/salud-service/src/main/java/com/polisport/salud/repository/GestionMedicaRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/salud-service/src/main/java/com/polisport/salud/service/ClientService.java" beforeDir="false" afterPath="$PROJECT_DIR$/salud-service/src/main/java/com/polisport/salud/service/ClientService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/salud-service/src/main/java/com/polisport/salud/service/GestionMedicaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/salud-service/src/main/java/com/polisport/salud/service/GestionMedicaService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/salud-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/salud-service/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/salud-service/src/test/java/com/polisport/salud/SaludServiceApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/salud-service/src/test/java/com/polisport/salud/SaludServiceApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/staff-service/src/main/java/com/polisport/staff/service/ClientService.java" beforeDir="false" afterPath="$PROJECT_DIR$/staff-service/src/main/java/com/polisport/staff/service/ClientService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/staff-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/staff-service/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/start.sh" beforeDir="false" afterPath="$PROJECT_DIR$/start.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,6 +69,9 @@
   &quot;associatedIndex&quot;: 3
 }</component>
   <component name="ProjectId" id="3F0UzGPoqOlIvQMiAivHaNrjxIT" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -65,6 +85,7 @@
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
     "git-widget-placeholder": "main",
     "junie.onboarding.icon.badge.shown": "true",
@@ -79,6 +100,109 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RunManager" selected="Spring Boot.AtletasServiceApplication">
+    <configuration name="AtletasServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="atletas-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.polisport.atletas.AtletasServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BiometriaServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="biometria-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.polisport.biometria.BiometriaServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CompetenciaServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="competencia-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.polisport.competencia.CompetenciaServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ContratosServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="contratos-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.polisport.contratos.ContratosServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EntrenamientoServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="entrenamiento-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.polisport.entrenamiento.EntrenamientoServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="gateway-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.polisport.gateway.GatewayApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="IamServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="iam-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.polisport.iam.IamServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="InventarioServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="inventario-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.polisport.inventario.InventarioServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="NutricionServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="nutricion-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.polisport.nutricion.NutricionServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SaludServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="salud-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.polisport.salud.SaludServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="StaffServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="staff-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.polisport.staff.StaffServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Spring Boot.GatewayApplication" />
+      <item itemvalue="Spring Boot.AtletasServiceApplication" />
+      <item itemvalue="Spring Boot.BiometriaServiceApplication" />
+      <item itemvalue="Spring Boot.CompetenciaServiceApplication" />
+      <item itemvalue="Spring Boot.ContratosServiceApplication" />
+      <item itemvalue="Spring Boot.EntrenamientoServiceApplication" />
+      <item itemvalue="Spring Boot.IamServiceApplication" />
+      <item itemvalue="Spring Boot.InventarioServiceApplication" />
+      <item itemvalue="Spring Boot.NutricionServiceApplication" />
+      <item itemvalue="Spring Boot.SaludServiceApplication" />
+      <item itemvalue="Spring Boot.StaffServiceApplication" />
+    </list>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -101,5 +225,18 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="dependencySupport" implementationName="java:org.springframework:spring-core" />
+    <option featureType="dependencySupport" implementationName="java:jakarta.validation:jakarta.validation-api" />
+    <option featureType="dependencySupport" implementationName="java:jakarta.persistence:jakarta.persistence-api" />
+    <option featureType="dependencySupport" implementationName="java:org.flywaydb:flyway-core" />
+    <option featureType="dependencySupport" implementationName="java:io.projectreactor:reactor-core" />
+    <option featureType="dependencySupport" implementationName="java:org.springframework.data:spring-data-commons" />
+    <option featureType="dependencySupport" implementationName="java:org.springframework.cloud:spring-cloud-context" />
+    <option featureType="dependencySupport" implementationName="java:org.hibernate.validator:hibernate-validator" />
+    <option featureType="dependencySupport" implementationName="java:org.springframework.boot:spring-boot" />
+    <option featureType="dependencySupport" implementationName="java:org.springframework:spring-webmvc" />
+    <option featureType="dependencySupport" implementationName="java:org.projectlombok:lombok" />
   </component>
 </project>

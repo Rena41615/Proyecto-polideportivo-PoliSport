@@ -1,6 +1,9 @@
 package com.polisport.iam.controller;
 
 import com.polisport.iam.dto.*;
+import com.polisport.iam.dto.RolesUsuariosCrearDTO;
+import com.polisport.iam.dto.RolesUsuariosDTO;
+import com.polisport.iam.mapper.RolesUsuariosMapper;
 import com.polisport.iam.mapper.UsuariosMapper;
 import com.polisport.iam.mapper.RolMapper;
 import com.polisport.iam.mapper.PermisosMapper;
@@ -38,6 +41,7 @@ public class IamController {
 	private final RolMapper rolMapper;
 	private final PermisosMapper permisosMapper;
 	private final PermisosRolMapper permisosRolMapper;
+	private final RolesUsuariosMapper rolesUsuariosMapper;
 
 	public IamController(UsuariosService usuariosService,
 						 RolService rolService,
@@ -47,7 +51,8 @@ public class IamController {
 						 UsuariosMapper usuariosMapper,
 						 RolMapper rolMapper,
 						 PermisosMapper permisosMapper,
-						 PermisosRolMapper permisosRolMapper) {
+						 PermisosRolMapper permisosRolMapper,
+						 RolesUsuariosMapper rolesUsuariosMapper) {
 		this.usuariosService = usuariosService;
 		this.rolService = rolService;
 		this.rolesUsuariosService = rolesUsuariosService;
@@ -57,6 +62,7 @@ public class IamController {
 		this.rolMapper = rolMapper;
 		this.permisosMapper = permisosMapper;
 		this.permisosRolMapper = permisosRolMapper;
+		this.rolesUsuariosMapper = rolesUsuariosMapper;
 	}
 
 	@GetMapping("/usuarios")
@@ -259,7 +265,10 @@ public class IamController {
 	public ResponseEntity<?> mostrarRolesUsuarios() {
 		try {
 			List<RolesUsuarios> relaciones = rolesUsuariosService.obtenerTodos();
-			return ResponseEntity.ok(relaciones);
+			List<RolesUsuariosDTO> dtos = relaciones.stream()
+					.map(rolesUsuariosMapper::entityToDTO)
+					.toList();
+			return ResponseEntity.ok(dtos);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
 					.body("Error al obtener las relaciones usuario-rol: " + e.getMessage());
@@ -275,7 +284,7 @@ public class IamController {
 		try {
 			RolesUsuarios relacionEncontrada = rolesUsuariosService.obtenerPorId(id).orElse(null);
 			if (relacionEncontrada != null) {
-				return ResponseEntity.ok(relacionEncontrada);
+				return ResponseEntity.ok(rolesUsuariosMapper.entityToDTO(relacionEncontrada));
 			}
 			return ResponseEntity.status(HttpStatus.NOT_FOUND)
 					.body("Relacion usuario-rol no encontrada con ID: " + id);
@@ -290,9 +299,26 @@ public class IamController {
 		summary = "Crear nueva relación roles-usuarios",
 		description = "Asigna un rol a un usuario creando una nueva relación en el sistema"
 	)
-	public ResponseEntity<?> guardarRelacion(@Valid @RequestBody RolesUsuarios nuevaRelacion) {
+	public ResponseEntity<?> guardarRelacion(@Valid @RequestBody RolesUsuariosCrearDTO crearDTO) {
 		try {
-			return ResponseEntity.status(HttpStatus.CREATED).body(rolesUsuariosService.guardarRolesUsuarios(nuevaRelacion));
+			Rol rol = rolService.obtenerPorId(crearDTO.getRolId()).orElse(null);
+			if (rol == null) {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND)
+						.body("Rol no encontrado con ID: " + crearDTO.getRolId());
+			}
+
+			Usuarios usuario = usuariosService.obtenerPorId(crearDTO.getUsuarioId()).orElse(null);
+			if (usuario == null) {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND)
+						.body("Usuario no encontrado con ID: " + crearDTO.getUsuarioId());
+			}
+
+			RolesUsuarios nuevaRelacion = new RolesUsuarios();
+			nuevaRelacion.setRol(rol);
+			nuevaRelacion.setUsuario(usuario);
+
+			RolesUsuarios guardado = rolesUsuariosService.guardarRolesUsuarios(nuevaRelacion);
+			return ResponseEntity.status(HttpStatus.CREATED).body(rolesUsuariosMapper.entityToDTO(guardado));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 					.body("Datos invalidos: " + e.getMessage());
@@ -304,15 +330,31 @@ public class IamController {
 		summary = "Actualizar relación roles-usuarios",
 		description = "Actualiza una asignación de rol a usuario existente identificada por su ID"
 	)
-	public ResponseEntity<?> actualizarRelacion(@PathVariable Long id, @Valid @RequestBody RolesUsuarios relacionActualizada) {
+	public ResponseEntity<?> actualizarRelacion(@PathVariable Long id, @Valid @RequestBody RolesUsuariosCrearDTO crearDTO) {
 		try {
 			RolesUsuarios relacionExistente = rolesUsuariosService.obtenerPorId(id).orElse(null);
-			if (relacionExistente != null) {
-				relacionActualizada.setId(id);
-				return ResponseEntity.ok(rolesUsuariosService.guardarRolesUsuarios(relacionActualizada));
+			if (relacionExistente == null) {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND)
+						.body("Relacion usuario-rol no encontrada con ID: " + id);
 			}
-			return ResponseEntity.status(HttpStatus.NOT_FOUND)
-					.body("Relacion usuario-rol no encontrada con ID: " + id);
+
+			Rol rol = rolService.obtenerPorId(crearDTO.getRolId()).orElse(null);
+			if (rol == null) {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND)
+						.body("Rol no encontrado con ID: " + crearDTO.getRolId());
+			}
+
+			Usuarios usuario = usuariosService.obtenerPorId(crearDTO.getUsuarioId()).orElse(null);
+			if (usuario == null) {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND)
+						.body("Usuario no encontrado con ID: " + crearDTO.getUsuarioId());
+			}
+
+			relacionExistente.setRol(rol);
+			relacionExistente.setUsuario(usuario);
+
+			RolesUsuarios guardado = rolesUsuariosService.guardarRolesUsuarios(relacionExistente);
+			return ResponseEntity.ok(rolesUsuariosMapper.entityToDTO(guardado));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
 					.body("Error al actualizar la relacion usuario-rol: " + e.getMessage());

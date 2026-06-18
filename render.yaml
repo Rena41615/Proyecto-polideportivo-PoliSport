@@ -1,0 +1,131 @@
+services:
+  - type: web
+    name: polisport-gateway
+    env: java
+    region: oregon
+    buildCommand: ./mvnw -B -DskipTests clean package
+    startCommand: java -jar gateway-service/target/*.jar --server.port=8080
+    healthCheckPath: /actuator/health
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: render
+
+  - type: web
+    name: polisport-atletas
+    env: java
+    region: oregon
+    buildCommand: ./mvnw -B -DskipTests clean package
+    startCommand: java -jar atletas-service/target/*.jar --server.port=8081
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: render
+      - key: SERVER_PORT
+        value: 8081
+
+  - type: web
+    name: polisport-biometria
+    env: java
+    region: oregon
+    buildCommand: ./mvnw -B -DskipTests clean package
+    startCommand: java -jar biometria-service/target/*.jar --server.port=8082
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: render
+      - key: SERVER_PORT
+        value: 8082
+
+  - type: web
+    name: polisport-competencias
+    env: java
+    region: oregon
+    buildCommand: ./mvnw -B -DskipTests clean package
+    startCommand: java -jar competencia-service/target/*.jar --server.port=8083
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: render
+      - key: SERVER_PORT
+        value: 8083
+
+  - type: web
+    name: polisport-contratos
+    env: java
+    region: oregon
+    buildCommand: ./mvnw -B -DskipTests clean package
+    startCommand: java -jar contratos-service/target/*.jar --server.port=8084
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: render
+      - key: SERVER_PORT
+        value: 8084
+
+  - type: web
+    name: polisport-entrenamientos
+    env: java
+    region: oregon
+    buildCommand: ./mvnw -B -DskipTests clean package
+    startCommand: java -jar entrenamiento-service/target/*.jar --server.port=8085
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: render
+      - key: SERVER_PORT
+        value: 8085
+
+  - type: web
+    name: polisport-inventario
+    env: java
+    region: oregon
+    buildCommand: ./mvnw -B -DskipTests clean package
+    startCommand: java -jar inventario-service/target/*.jar --server.port=8086
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: render
+      - key: SERVER_PORT
+        value: 8086
+
+  - type: web
+    name: polisport-salud
+    env: java
+    region: oregon
+    buildCommand: ./mvnw -B -DskipTests clean package
+    startCommand: java -jar salud-service/target/*.jar --server.port=8087
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: render
+      - key: SERVER_PORT
+        value: 8087
+
+  - type: web
+    name: polisport-iam
+    env: java
+    region: oregon
+    buildCommand: ./mvnw -B -DskipTests clean package
+    startCommand: java -jar iam-service/target/*.jar --server.port=8088
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: render
+      - key: SERVER_PORT
+        value: 8088
+
+  - type: web
+    name: polisport-nutricion
+    env: java
+    region: oregon
+    buildCommand: ./mvnw -B -DskipTests clean package
+    startCommand: java -jar nutricion-service/target/*.jar --server.port=8089
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: render
+      - key: SERVER_PORT
+        value: 8089
+
+  - type: web
+    name: polisport-staff
+    env: java
+    region: oregon
+    buildCommand: ./mvnw -B -DskipTests clean package
+    startCommand: java -jar staff-service/target/*.jar --server.port=8090
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: render
+      - key: SERVER_PORT
+        value: 8090
