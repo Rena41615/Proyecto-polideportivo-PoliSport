@@ -21,7 +21,7 @@ COPY salud-service/ salud-service/
 COPY staff-service/ staff-service/
 
 # Compilar todos los servicios
-RUN mvn -B -DskipTests clean package
+RUN mvn -B -Dmaven.test.skip=true clean package
 
 # ==========================================
 # ETAPA 2: Ejecución (Run)
