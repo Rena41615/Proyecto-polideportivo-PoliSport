@@ -38,4 +38,5 @@ EXPOSE 8080
 # ==========================================
 # EL CAMBIO CLAVE: LEVANTAR SOLO ATLETAS
 # ==========================================
+# Esto ejecuta SOLO el JAR de atletas, ignorando los otros 10
 ENTRYPOINT ["java", "-jar", "atletas-service.jar"]
