@@ -28,6 +28,10 @@
   <component name="MavenRunner">
     <option name="skipTests" value="true" />
   </component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 3
@@ -54,6 +58,7 @@
     "git-widget-placeholder": "main",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/rena4/Downloads/Proyecto-polideportivo-PoliSport/pom.xml",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -195,7 +200,10 @@
       <updated>1781211741126</updated>
       <workItem from="1781211743710" duration="1180000" />
       <workItem from="1781227352957" duration="1957000" />
-      <workItem from="1782945125024" duration="8155000" />
+      <workItem from="1782958343634" duration="4000" />
+      <workItem from="1782958362183" duration="129000" />
+      <workItem from="1782958500498" duration="3000" />
+      <workItem from="1782958520937" duration="378000" />
     </task>
     <servers />
   </component>

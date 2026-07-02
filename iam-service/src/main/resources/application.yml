@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: iam-service
+  datasource:
+    url: jdbc:mysql://db-iam:3306/polisport_iam_db?useSSL=false&serverTimezone=UTC
+    username: root
+    password: ""
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    open-in-view: false
+  flyway:
+    enabled: true
+  docker:
+    compose:
+      enabled: false
+  main:
+    web-application-type: servlet
+
+server:
+  port: 8088
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+  api-docs:
+    path: /api-docs

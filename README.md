@@ -14,6 +14,11 @@
   Arquitectura de microservicios para la administracion de atletas, entrenamientos, nutricion, salud, competencias y mas.
 </p>
 
+<p align="center">
+  <strong>Equipo de desarrollo:</strong><br>
+  Felipe Barra &bull; Renata Orellana &bull; Aolani Caiguan
+</p>
+
 ---
 
 ## Estrategia de Branching — GitHub Flow
@@ -90,6 +95,8 @@ Cada microservicio tiene su propia base de datos MySQL 8.0 independiente con mig
 | 10 | **Staff** | `8090` | http://localhost:8090/swagger-ui.html | http://localhost:8090/api-docs |
 
 > Tambien puedes acceder a todos los servicios a traves del Gateway en `http://localhost:8080/<ruta-del-servicio>`
+>
+> **Nota:** Para acceder a Swagger en produccion, reemplazar `localhost` por la URL del despliegue en Render.
 
 ---
 
@@ -229,7 +236,7 @@ POST   /roles             Crear rol
 ## Requisitos
 
 - **Java 17** o superior
-- **Maven 3.8+** (o usar `mvnw` incluido)
+- **Maven 3.8+**
 - **Docker** y **Docker Compose** (para base de datos)
 - Puertos 8080-8090 disponibles
 
@@ -240,8 +247,8 @@ POST   /roles             Crear rol
 ### 1. Clonar e iniciar bases de datos
 
 ```bash
-git clone https://github.com/tu-usuario/polisport.git
-cd polisport
+git clone https://github.com/Rena41615/Proyecto-polideportivo-PoliSport.git
+cd Proyecto-polideportivo-PoliSport
 docker compose up -d
 ```
 
@@ -251,14 +258,14 @@ Esto levantara 10 instancias de MySQL 8.0, una por microservicio.
 
 ```bash
 # Compilar todo el proyecto
-./mvnw clean install
+mvn clean install
 
 # Ejecutar todos los servicios via Docker
 docker compose up --build
 
 # O ejecutar servicios individualmente
-./mvnw spring-boot:run -pl gateway-service
-./mvnw spring-boot:run -pl atletas-service
+mvn spring-boot:run -pl gateway-service
+mvn spring-boot:run -pl atletas-service
 ```
 
 ### 3. Probar
@@ -280,16 +287,17 @@ open http://localhost:8080/swagger-ui.html
 
 ```bash
 # Ejecutar todos los tests
-./mvnw test
+mvn test
 
 # Reporte de cobertura JaCoCo
 open target/site/jacoco/index.html
 ```
 
 Los tests incluyen:
-- Tests de contexto Spring Boot
+- Tests de contexto Spring Boot en todos los servicios
 - Tests unitarios con Mockito para servicios clave
 - Cobertura de codigo via JaCoCo
+- Pruebas Given-When-Then con asserts y mocks de repositorios
 
 ---
 
@@ -309,12 +317,20 @@ El archivo `render.yaml` contiene la configuracion para desplegar los 11 servici
 
 ---
 
-## ClickUp
+## ClickUp / Trello
 
 Este proyecto utiliza ClickUp para la gestion de tareas.
 El archivo `.clickup/tasks.json` contiene la lista completa de tareas del proyecto.
 
 Panel: Crear un nuevo Space en ClickUp e importar las tareas desde `.clickup/tasks.json`
+
+### Trello
+Las tareas del proyecto tambien se gestionan en Trello con las siguientes listas:
+- **Pendiente**: Tareas por realizar
+- **En Progreso**: Tareas en desarrollo
+- **Completado**: Tareas finalizadas
+
+> Los tableros de Trello fueron utilizados para la distribucion de tareas entre los integrantes del equipo.
 
 ---
 
