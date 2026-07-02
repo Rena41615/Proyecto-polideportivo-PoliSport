@@ -1,3 +1,6 @@
+# ==========================================
+# ETAPA 1: Construcción (Build)
+# ==========================================
 FROM maven:3.9.6-eclipse-temurin-17 AS build
 WORKDIR /workspace
 
@@ -21,6 +24,8 @@ COPY staff-service/ staff-service/
 RUN mvn -B -DskipTests clean package
 
 # ==========================================
+# ETAPA 2: Ejecución (Run)
+# ==========================================
 FROM eclipse-temurin:17-jre-alpine
 WORKDIR /app
 
@@ -43,5 +48,5 @@ RUN chmod +x start.sh
 
 EXPOSE 8080 8081 8082 8083 8084 8085 8086 8087 8088 8089 8090
 
-# Si quieres ejecutar tu script de inicio (el que ya limpiamos):
+# Ejecutar el script de inicio con todos los servicios
 ENTRYPOINT ["/app/start.sh"]
