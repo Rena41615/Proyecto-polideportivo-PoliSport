@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: atletas-service
+  datasource:
+    url: jdbc:mysql://db-atletas:3306/polisport_atletas_db?useSSL=false&serverTimezone=UTC
+    username: root
+    password: ""
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    open-in-view: false
+  flyway:
+    enabled: true
+  docker:
+    compose:
+      enabled: false
+  main:
+    web-application-type: servlet
+
+server:
+  port: 8081
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+  api-docs:
+    path: /api-docs

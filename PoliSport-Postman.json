@@ -1,0 +1,507 @@
+{
+  "info": {
+    "name": "PoliSport API",
+    "description": "Colección completa de endpoints para el proyecto PoliSport. Todos los servicios se ejecutan vía Docker Compose en localhost:8081-8090.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Atletas (8081)",
+      "item": [
+        {
+          "name": "Listar todos",
+          "request": { "method": "GET", "url": "localhost:8081/api/atletas", "header": [{"key": "Content-Type", "value": "application/json"}] }
+        },
+        {
+          "name": "Obtener por ID",
+          "request": { "method": "GET", "url": "localhost:8081/api/atletas/1", "header": [{"key": "Content-Type", "value": "application/json"}] }
+        },
+        {
+          "name": "Obtener por RUN",
+          "request": { "method": "GET", "url": "localhost:8081/api/atletas/run/12345678", "header": [{"key": "Content-Type", "value": "application/json"}] }
+        },
+        {
+          "name": "Crear",
+          "request": {
+            "method": "POST",
+            "url": "localhost:8081/api/atletas",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": { "mode": "raw", "raw": "{\n  \"runAtleta\": 12345678,\n  \"dvrunAtleta\": \"k\",\n  \"primerNombre\": \"Juan\",\n  \"segundoNombre\": \"Pablo\",\n  \"tercerNombre\": null,\n  \"primerApellido\": \"Gonzalez\",\n  \"segundoApellido\": \"Lopez\",\n  \"email\": \"juan@example.com\",\n  \"fechaNacimiento\": \"2000-05-15\",\n  \"deportePrincipal\": \"Natacion\",\n  \"categoria\": \"SUB20\",\n  \"historialDeportivo\": \"Compitiendo desde 2015\"\n}" }
+          }
+        },
+        {
+          "name": "Actualizar",
+          "request": {
+            "method": "PUT",
+            "url": "localhost:8081/api/atletas/1",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": { "mode": "raw", "raw": "{\n  \"runAtleta\": 12345678,\n  \"dvrunAtleta\": \"k\",\n  \"primerNombre\": \"Juan\",\n  \"segundoNombre\": \"Pablo\",\n  \"tercerNombre\": null,\n  \"primerApellido\": \"Gonzalez\",\n  \"segundoApellido\": \"Lopez\",\n  \"email\": \"juan@example.com\",\n  \"fechaNacimiento\": \"2000-05-15\",\n  \"deportePrincipal\": \"Natacion\",\n  \"categoria\": \"SUB20\",\n  \"historialDeportivo\": \"Compitiendo desde 2015\"\n}" }
+          }
+        },
+        {
+          "name": "Eliminar",
+          "request": { "method": "DELETE", "url": "localhost:8081/api/atletas/1", "header": [{"key": "Content-Type", "value": "application/json"}] }
+        }
+      ]
+    },
+    {
+      "name": "Biometria (8082)",
+      "item": [
+        {
+          "name": "Listar todos",
+          "request": { "method": "GET", "url": "localhost:8082/api/v1/biometria", "header": [{"key": "Content-Type", "value": "application/json"}] }
+        },
+        {
+          "name": "Obtener por ID",
+          "request": { "method": "GET", "url": "localhost:8082/api/v1/biometria/1", "header": [{"key": "Content-Type", "value": "application/json"}] }
+        },
+        {
+          "name": "Crear",
+          "request": {
+            "method": "POST",
+            "url": "localhost:8082/api/v1/biometria",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": { "mode": "raw", "raw": "{\n  \"atletaId\": 1,\n  \"fecha\": \"2024-01-15\",\n  \"peso\": 75.5,\n  \"altura\": 1.80,\n  \"imc\": 23.3,\n  \"porcentajeGrasa\": 12.5,\n  \"masaMuscular\": 35.2,\n  \"vo2Max\": 52.1,\n  \"frecuenciaCardiacaReposo\": 60,\n  \"indicadorRendimiento\": 8.5\n}" }
+          }
+        },
+        {
+          "name": "Actualizar",
+          "request": {
+            "method": "PUT",
+            "url": "localhost:8082/api/v1/biometria/1",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": { "mode": "raw", "raw": "{\n  \"atletaId\": 1,\n  \"fecha\": \"2024-01-15\",\n  \"peso\": 76.0,\n  \"altura\": 1.80,\n  \"imc\": 23.5,\n  \"porcentajeGrasa\": 12.0,\n  \"masaMuscular\": 36.0,\n  \"vo2Max\": 53.0,\n  \"frecuenciaCardiacaReposo\": 58,\n  \"indicadorRendimiento\": 8.7\n}" }
+          }
+        },
+        {
+          "name": "Eliminar",
+          "request": { "method": "DELETE", "url": "localhost:8082/api/v1/biometria/1", "header": [{"key": "Content-Type", "value": "application/json"}] }
+        }
+      ]
+    },
+    {
+      "name": "Competencias (8083)",
+      "item": [
+        {
+          "name": "Listar todas",
+          "request": { "method": "GET", "url": "localhost:8083/api/competencias", "header": [{"key": "Content-Type", "value": "application/json"}] }
+        },
+        {
+          "name": "Obtener por ID",
+          "request": { "method": "GET", "url": "localhost:8083/api/competencias/1", "header": [{"key": "Content-Type", "value": "application/json"}] }
+        },
+        {
+          "name": "Obtener por RUN atleta",
+          "request": { "method": "GET", "url": "localhost:8083/api/competencias/atleta/12345678", "header": [{"key": "Content-Type", "value": "application/json"}] }
+        },
+        {
+          "name": "Crear",
+          "request": {
+            "method": "POST",
+            "url": "localhost:8083/api/competencias",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": { "mode": "raw", "raw": "{\n  \"nombreCompetencia\": \"Campeonato Nacional\",\n  \"lugarCompetencia\": \"Santiago\",\n  \"fechaInicio\": \"2025-06-01\",\n  \"fechaFin\": \"2025-06-10\",\n  \"categoria\": \"SENIOR\",\n  \"modalidad\": \"INDIVIDUAL\",\n  \"estadoCompetencia\": \"PROGRAMADA\",\n  \"inscritosRun\": [12345678, 87654321],\n  \"resultadosDetalle\": \"Resultados detallados...\"\n}" }
+          }
+        },
+        {
+          "name": "Actualizar",
+          "request": {
+            "method": "PUT",
+            "url": "localhost:8083/api/competencias/1",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": { "mode": "raw", "raw": "{\n  \"nombreCompetencia\": \"Campeonato Nacional\",\n  \"lugarCompetencia\": \"Santiago\",\n  \"fechaInicio\": \"2025-06-01\",\n  \"fechaFin\": \"2025-06-10\",\n  \"categoria\": \"SENIOR\",\n  \"modalidad\": \"INDIVIDUAL\",\n  \"estadoCompetencia\": \"EN_CURSO\",\n  \"inscritosRun\": [12345678, 87654321],\n  \"resultadosDetalle\": \"Resultados actualizados...\"\n}" }
+          }
+        },
+        {
+          "name": "Eliminar",
+          "request": { "method": "DELETE", "url": "localhost:8083/api/competencias/1", "header": [{"key": "Content-Type", "value": "application/json"}] }
+        }
+      ]
+    },
+    {
+      "name": "Contratos (8084)",
+      "item": [
+        {
+          "name": "Listar todos",
+          "request": { "method": "GET", "url": "localhost:8084/api/contratos", "header": [{"key": "Content-Type", "value": "application/json"}] }
+        },
+        {
+          "name": "Obtener por ID",
+          "request": { "method": "GET", "url": "localhost:8084/api/contratos/1", "header": [{"key": "Content-Type", "value": "application/json"}] }
+        },
+        {
+          "name": "Obtener por RUN empleado",
+          "request": { "method": "GET", "url": "localhost:8084/api/contratos/empleado/12345678", "header": [{"key": "Content-Type", "value": "application/json"}] }
+        },
+        {
+          "name": "Crear",
+          "request": {
+            "method": "POST",
+            "url": "localhost:8084/api/contratos",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": { "mode": "raw", "raw": "{\n  \"runEmpleado\": 12345678,\n  \"dvrunEmpleado\": \"1\",\n  \"cargo\": \"Entrenador\",\n  \"fechaInicio\": \"2024-01-01\",\n  \"fechaTermino\": null,\n  \"salarioMensual\": 1500000,\n  \"tipoContrato\": \"PLAZO_FIJO\",\n  \"estado\": \"ACTIVO\"\n}" }
+          }
+        },
+        {
+          "name": "Actualizar",
+          "request": {
+            "method": "PUT",
+            "url": "localhost:8084/api/contratos/1",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": { "mode": "raw", "raw": "{\n  \"runEmpleado\": 12345678,\n  \"dvrunEmpleado\": \"1\",\n  \"cargo\": \"Entrenador Principal\",\n  \"fechaInicio\": \"2024-01-01\",\n  \"fechaTermino\": null,\n  \"salarioMensual\": 1800000,\n  \"tipoContrato\": \"INDEFINIDO\",\n  \"estado\": \"ACTIVO\"\n}" }
+          }
+        },
+        {
+          "name": "Eliminar",
+          "request": { "method": "DELETE", "url": "localhost:8084/api/contratos/1", "header": [{"key": "Content-Type", "value": "application/json"}] }
+        }
+      ]
+    },
+    {
+      "name": "Entrenamientos (8085)",
+      "item": [
+        {
+          "name": "Listar todos",
+          "request": { "method": "GET", "url": "localhost:8085/api/entrenamientos", "header": [{"key": "Content-Type", "value": "application/json"}] }
+        },
+        {
+          "name": "Obtener por ID",
+          "request": { "method": "GET", "url": "localhost:8085/api/entrenamientos/1", "header": [{"key": "Content-Type", "value": "application/json"}] }
+        },
+        {
+          "name": "Obtener por RUN atleta",
+          "request": { "method": "GET", "url": "localhost:8085/api/entrenamientos/atleta/12345678", "header": [{"key": "Content-Type", "value": "application/json"}] }
+        },
+        {
+          "name": "Crear",
+          "request": {
+            "method": "POST",
+            "url": "localhost:8085/api/entrenamientos",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": { "mode": "raw", "raw": "{\n  \"tipoEntrenamiento\": \"PRACTICO\",\n  \"fecha\": \"2024-06-15\",\n  \"horaInicio\": \"09:00:00\",\n  \"horaFin\": \"11:00:00\",\n  \"estado\": \"PLANIFICADO\",\n  \"atletasParticipantes\": [12345678, 87654321],\n  \"observaciones\": \"Trabajo de velocidad\",\n  \"nivelIntensidad\": 7.5\n}" }
+          }
+        },
+        {
+          "name": "Actualizar",
+          "request": {
+            "method": "PUT",
+            "url": "localhost:8085/api/entrenamientos/1",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": { "mode": "raw", "raw": "{\n  \"tipoEntrenamiento\": \"PRACTICO\",\n  \"fecha\": \"2024-06-15\",\n  \"horaInicio\": \"09:00:00\",\n  \"horaFin\": \"11:00:00\",\n  \"estado\": \"EN_CURSO\",\n  \"atletasParticipantes\": [12345678, 87654321],\n  \"observaciones\": \"Trabajo de velocidad\",\n  \"nivelIntensidad\": 8.0\n}" }
+          }
+        },
+        {
+          "name": "Eliminar",
+          "request": { "method": "DELETE", "url": "localhost:8085/api/entrenamientos/1", "header": [{"key": "Content-Type", "value": "application/json"}] }
+        }
+      ]
+    },
+    {
+      "name": "Inventario (8086)",
+      "item": [
+        {
+          "name": "[Inventario] Listar todos",
+          "request": { "method": "GET", "url": "localhost:8086/api/v1/inventario", "header": [{"key": "Content-Type", "value": "application/json"}] }
+        },
+        {
+          "name": "[Inventario] Obtener por ID",
+          "request": { "method": "GET", "url": "localhost:8086/api/v1/inventario/1", "header": [{"key": "Content-Type", "value": "application/json"}] }
+        },
+        {
+          "name": "[Inventario] Crear",
+          "request": {
+            "method": "POST",
+            "url": "localhost:8086/api/v1/inventario",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": { "mode": "raw", "raw": "{\n  \"nombreArticulo\": \"Balon de futbol\",\n  \"descripcion\": \"Balon talla 5\",\n  \"cantidad\": 10,\n  \"ubicacion\": \"Bodega A\"\n}" }
+          }
+        },
+        {
+          "name": "[Inventario] Actualizar",
+          "request": {
+            "method": "PUT",
+            "url": "localhost:8086/api/v1/inventario/1",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": { "mode": "raw", "raw": "{\n  \"nombreArticulo\": \"Balon de futbol\",\n  \"descripcion\": \"Balon talla 5 profesional\",\n  \"cantidad\": 15,\n  \"ubicacion\": \"Bodega A\"\n}" }
+          }
+        },
+        {
+          "name": "[Inventario] Eliminar",
+          "request": { "method": "DELETE", "url": "localhost:8086/api/v1/inventario/1", "header": [{"key": "Content-Type", "value": "application/json"}] }
+        },
+        {
+          "name": "[Instalacion] Listar todas",
+          "request": { "method": "GET", "url": "localhost:8086/api/v1/instalaciones", "header": [{"key": "Content-Type", "value": "application/json"}] }
+        },
+        {
+          "name": "[Instalacion] Obtener por ID",
+          "request": { "method": "GET", "url": "localhost:8086/api/v1/instalaciones/1", "header": [{"key": "Content-Type", "value": "application/json"}] }
+        },
+        {
+          "name": "[Instalacion] Crear",
+          "request": {
+            "method": "POST",
+            "url": "localhost:8086/api/v1/instalaciones",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": { "mode": "raw", "raw": "{\n  \"nombreInstalacion\": \"Cancha Central\",\n  \"descripcion\": \"Cancha de futbol profesional\",\n  \"ubicacion\": \"Sector A\",\n  \"estado\": \"OPERATIVA\"\n}" }
+          }
+        },
+        {
+          "name": "[Instalacion] Actualizar",
+          "request": {
+            "method": "PUT",
+            "url": "localhost:8086/api/v1/instalaciones/1",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": { "mode": "raw", "raw": "{\n  \"nombreInstalacion\": \"Cancha Central\",\n  \"descripcion\": \"Cancha de futbol profesional renovada\",\n  \"ubicacion\": \"Sector A\",\n  \"estado\": \"EN_MANTENIMIENTO\"\n}" }
+          }
+        },
+        {
+          "name": "[Instalacion] Eliminar",
+          "request": { "method": "DELETE", "url": "localhost:8086/api/v1/instalaciones/1", "header": [{"key": "Content-Type", "value": "application/json"}] }
+        }
+      ]
+    },
+    {
+      "name": "Salud (8087)",
+      "item": [
+        {
+          "name": "Listar todos",
+          "request": { "method": "GET", "url": "localhost:8087/api/v1/salud", "header": [{"key": "Content-Type", "value": "application/json"}] }
+        },
+        {
+          "name": "Obtener por ID",
+          "request": { "method": "GET", "url": "localhost:8087/api/v1/salud/1", "header": [{"key": "Content-Type", "value": "application/json"}] }
+        },
+        {
+          "name": "Crear",
+          "request": {
+            "method": "POST",
+            "url": "localhost:8087/api/v1/salud",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": { "mode": "raw", "raw": "{\n  \"atletaId\": 1,\n  \"tipoLesion\": \"Esguince\",\n  \"fechaDiagnostico\": \"2024-02-10\",\n  \"descripcion\": \"Esguince de tobillo grado II\",\n  \"tratamiento\": \"Reposo y fisioterapia\",\n  \"observaciones\": \"Control en 15 dias\"\n}" }
+          }
+        },
+        {
+          "name": "Actualizar",
+          "request": {
+            "method": "PUT",
+            "url": "localhost:8087/api/v1/salud/1",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": { "mode": "raw", "raw": "{\n  \"atletaId\": 1,\n  \"tipoLesion\": \"Esguince\",\n  \"fechaDiagnostico\": \"2024-02-10\",\n  \"descripcion\": \"Esguince de tobillo grado II - en recuperacion\",\n  \"tratamiento\": \"Reposo y fisioterapia avanzada\",\n  \"observaciones\": \"Evolucionando favorablemente\"\n}" }
+          }
+        },
+        {
+          "name": "Eliminar",
+          "request": { "method": "DELETE", "url": "localhost:8087/api/v1/salud/1", "header": [{"key": "Content-Type", "value": "application/json"}] }
+        }
+      ]
+    },
+    {
+      "name": "IAM (8088)",
+      "item": [
+        {
+          "name": "[Usuarios] Listar todos",
+          "request": { "method": "GET", "url": "localhost:8088/api/v1/iam/usuarios", "header": [{"key": "Content-Type", "value": "application/json"}] }
+        },
+        {
+          "name": "[Usuarios] Obtener por ID",
+          "request": { "method": "GET", "url": "localhost:8088/api/v1/iam/usuarios/1", "header": [{"key": "Content-Type", "value": "application/json"}] }
+        },
+        {
+          "name": "[Usuarios] Crear",
+          "request": {
+            "method": "POST",
+            "url": "localhost:8088/api/v1/iam/usuarios",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": { "mode": "raw", "raw": "{\n  \"email\": \"usuario@example.com\",\n  \"contrasena\": \"password123\",\n  \"nombre\": \"Carlos\"\n}" }
+          }
+        },
+        {
+          "name": "[Usuarios] Actualizar",
+          "request": {
+            "method": "PUT",
+            "url": "localhost:8088/api/v1/iam/usuarios/1",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": { "mode": "raw", "raw": "{\n  \"email\": \"usuario@example.com\",\n  \"contrasena\": \"nuevopassword\",\n  \"nombre\": \"Carlos Actualizado\"\n}" }
+          }
+        },
+        {
+          "name": "[Usuarios] Eliminar",
+          "request": { "method": "DELETE", "url": "localhost:8088/api/v1/iam/usuarios/1", "header": [{"key": "Content-Type", "value": "application/json"}] }
+        },
+        {
+          "name": "[Roles] Listar todos",
+          "request": { "method": "GET", "url": "localhost:8088/api/v1/iam/roles", "header": [{"key": "Content-Type", "value": "application/json"}] }
+        },
+        {
+          "name": "[Roles] Obtener por ID",
+          "request": { "method": "GET", "url": "localhost:8088/api/v1/iam/roles/1", "header": [{"key": "Content-Type", "value": "application/json"}] }
+        },
+        {
+          "name": "[Roles] Crear",
+          "request": {
+            "method": "POST",
+            "url": "localhost:8088/api/v1/iam/roles",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": { "mode": "raw", "raw": "{\n  \"nombreRol\": \"ADMIN\",\n  \"descripcion\": \"Administrador del sistema\"\n}" }
+          }
+        },
+        {
+          "name": "[Roles] Actualizar",
+          "request": {
+            "method": "PUT",
+            "url": "localhost:8088/api/v1/iam/roles/1",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": { "mode": "raw", "raw": "{\n  \"nombreRol\": \"SUPER_ADMIN\",\n  \"descripcion\": \"Super Administrador del sistema\"\n}" }
+          }
+        },
+        {
+          "name": "[Roles] Eliminar",
+          "request": { "method": "DELETE", "url": "localhost:8088/api/v1/iam/roles/1", "header": [{"key": "Content-Type", "value": "application/json"}] }
+        },
+        {
+          "name": "[Roles-Usuarios] Listar todos",
+          "request": { "method": "GET", "url": "localhost:8088/api/v1/iam/roles-usuarios", "header": [{"key": "Content-Type", "value": "application/json"}] }
+        },
+        {
+          "name": "[Roles-Usuarios] Obtener por ID",
+          "request": { "method": "GET", "url": "localhost:8088/api/v1/iam/roles-usuarios/1", "header": [{"key": "Content-Type", "value": "application/json"}] }
+        },
+        {
+          "name": "[Roles-Usuarios] Crear",
+          "request": {
+            "method": "POST",
+            "url": "localhost:8088/api/v1/iam/roles-usuarios",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": { "mode": "raw", "raw": "{\n  \"usuario\": { \"id\": 1 },\n  \"rol\": { \"id\": 1 },\n  \"fechaAsignacion\": \"2024-01-01T00:00:00\"\n}" }
+          }
+        },
+        {
+          "name": "[Roles-Usuarios] Eliminar",
+          "request": { "method": "DELETE", "url": "localhost:8088/api/v1/iam/roles-usuarios/1", "header": [{"key": "Content-Type", "value": "application/json"}] }
+        }
+      ]
+    },
+    {
+      "name": "Nutricion (8089)",
+      "item": [
+        {
+          "name": "Listar todos",
+          "request": { "method": "GET", "url": "localhost:8089/api/v1/nutricion", "header": [{"key": "Content-Type", "value": "application/json"}] }
+        },
+        {
+          "name": "Obtener por ID",
+          "request": { "method": "GET", "url": "localhost:8089/api/v1/nutricion/1", "header": [{"key": "Content-Type", "value": "application/json"}] }
+        },
+        {
+          "name": "Crear",
+          "request": {
+            "method": "POST",
+            "url": "localhost:8089/api/v1/nutricion",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": { "mode": "raw", "raw": "{\n  \"atletaId\": 1,\n  \"objetivo\": \"GANANCIA_MUSCULAR\",\n  \"estado\": \"ACTIVO\",\n  \"fechaInicio\": \"2024-01-01\",\n  \"fechaFin\": \"2024-06-30\",\n  \"caloriasDiarias\": 3000,\n  \"observaciones\": \"Alta proteina\"\n}" }
+          }
+        },
+        {
+          "name": "Actualizar",
+          "request": {
+            "method": "PUT",
+            "url": "localhost:8089/api/v1/nutricion/1",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": { "mode": "raw", "raw": "{\n  \"atletaId\": 1,\n  \"objetivo\": \"MANTENIMIENTO\",\n  \"estado\": \"ACTIVO\",\n  \"fechaInicio\": \"2024-01-01\",\n  \"fechaFin\": \"2024-12-31\",\n  \"caloriasDiarias\": 2500,\n  \"observaciones\": \"Plan ajustado\"\n}" }
+          }
+        },
+        {
+          "name": "Eliminar",
+          "request": { "method": "DELETE", "url": "localhost:8089/api/v1/nutricion/1", "header": [{"key": "Content-Type", "value": "application/json"}] }
+        }
+      ]
+    },
+    {
+      "name": "Staff (8090)",
+      "item": [
+        {
+          "name": "[Miembros] Listar todos",
+          "request": { "method": "GET", "url": "localhost:8090/api/v1/staff/miembros", "header": [{"key": "Content-Type", "value": "application/json"}] }
+        },
+        {
+          "name": "[Miembros] Obtener por ID",
+          "request": { "method": "GET", "url": "localhost:8090/api/v1/staff/miembros/1", "header": [{"key": "Content-Type", "value": "application/json"}] }
+        },
+        {
+          "name": "[Miembros] Crear",
+          "request": {
+            "method": "POST",
+            "url": "localhost:8090/api/v1/staff/miembros",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": { "mode": "raw", "raw": "{\n  \"run\": 12345678,\n  \"dv\": \"1\",\n  \"nombre\": \"Pedro\",\n  \"email\": \"pedro@staff.com\",\n  \"puesto\": \"Entrenador\",\n  \"fechaIngreso\": \"2023-01-15\",\n  \"observaciones\": \"\"\n}" }
+          }
+        },
+        {
+          "name": "[Miembros] Actualizar",
+          "request": {
+            "method": "PUT",
+            "url": "localhost:8090/api/v1/staff/miembros/1",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": { "mode": "raw", "raw": "{\n  \"run\": 12345678,\n  \"dv\": \"1\",\n  \"nombre\": \"Pedro Actualizado\",\n  \"email\": \"pedro@staff.com\",\n  \"puesto\": \"Entrenador Principal\",\n  \"fechaIngreso\": \"2023-01-15\",\n  \"observaciones\": \"Ascendido\"\n}" }
+          }
+        },
+        {
+          "name": "[Miembros] Eliminar",
+          "request": { "method": "DELETE", "url": "localhost:8090/api/v1/staff/miembros/1", "header": [{"key": "Content-Type", "value": "application/json"}] }
+        },
+        {
+          "name": "[Roles] Listar todos",
+          "request": { "method": "GET", "url": "localhost:8090/api/v1/staff/roles", "header": [{"key": "Content-Type", "value": "application/json"}] }
+        },
+        {
+          "name": "[Roles] Obtener por ID",
+          "request": { "method": "GET", "url": "localhost:8090/api/v1/staff/roles/1", "header": [{"key": "Content-Type", "value": "application/json"}] }
+        },
+        {
+          "name": "[Roles] Crear",
+          "request": {
+            "method": "POST",
+            "url": "localhost:8090/api/v1/staff/roles",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": { "mode": "raw", "raw": "{\n  \"nombre\": \"ENTRENADOR_PRINCIPAL\",\n  \"descripcion\": \"Entrenador a cargo del equipo\"\n}" }
+          }
+        },
+        {
+          "name": "[Roles] Actualizar",
+          "request": {
+            "method": "PUT",
+            "url": "localhost:8090/api/v1/staff/roles/1",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": { "mode": "raw", "raw": "{\n  \"nombre\": \"DIRECTOR_TECNICO\",\n  \"descripcion\": \"Director tecnico del equipo\"\n}" }
+          }
+        },
+        {
+          "name": "[Roles] Eliminar",
+          "request": { "method": "DELETE", "url": "localhost:8090/api/v1/staff/roles/1", "header": [{"key": "Content-Type", "value": "application/json"}] }
+        },
+        {
+          "name": "[Permisos] Listar todos",
+          "request": { "method": "GET", "url": "localhost:8090/api/v1/staff/permisos", "header": [{"key": "Content-Type", "value": "application/json"}] }
+        },
+        {
+          "name": "[Permisos] Obtener por ID",
+          "request": { "method": "GET", "url": "localhost:8090/api/v1/staff/permisos/1", "header": [{"key": "Content-Type", "value": "application/json"}] }
+        },
+        {
+          "name": "[Permisos] Crear",
+          "request": {
+            "method": "POST",
+            "url": "localhost:8090/api/v1/staff/permisos",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": { "mode": "raw", "raw": "{\n  \"staff\": { \"id\": 1 },\n  \"permiso\": \"ACCESO_BIOMETRIA\",\n  \"descripcion\": \"Acceso a datos biometricos\",\n  \"otorgadoDesde\": \"2024-01-01\"\n}" }
+          }
+        },
+        {
+          "name": "[Permisos] Eliminar",
+          "request": { "method": "DELETE", "url": "localhost:8090/api/v1/staff/permisos/1", "header": [{"key": "Content-Type", "value": "application/json"}] }
+        }
+      ]
+    }
+  ]
+}
