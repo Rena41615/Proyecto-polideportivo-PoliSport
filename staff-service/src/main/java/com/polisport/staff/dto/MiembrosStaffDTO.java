@@ -10,6 +10,8 @@ public class MiembrosStaffDTO {
     private Integer run;
     private String dv;
     private String nombre;
+    private String apellido;
+    private String documento;
     private String email;
     private String puesto;
     private LocalDate fechaIngreso;

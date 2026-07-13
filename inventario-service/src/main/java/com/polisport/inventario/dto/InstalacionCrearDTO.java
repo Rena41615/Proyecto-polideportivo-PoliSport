@@ -16,6 +16,16 @@ public class InstalacionCrearDTO {
     @NotBlank(message = "La ubicación es obligatoria")
     private String ubicacion;
 
+    @NotBlank(message = "El tipo de instalación es obligatorio")
+    private String tipo;
+
+    @NotNull(message = "La capacidad es obligatoria")
+    @Positive(message = "La capacidad debe ser un número positivo")
+    private Integer capacidad;
+
+    @NotNull(message = "Debe especificar si la instalación está disponible")
+    private Boolean disponible;
+
     @Size(max = 500, message = "El estado no puede exceder 500 caracteres")
     private String estado;
 }

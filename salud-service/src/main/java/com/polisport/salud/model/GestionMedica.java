@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 @Entity
-@Table(name = "Gestion_medica")
+@Table(name = "gestion_medica")
 @Schema(name = "GestionMedica", description = "Registro médico y de salud de un atleta")
 public class GestionMedica {
 

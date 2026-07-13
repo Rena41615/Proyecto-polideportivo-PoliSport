@@ -35,10 +35,14 @@ atletas   gateway    testing    login-bug
 
 ### Reglas:
 - **main**: siempre desplegable, codigo estable y probado
-- **feature/***: ramas para nuevas funcionalidades (ej: `feature/atletas-crud`)
-- **hotfix/***: ramas para correcciones urgentes en produccion
+- **feature/***: ramas para nuevas funcionalidades, nombradas por microservicio (ej: `feature/atletas-crud`)
+- **hotfix/***: ramas para correcciones urgentes en produccion (ej: `hotfix/iam-login-bug`)
 - **No hay rama develop**: se integra directamente a main via Pull Request
 - Cada PR debe pasar los tests y tener al menos 1 approval
+- Regla de oro: **un PR = un microservicio** (salvo cambios transversales como `pom.xml` raiz o `gateway-service`)
+- El CI (`.github/workflows/ci.yml`) solo construye y testea los microservicios modificados en cada PR (path filtering), validando la cobertura JaCoCo del paquete `/service` (>= 80%)
+
+> Detalle completo de la convencion de ramas, commits y CI por microservicio en [CONTRIBUTING.md](./CONTRIBUTING.md).
 
 ---
 
