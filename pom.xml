@@ -93,9 +93,21 @@
 				</configuration>
 			</plugin>
 			<plugin>
+				<!--
+					JaCoCo se restringe unicamente al paquete "service" de cada
+					microservicio (regla del equipo: la cobertura solo se mide
+					sobre la logica de negocio). Controllers, DTOs, entidades,
+					mappers, excepciones, repositorios y clases de configuracion
+					quedan fuera del reporte y de la validacion de cobertura.
+				-->
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>0.8.12</version>
+				<configuration>
+					<includes>
+						<include>**/service/**</include>
+					</includes>
+				</configuration>
 				<executions>
 					<execution>
 						<id>prepare-agent</id>
@@ -105,9 +117,36 @@
 					</execution>
 					<execution>
 						<id>report</id>
+						<phase>test</phase>
 						<goals>
 							<goal>report</goal>
 						</goals>
+					</execution>
+					<execution>
+						<!--
+							Falla el build (mvn verify) si el paquete /service
+							no alcanza el 80% de cobertura de lineas exigido
+							para el ET.
+						-->
+						<id>jacoco-check</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>check</goal>
+						</goals>
+						<configuration>
+							<rules>
+								<rule>
+									<element>BUNDLE</element>
+									<limits>
+										<limit>
+											<counter>LINE</counter>
+											<value>COVEREDRATIO</value>
+											<minimum>0.80</minimum>
+										</limit>
+									</limits>
+								</rule>
+							</rules>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>

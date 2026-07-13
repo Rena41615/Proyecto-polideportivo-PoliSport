@@ -42,7 +42,7 @@ class ContratosServiceApplicationTests {
 		contrato.setFechaInicio(LocalDate.of(2025, 1, 15));
 		contrato.setSalarioMensual(2500000);
 		contrato.setTipoContrato(TipoContrato.PLAZO_FIJO);
-		contrato.setEstado(EstadoContrato.VIGENTE);
+		contrato.setEstado(EstadoContrato.ACTIVO);
 	}
 
 	@Test
