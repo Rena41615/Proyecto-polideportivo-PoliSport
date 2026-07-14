@@ -43,7 +43,7 @@ class EntrenamientoServiceApplicationTests {
 		entrenamiento.setFecha(LocalDate.of(2025, 6, 15));
 		entrenamiento.setHoraInicio(LocalTime.of(8, 0));
 		entrenamiento.setHoraFin(LocalTime.of(10, 0));
-		entrenamiento.setTipoEntrenamiento(TipoEntrenamiento.RESISTENCIA);
+		entrenamiento.setTipoEntrenamiento(TipoEntrenamiento.TACTICO);
 		entrenamiento.setEstado(EstadoEntrenamiento.COMPLETADO);
 		entrenamiento.setDuracionMinutos(120);
 		entrenamiento.setNivelIntensidad(7.5);
@@ -67,7 +67,7 @@ class EntrenamientoServiceApplicationTests {
 		when(entrenamientoRepository.findById(1L)).thenReturn(Optional.of(entrenamiento));
 		Optional<Entrenamiento> result = entrenamientoService.obtenerPorId(1L);
 		assertTrue(result.isPresent());
-		assertEquals(TipoEntrenamiento.RESISTENCIA, result.get().getTipoEntrenamiento());
+		assertEquals(TipoEntrenamiento.TACTICO, result.get().getTipoEntrenamiento());
 	}
 
 	@Test
