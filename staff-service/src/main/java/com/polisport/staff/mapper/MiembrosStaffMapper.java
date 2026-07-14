@@ -14,6 +14,8 @@ public class MiembrosStaffMapper {
         entity.setRun(dto.getRun());
         entity.setDv(dto.getDv());
         entity.setNombre(dto.getNombre());
+        entity.setApellido(dto.getApellido());
+        entity.setDocumento(dto.getDocumento());
         entity.setEmail(dto.getEmail());
         entity.setPuesto(dto.getPuesto());
         entity.setFechaIngreso(dto.getFechaIngreso());
@@ -30,6 +32,8 @@ public class MiembrosStaffMapper {
         dto.setRun(entity.getRun());
         dto.setDv(entity.getDv());
         dto.setNombre(entity.getNombre());
+        dto.setApellido(entity.getApellido());
+        dto.setDocumento(entity.getDocumento());
         dto.setEmail(entity.getEmail());
         dto.setPuesto(entity.getPuesto());
         dto.setFechaIngreso(entity.getFechaIngreso());

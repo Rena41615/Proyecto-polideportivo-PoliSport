@@ -53,7 +53,7 @@ public class Entrenamiento {
     @NotNull(message = "El tipo de entrenamiento no puede estar vacio")
     @Enumerated(EnumType.STRING)
     @Column(columnDefinition = "varchar(50)")
-    @Schema(name = "tipoEntrenamiento", description = "Tipo de entrenamiento", example = "RESISTENCIA")
+    @Schema(name = "tipoEntrenamiento", description = "Tipo de entrenamiento", example = "TACTICO")
     private TipoEntrenamiento tipoEntrenamiento;
 
     @NotNull(message = "El estado del entrenamiento es obligatorio")

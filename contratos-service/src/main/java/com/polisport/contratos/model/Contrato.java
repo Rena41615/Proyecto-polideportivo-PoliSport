@@ -56,6 +56,6 @@ public class Contrato {
     @NotNull(message = "El estado del contrato es obligatorio")
     @Enumerated(EnumType.STRING)
     @Column(columnDefinition = "varchar(50)")
-    @Schema(name = "estado", description = "Estado actual del contrato", example = "VIGENTE")
+    @Schema(name = "estado", description = "Estado actual del contrato", example = "ACTIVO")
     private EstadoContrato estado;
 }

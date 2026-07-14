@@ -19,4 +19,11 @@ public class InventarioCrearDTO {
 
     @NotBlank(message = "La ubicación es obligatoria")
     private String ubicacion;
+
+    @NotBlank(message = "El estado del artículo es obligatorio")
+    private String estado;
+
+    @NotNull(message = "El ID de la instalación asociada es obligatorio")
+    @Positive(message = "El ID de la instalación debe ser un número positivo")
+    private Long instalacionId;
 }

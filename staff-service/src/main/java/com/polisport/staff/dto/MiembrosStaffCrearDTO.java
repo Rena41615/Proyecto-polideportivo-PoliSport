@@ -19,6 +19,14 @@ public class MiembrosStaffCrearDTO {
     @Size(min = 3, max = 100, message = "El nombre debe tener entre 3 y 100 caracteres")
     private String nombre;
 
+    @NotBlank(message = "El apellido es obligatorio")
+    @Size(min = 3, max = 80, message = "El apellido debe tener entre 3 y 80 caracteres")
+    private String apellido;
+
+    @NotBlank(message = "El documento es obligatorio")
+    @Size(max = 20, message = "El documento no puede exceder 20 caracteres")
+    private String documento;
+
     @NotBlank(message = "El email es obligatorio")
     @Email(message = "El email debe ser válido")
     private String email;

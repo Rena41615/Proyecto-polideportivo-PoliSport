@@ -38,7 +38,7 @@ class CompetenciaServiceApplicationTests {
 		competencia.setLugarCompetencia("Estadio Nacional, Santiago");
 		competencia.setFechaInicio(LocalDate.of(2026, 7, 15));
 		competencia.setFechaFin(LocalDate.of(2026, 7, 17));
-		competencia.setCategoria(Categoria.JUNIOR);
+		competencia.setCategoria(Categoria.SUB18);
 		competencia.setModalidad(Modalidad.INDIVIDUAL);
 		competencia.setEstadoCompetencia(EstadoCompetencia.PROGRAMADA);
 		competencia.setInscritosRun(List.of(20456789, 21567890));
@@ -70,7 +70,7 @@ class CompetenciaServiceApplicationTests {
 		when(competenciaRepository.save(any(Competencia.class))).thenReturn(competencia);
 		Competencia created = competenciaService.guardar(competencia);
 		assertNotNull(created);
-		assertEquals(Categoria.JUNIOR, created.getCategoria());
+		assertEquals(Categoria.SUB18, created.getCategoria());
 	}
 
 	@Test
