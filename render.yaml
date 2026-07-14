@@ -1,21 +1,74 @@
 services:
   - type: web
     name: polisport-gateway
-    env: java
+    env: docker
     region: oregon
-    buildCommand: ./mvnw -B -DskipTests clean package
-    startCommand: java -jar gateway-service/target/*.jar --server.port=8080
+    dockerfilePath: ./gateway-service/Dockerfile
     healthCheckPath: /actuator/health
     envVars:
       - key: SPRING_PROFILES_ACTIVE
         value: render
+      - key: SERVER_PORT
+        value: 8080
+      # Host publico real de cada microservicio, resuelto por Render en
+      # tiempo de deploy (evita hardcodear una URL que puede variar si el
+      # nombre del servicio ya esta tomado en Render).
+      - key: ATLETAS_SERVICE_HOST
+        fromService:
+          name: polisport-atletas
+          type: web
+          property: host
+      - key: BIOMETRIA_SERVICE_HOST
+        fromService:
+          name: polisport-biometria
+          type: web
+          property: host
+      - key: COMPETENCIA_SERVICE_HOST
+        fromService:
+          name: polisport-competencia
+          type: web
+          property: host
+      - key: CONTRATOS_SERVICE_HOST
+        fromService:
+          name: polisport-contratos
+          type: web
+          property: host
+      - key: ENTRENAMIENTO_SERVICE_HOST
+        fromService:
+          name: polisport-entrenamiento
+          type: web
+          property: host
+      - key: INVENTARIO_SERVICE_HOST
+        fromService:
+          name: polisport-inventario
+          type: web
+          property: host
+      - key: SALUD_SERVICE_HOST
+        fromService:
+          name: polisport-salud
+          type: web
+          property: host
+      - key: IAM_SERVICE_HOST
+        fromService:
+          name: polisport-iam
+          type: web
+          property: host
+      - key: NUTRICION_SERVICE_HOST
+        fromService:
+          name: polisport-nutricion
+          type: web
+          property: host
+      - key: STAFF_SERVICE_HOST
+        fromService:
+          name: polisport-staff
+          type: web
+          property: host
 
   - type: web
     name: polisport-atletas
-    env: java
+    env: docker
     region: oregon
-    buildCommand: ./mvnw -B -DskipTests clean package
-    startCommand: java -jar atletas-service/target/*.jar --server.port=8081
+    dockerfilePath: ./atletas-service/Dockerfile
     envVars:
       - key: SPRING_PROFILES_ACTIVE
         value: render
@@ -24,10 +77,9 @@ services:
 
   - type: web
     name: polisport-biometria
-    env: java
+    env: docker
     region: oregon
-    buildCommand: ./mvnw -B -DskipTests clean package
-    startCommand: java -jar biometria-service/target/*.jar --server.port=8082
+    dockerfilePath: ./biometria-service/Dockerfile
     envVars:
       - key: SPRING_PROFILES_ACTIVE
         value: render
@@ -36,10 +88,9 @@ services:
 
   - type: web
     name: polisport-competencia
-    env: java
+    env: docker
     region: oregon
-    buildCommand: ./mvnw -B -DskipTests clean package
-    startCommand: java -jar competencia-service/target/*.jar --server.port=8083
+    dockerfilePath: ./competencia-service/Dockerfile
     envVars:
       - key: SPRING_PROFILES_ACTIVE
         value: render
@@ -48,10 +99,9 @@ services:
 
   - type: web
     name: polisport-contratos
-    env: java
+    env: docker
     region: oregon
-    buildCommand: ./mvnw -B -DskipTests clean package
-    startCommand: java -jar contratos-service/target/*.jar --server.port=8084
+    dockerfilePath: ./contratos-service/Dockerfile
     envVars:
       - key: SPRING_PROFILES_ACTIVE
         value: render
@@ -60,10 +110,9 @@ services:
 
   - type: web
     name: polisport-entrenamiento
-    env: java
+    env: docker
     region: oregon
-    buildCommand: ./mvnw -B -DskipTests clean package
-    startCommand: java -jar entrenamiento-service/target/*.jar --server.port=8085
+    dockerfilePath: ./entrenamiento-service/Dockerfile
     envVars:
       - key: SPRING_PROFILES_ACTIVE
         value: render
@@ -72,10 +121,9 @@ services:
 
   - type: web
     name: polisport-inventario
-    env: java
+    env: docker
     region: oregon
-    buildCommand: ./mvnw -B -DskipTests clean package
-    startCommand: java -jar inventario-service/target/*.jar --server.port=8086
+    dockerfilePath: ./inventario-service/Dockerfile
     envVars:
       - key: SPRING_PROFILES_ACTIVE
         value: render
@@ -84,10 +132,9 @@ services:
 
   - type: web
     name: polisport-salud
-    env: java
+    env: docker
     region: oregon
-    buildCommand: ./mvnw -B -DskipTests clean package
-    startCommand: java -jar salud-service/target/*.jar --server.port=8087
+    dockerfilePath: ./salud-service/Dockerfile
     envVars:
       - key: SPRING_PROFILES_ACTIVE
         value: render
@@ -96,10 +143,9 @@ services:
 
   - type: web
     name: polisport-iam
-    env: java
+    env: docker
     region: oregon
-    buildCommand: ./mvnw -B -DskipTests clean package
-    startCommand: java -jar iam-service/target/*.jar --server.port=8088
+    dockerfilePath: ./iam-service/Dockerfile
     envVars:
       - key: SPRING_PROFILES_ACTIVE
         value: render
@@ -108,10 +154,9 @@ services:
 
   - type: web
     name: polisport-nutricion
-    env: java
+    env: docker
     region: oregon
-    buildCommand: ./mvnw -B -DskipTests clean package
-    startCommand: java -jar nutricion-service/target/*.jar --server.port=8089
+    dockerfilePath: ./nutricion-service/Dockerfile
     envVars:
       - key: SPRING_PROFILES_ACTIVE
         value: render
@@ -120,10 +165,9 @@ services:
 
   - type: web
     name: polisport-staff
-    env: java
+    env: docker
     region: oregon
-    buildCommand: ./mvnw -B -DskipTests clean package
-    startCommand: java -jar staff-service/target/*.jar --server.port=8090
+    dockerfilePath: ./staff-service/Dockerfile
     envVars:
       - key: SPRING_PROFILES_ACTIVE
         value: render
