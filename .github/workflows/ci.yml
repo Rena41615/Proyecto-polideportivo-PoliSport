@@ -1,0 +1,123 @@
+name: CI - Build y Tests por Microservicio
+
+# Estrategia GitHub Flow para microservicios: este pipeline se ejecuta en
+# cada Pull Request hacia main y en cada push a main, pero solo construye
+# y testea los microservicios cuya carpeta fue modificada (path filtering).
+# Esto evita recompilar los 11 modulos Maven en cada cambio y mantiene los
+# PRs rapidos de revisar, alineado con la regla "un PR, un microservicio"
+# descrita en CONTRIBUTING.md.
+
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+
+jobs:
+  # Detecta que microservicios cambiaron en este PR/push comparando las
+  # rutas modificadas contra la carpeta de cada modulo Maven.
+  detect-changes:
+    runs-on: ubuntu-latest
+    outputs:
+      atletas: ${{ steps.filter.outputs.atletas }}
+      biometria: ${{ steps.filter.outputs.biometria }}
+      competencia: ${{ steps.filter.outputs.competencia }}
+      contratos: ${{ steps.filter.outputs.contratos }}
+      entrenamiento: ${{ steps.filter.outputs.entrenamiento }}
+      gateway: ${{ steps.filter.outputs.gateway }}
+      iam: ${{ steps.filter.outputs.iam }}
+      inventario: ${{ steps.filter.outputs.inventario }}
+      nutricion: ${{ steps.filter.outputs.nutricion }}
+      salud: ${{ steps.filter.outputs.salud }}
+      staff: ${{ steps.filter.outputs.staff }}
+      root: ${{ steps.filter.outputs.root }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            atletas:
+              - 'atletas-service/**'
+            biometria:
+              - 'biometria-service/**'
+            competencia:
+              - 'competencia-service/**'
+            contratos:
+              - 'contratos-service/**'
+            entrenamiento:
+              - 'entrenamiento-service/**'
+            gateway:
+              - 'gateway-service/**'
+            iam:
+              - 'iam-service/**'
+            inventario:
+              - 'inventario-service/**'
+            nutricion:
+              - 'nutricion-service/**'
+            salud:
+              - 'salud-service/**'
+            staff:
+              - 'staff-service/**'
+            root:
+              - 'pom.xml'
+
+  # Un job por microservicio. Cada uno solo se ejecuta si su carpeta (o el
+  # pom.xml raiz, del que todos heredan la config de JaCoCo) cambio. Cada
+  # job corre "mvn verify", que compila, ejecuta los tests unitarios y
+  # aplica la regla JaCoCo (>= 80% de cobertura de linea en el paquete
+  # /service) definida en el pom.xml raiz. Si algun servicio no llega al
+  # 80%, el build de ese modulo falla y bloquea el merge del PR.
+  build-service:
+    needs: detect-changes
+    if: ${{ needs.detect-changes.outputs.root == 'true' || needs.detect-changes.outputs.atletas == 'true' || needs.detect-changes.outputs.biometria == 'true' || needs.detect-changes.outputs.competencia == 'true' || needs.detect-changes.outputs.contratos == 'true' || needs.detect-changes.outputs.entrenamiento == 'true' || needs.detect-changes.outputs.gateway == 'true' || needs.detect-changes.outputs.iam == 'true' || needs.detect-changes.outputs.inventario == 'true' || needs.detect-changes.outputs.nutricion == 'true' || needs.detect-changes.outputs.salud == 'true' || needs.detect-changes.outputs.staff == 'true' }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        service:
+          - name: atletas-service
+            changed: ${{ needs.detect-changes.outputs.atletas == 'true' || needs.detect-changes.outputs.root == 'true' }}
+          - name: biometria-service
+            changed: ${{ needs.detect-changes.outputs.biometria == 'true' || needs.detect-changes.outputs.root == 'true' }}
+          - name: competencia-service
+            changed: ${{ needs.detect-changes.outputs.competencia == 'true' || needs.detect-changes.outputs.root == 'true' }}
+          - name: contratos-service
+            changed: ${{ needs.detect-changes.outputs.contratos == 'true' || needs.detect-changes.outputs.root == 'true' }}
+          - name: entrenamiento-service
+            changed: ${{ needs.detect-changes.outputs.entrenamiento == 'true' || needs.detect-changes.outputs.root == 'true' }}
+          - name: gateway-service
+            changed: ${{ needs.detect-changes.outputs.gateway == 'true' || needs.detect-changes.outputs.root == 'true' }}
+          - name: iam-service
+            changed: ${{ needs.detect-changes.outputs.iam == 'true' || needs.detect-changes.outputs.root == 'true' }}
+          - name: inventario-service
+            changed: ${{ needs.detect-changes.outputs.inventario == 'true' || needs.detect-changes.outputs.root == 'true' }}
+          - name: nutricion-service
+            changed: ${{ needs.detect-changes.outputs.nutricion == 'true' || needs.detect-changes.outputs.root == 'true' }}
+          - name: salud-service
+            changed: ${{ needs.detect-changes.outputs.salud == 'true' || needs.detect-changes.outputs.root == 'true' }}
+          - name: staff-service
+            changed: ${{ needs.detect-changes.outputs.staff == 'true' || needs.detect-changes.outputs.root == 'true' }}
+    steps:
+      - uses: actions/checkout@v4
+        if: matrix.service.changed == 'true'
+
+      - name: Configurar JDK 17
+        if: matrix.service.changed == 'true'
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: maven
+
+      - name: Build + tests + JaCoCo (${{ matrix.service.name }})
+        if: matrix.service.changed == 'true'
+        run: mvn -B -pl ${{ matrix.service.name }} -am verify
+
+      - name: Publicar reporte JaCoCo (${{ matrix.service.name }})
+        if: matrix.service.changed == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: jacoco-${{ matrix.service.name }}
+          path: ${{ matrix.service.name }}/target/site/jacoco/
+          retention-days: 7

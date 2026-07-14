@@ -14,6 +14,9 @@ public class InstalacionMapper {
         entity.setNombre(dto.getNombreInstalacion());
         entity.setDescripcion(dto.getDescripcion());
         entity.setUbicacion(dto.getUbicacion());
+        entity.setTipo(dto.getTipo());
+        entity.setCapacidad(dto.getCapacidad());
+        entity.setDisponible(dto.getDisponible());
         entity.setEstado(dto.getEstado());
 
         return entity;

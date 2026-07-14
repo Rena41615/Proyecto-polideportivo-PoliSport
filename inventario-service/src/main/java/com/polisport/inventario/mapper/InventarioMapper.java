@@ -15,6 +15,8 @@ public class InventarioMapper {
         entity.setDescripcion(dto.getDescripcion());
         entity.setCantidad(dto.getCantidad());
         entity.setUbicacion(dto.getUbicacion());
+        entity.setEstado(dto.getEstado());
+        entity.setInstalacionId(dto.getInstalacionId());
 
         return entity;
     }
