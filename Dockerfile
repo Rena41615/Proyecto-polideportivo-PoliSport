@@ -29,14 +29,23 @@ RUN mvn -B -Dmaven.test.skip=true clean package
 FROM eclipse-temurin:17-jre-alpine
 WORKDIR /app
 
-# Copiar el JAR de atletas
+# Copiar los JARs de los 11 servicios
+COPY --from=build /workspace/gateway-service/target/*.jar gateway-service.jar
 COPY --from=build /workspace/atletas-service/target/*.jar atletas-service.jar
+COPY --from=build /workspace/biometria-service/target/*.jar biometria-service.jar
+COPY --from=build /workspace/competencia-service/target/*.jar competencia-service.jar
+COPY --from=build /workspace/contratos-service/target/*.jar contratos-service.jar
+COPY --from=build /workspace/entrenamiento-service/target/*.jar entrenamiento-service.jar
+COPY --from=build /workspace/inventario-service/target/*.jar inventario-service.jar
+COPY --from=build /workspace/salud-service/target/*.jar salud-service.jar
+COPY --from=build /workspace/iam-service/target/*.jar iam-service.jar
+COPY --from=build /workspace/nutricion-service/target/*.jar nutricion-service.jar
+COPY --from=build /workspace/staff-service/target/*.jar staff-service.jar
 
-# Exponemos el puerto
-EXPOSE 8080
+# Script de inicio: levanta los 11 servicios en paralelo
+COPY start.sh .
+RUN chmod +x start.sh
 
-# ==========================================
-# EL CAMBIO CLAVE: LEVANTAR SOLO ATLETAS
-# ==========================================
-# Esto ejecuta SOLO el JAR de atletas, ignorando los otros 10
-ENTRYPOINT ["java", "-jar", "atletas-service.jar"]
+EXPOSE 8080 8081 8082 8083 8084 8085 8086 8087 8088 8089 8090
+
+ENTRYPOINT ["/app/start.sh"]
